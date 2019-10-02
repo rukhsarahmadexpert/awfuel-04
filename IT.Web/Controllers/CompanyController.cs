@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace IT.Web.Controllers
 {
@@ -27,12 +30,40 @@ namespace IT.Web.Controllers
         }
 
         // POST: Company/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [HttpGet]
+        public ActionResult Creates()
         {
             try
             {
-                // TODO: Add insert logic here     
+                using (var client = new HttpClient())
+                using (var content = new MultipartFormDataContent())
+                {
+                    // Make sure to change API address
+                    client.BaseAddress = new Uri("http://itmolen-001-site8.htempurl.com/api/");
+
+                    // Add first file content 
+                    var fileContent1 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"C:\Users\IT Molen\Pictures\pic 2.PNG"));
+                    fileContent1.Headers.ContentDisposition = new ContentDispositionHeaderValue("LogoUrl")
+                    {
+                        FileName = "Sample.pdf"
+                    };
+
+                    // Add Second file content
+                   // var fileContent2 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"c:\Users\aisadmin\Desktop\Sample.txt"));
+                   // fileContent2.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                   // {
+                   //     FileName = "Sample.txt"
+                  //  };
+
+                    content.Add(fileContent1);
+                    //  content.Add(fileContent2);
+
+                    // Make a call to Web API
+                    var result = client.PostAsync("Company/Add", content).Result;
+                    
+                    Console.WriteLine(result.StatusCode);
+                    Console.ReadLine();
+                }
 
                 return RedirectToAction("Index");
             }
