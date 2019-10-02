@@ -27,7 +27,7 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult Add(UserViewModel userViewModel)
         {
-            var result = webServices.Post(userViewModel, "User/Add");
+           
             //var resultData = (new JavaScriptSerializer()).Deserialize<object>(result.Data.ToString());
             //return View();
             if (Convert.ToInt32(result.Data) > 0)
@@ -39,13 +39,34 @@ namespace IT.Web.Controllers
 
         public ActionResult Login()
         {
+            LoginViewModel loginViewModel = new LoginViewModel();
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserViewModel userViewModel)
+        public ActionResult Login(LoginViewModel loginViewModel)
         {
-            return View();
+            // loginViewModel.UserName = "j12@gmail.com";
+            //  loginViewModel.Password = "123456";
+
+            try
+            {
+                var result = webServices.Post(userViewModel, "User/Add");
+
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var UserDate = (new JavaScriptSerializer()).Deserialize<object>(result.Data.ToString());
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return View(loginViewModel);
         }
 
         public ActionResult Registration()
