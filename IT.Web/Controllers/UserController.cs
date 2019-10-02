@@ -1,4 +1,4 @@
-﻿using IT.Core.ViewModels;
+using IT.Core.ViewModels;
 using IT.Repository.WebServices;
 using System;
 using System.Collections.Generic;
@@ -37,6 +37,7 @@ namespace IT.Web.Controllers
         }
 
 
+
         public ActionResult Login()
         {
             return View();
@@ -59,5 +60,6 @@ namespace IT.Web.Controllers
         }
 
 
+        
     }
 }
