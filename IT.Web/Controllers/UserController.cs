@@ -16,9 +16,9 @@ namespace IT.Web.Controllers
         WebServices webServices = new WebServices();
         public ActionResult Index()
         {
-            var result = webServices.Post(new UserViewModel(), "User/GetAll");
-            userViewModelList = (new JavaScriptSerializer()).Deserialize<List<UserViewModel>>(result.Data.ToString());
-            return View(userViewModelList);
+            //var result = webServices.Post(new UserViewModel(), "User/GetAll");
+          //  userViewModelList = (new JavaScriptSerializer()).Deserialize<List<UserViewModel>>(result.Data.ToString());
+            return View();
         }
         public ActionResult Add()
         {
@@ -35,6 +35,29 @@ namespace IT.Web.Controllers
             else
                 return View(userViewModel);
         }
-       
+
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserViewModel userViewModel)
+        {
+            return View();
+        }
+
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        public ActionResult Registration(UserViewModel userViewModel)
+        {
+            return View();
+        }
+
+
     }
 }

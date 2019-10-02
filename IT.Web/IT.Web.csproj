@@ -509,6 +509,8 @@
     <Content Include="assets\webfonts\webfonts\nextgen-icons.html" />
     <None Include="assets\media\video\cc.mp4" />
     <None Include="assets\media\video\cc.webm" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
