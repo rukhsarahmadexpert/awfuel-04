@@ -30,17 +30,17 @@ namespace IT.Web.Controllers
            
             //var resultData = (new JavaScriptSerializer()).Deserialize<object>(result.Data.ToString());
             //return View();
-            if (Convert.ToInt32(result.Data) > 0)
-                return RedirectToAction("Index");
-            else
-                return View(userViewModel);
+        //    if (Convert.ToInt32(result.Data) > 0)
+        //        return RedirectToAction("Index");
+        //    else
+               return View();
         }
 
 
 
         public ActionResult Login()
         {
-            LoginViewModel loginViewModel = new LoginViewModel();
+            //LoginViewModel loginViewModel = new LoginViewModel();
 
             return View();
         }
@@ -53,7 +53,7 @@ namespace IT.Web.Controllers
 
             try
             {
-                var result = webServices.Post(userViewModel, "User/Add");
+                var result = webServices.Post(loginViewModel, "User/Add");
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -79,8 +79,5 @@ namespace IT.Web.Controllers
         {
             return View();
         }
-
-
-        
     }
 }
