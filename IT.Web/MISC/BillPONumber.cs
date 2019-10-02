@@ -10,63 +10,63 @@ namespace IT.Web.MISC
 {
     public class BillPONumber
     {
-        WebServices webServices = new WebServices();
+        //    WebServices webServices = new WebServices();
 
-        public string PnNumber()
-        {
-            string AlreadyNumber = "";
-            string SerailNO = "";
-            var LPONoResult = webServices.Post(new SingleStringValueResult(), "Bill/BillNumber");
-            if (LPONoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-            {
-                if (LPONoResult.Data != "[]")
-                {
-                    string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
-
-
-                    SerailNO = LPNo.Substring(4, 8);
-
-                    SerailNO = SerailNO.ToString().Substring(0, 6);
+        //    public string PnNumber()
+        //    {
+        //        string AlreadyNumber = "";
+        //        string SerailNO = "";
+        //        var LPONoResult = webServices.Post(new SingleStringValueResult(), "Bill/BillNumber");
+        //        if (LPONoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+        //        {
+        //            if (LPONoResult.Data != "[]")
+        //            {
+        //                string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
 
 
-                    string TotdayNumber = POClass.PONumber().Substring(0, 6);
-                    int Counts = 0;
-                    if (SerailNO == TotdayNumber)
-                    {
-                        Counts = Convert.ToInt32(LPNo.Substring(10, 2)) + 1;
+        //                SerailNO = LPNo.Substring(4, 8);
 
-                        if (Counts.ToString().Length == 1)
-                        {
-                            SerailNO = "BIL-" + TotdayNumber + "0" + Counts;
-                        }
-                        else
-                        {
-                            SerailNO = "BIL-" + TotdayNumber + Counts.ToString();
-                        }
-                    }
-                    else
-                    {
-                        AlreadyNumber = POClass.PONumber();
+        //                SerailNO = SerailNO.ToString().Substring(0, 6);
 
-                        SerailNO = "BIL-" + AlreadyNumber;
-                    }
-                }
-                else
-                {
-                    AlreadyNumber = POClass.PONumber();
 
-                    SerailNO = "BIL-" + AlreadyNumber;
-                }
+        //                string TotdayNumber = POClass.PONumber().Substring(0, 6);
+        //                int Counts = 0;
+        //                if (SerailNO == TotdayNumber)
+        //                {
+        //                    Counts = Convert.ToInt32(LPNo.Substring(10, 2)) + 1;
 
-            }
-            else
-            {
-                AlreadyNumber = POClass.PONumber();
+        //                    if (Counts.ToString().Length == 1)
+        //                    {
+        //                        SerailNO = "BIL-" + TotdayNumber + "0" + Counts;
+        //                    }
+        //                    else
+        //                    {
+        //                        SerailNO = "BIL-" + TotdayNumber + Counts.ToString();
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    AlreadyNumber = POClass.PONumber();
 
-                SerailNO = "BIL-" + AlreadyNumber;
-            }
+        //                    SerailNO = "BIL-" + AlreadyNumber;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                AlreadyNumber = POClass.PONumber();
 
-            return SerailNO;
-        }
+        //                SerailNO = "BIL-" + AlreadyNumber;
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            AlreadyNumber = POClass.PONumber();
+
+        //            SerailNO = "BIL-" + AlreadyNumber;
+        //        }
+
+        //        return SerailNO;
+        //    }
     }
 }

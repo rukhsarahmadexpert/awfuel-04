@@ -10,63 +10,63 @@ namespace IT.Web.MISC
 {
     public class ExpenseNumber
     {
-        WebServices webServices = new WebServices();
+        //WebServices webServices = new WebServices();
 
-        public string ExNumber()
-        {
-            string AlreadyNumber = "";
-            string SerailNO = "";
-            var EXPNoResult = webServices.Post(new SingleStringValueResult(), "Expense/ExpenseNumber");
-            if (EXPNoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-            {
-                if (EXPNoResult.Data != "[]")
-                {
-                    string ExP = (new JavaScriptSerializer()).Deserialize<string>(EXPNoResult.Data);
-
-
-                    SerailNO = ExP.Substring(4, 8);
-
-                    SerailNO = SerailNO.ToString().Substring(0, 6);
+        //public string ExNumber()
+        //{
+        //    string AlreadyNumber = "";
+        //    string SerailNO = "";
+        //    var EXPNoResult = webServices.Post(new SingleStringValueResult(), "Expense/ExpenseNumber");
+        //    if (EXPNoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+        //    {
+        //        if (EXPNoResult.Data != "[]")
+        //        {
+        //            string ExP = (new JavaScriptSerializer()).Deserialize<string>(EXPNoResult.Data);
 
 
-                    string TotdayNumber = POClass.PONumber().Substring(0, 6);
-                    int Counts = 0;
-                    if (SerailNO == TotdayNumber)
-                    {
-                        Counts = Convert.ToInt32(ExP.Substring(10, 2)) + 1;
+        //            SerailNO = ExP.Substring(4, 8);
 
-                        if (Counts.ToString().Length == 1)
-                        {
-                            SerailNO = "EXP-" + TotdayNumber + "0" + Counts;
-                        }
-                        else
-                        {
-                            SerailNO = "EXP-" + TotdayNumber + Counts.ToString();
-                        }
-                    }
-                    else
-                    {
-                        AlreadyNumber = POClass.PONumber();
+        //            SerailNO = SerailNO.ToString().Substring(0, 6);
 
-                        SerailNO = "EXP-" + AlreadyNumber;
-                    }
-                }
-                else
-                {
-                    AlreadyNumber = POClass.PONumber();
 
-                    SerailNO = "EXP-" + AlreadyNumber;
-                }
+        //            string TotdayNumber = POClass.PONumber().Substring(0, 6);
+        //            int Counts = 0;
+        //            if (SerailNO == TotdayNumber)
+        //            {
+        //                Counts = Convert.ToInt32(ExP.Substring(10, 2)) + 1;
 
-            }
-            else
-            {
-                AlreadyNumber = POClass.PONumber();
+        //                if (Counts.ToString().Length == 1)
+        //                {
+        //                    SerailNO = "EXP-" + TotdayNumber + "0" + Counts;
+        //                }
+        //                else
+        //                {
+        //                    SerailNO = "EXP-" + TotdayNumber + Counts.ToString();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                AlreadyNumber = POClass.PONumber();
 
-                SerailNO = "EXP-" + AlreadyNumber;
-            }
+        //                SerailNO = "EXP-" + AlreadyNumber;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            AlreadyNumber = POClass.PONumber();
 
-            return SerailNO;
-        }
+        //            SerailNO = "EXP-" + AlreadyNumber;
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        AlreadyNumber = POClass.PONumber();
+
+        //        SerailNO = "EXP-" + AlreadyNumber;
+        //    }
+
+        //    return SerailNO;
+        //}
     }
 }
