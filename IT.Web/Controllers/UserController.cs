@@ -27,17 +27,11 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult Add(UserViewModel userViewModel)
         {
-           
-            //var resultData = (new JavaScriptSerializer()).Deserialize<object>(result.Data.ToString());
-            //return View();
-            if (Convert.ToInt32(result.Data) > 0)
-                return RedirectToAction("Index");
-            else
-                return View(userViewModel);
+            return View();
         }
 
 
-
+        [HttpGet]
         public ActionResult Login()
         {
             LoginViewModel loginViewModel = new LoginViewModel();
@@ -53,7 +47,7 @@ namespace IT.Web.Controllers
 
             try
             {
-                var result = webServices.Post(userViewModel, "User/Add");
+                var result = webServices.Post(loginViewModel, "User/Login");
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -62,25 +56,51 @@ namespace IT.Web.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
             return View(loginViewModel);
         }
 
+        [HttpGet]
         public ActionResult Registration()
         {
             return View();
         }
 
+        [HttpPost]
         public ActionResult Registration(UserViewModel userViewModel)
         {
+            UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
+
+            try
+            {
+                var result = webServices.Post(userViewModel, "User/Register");
+
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
+
+
+                    if (userCompanyViewModel.CompanyId > 0)
+                    {
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create", "Company");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
             return View();
         }
-
-
-        
     }
 }
