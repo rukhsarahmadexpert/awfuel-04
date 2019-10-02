@@ -10,63 +10,63 @@ namespace IT.Web.MISC
 {
     public class InvoicePNNumber
     {
-        WebServices webServices = new WebServices();
+        //WebServices webServices = new WebServices();
 
-        public string PnNumber()
-        {
-            string AlreadyNumber = "";
-            string SerailNO = "";
-            var LPONoResult = webServices.Post(new SingleStringValueResult(), "Invoice/InvoiceNumber");
-            if (LPONoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
-            {
-                if (LPONoResult.Data != "[]")
-                {
-                    string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
-
-
-                    SerailNO = LPNo.Substring(4, 8);
-
-                    SerailNO = SerailNO.ToString().Substring(0, 6);
+        //public string PnNumber()
+        //{
+        //    string AlreadyNumber = "";
+        //    string SerailNO = "";
+        //    var LPONoResult = webServices.Post(new SingleStringValueResult(), "Invoice/InvoiceNumber");
+        //    if (LPONoResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+        //    {
+        //        if (LPONoResult.Data != "[]")
+        //        {
+        //            string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
 
 
-                    string TotdayNumber = POClass.PONumber().Substring(0, 6);
-                    int Counts = 0;
-                    if (SerailNO == TotdayNumber)
-                    {
-                        Counts = Convert.ToInt32(LPNo.Substring(10, 2)) + 1;
+        //            SerailNO = LPNo.Substring(4, 8);
 
-                        if (Counts.ToString().Length == 1)
-                        {
-                            SerailNO = "INV-" + TotdayNumber + "0" + Counts;
-                        }
-                        else
-                        {
-                            SerailNO = "INV-" + TotdayNumber + Counts.ToString();
-                        }
-                    }
-                    else
-                    {
-                        AlreadyNumber = POClass.PONumber();
+        //            SerailNO = SerailNO.ToString().Substring(0, 6);
 
-                        SerailNO = "INV-" + AlreadyNumber;
-                    }
-                }
-                else
-                {
-                    AlreadyNumber = POClass.PONumber();
 
-                    SerailNO = "INV-" + AlreadyNumber;
-                }
+        //            string TotdayNumber = POClass.PONumber().Substring(0, 6);
+        //            int Counts = 0;
+        //            if (SerailNO == TotdayNumber)
+        //            {
+        //                Counts = Convert.ToInt32(LPNo.Substring(10, 2)) + 1;
 
-            }
-            else
-            {
-                AlreadyNumber = POClass.PONumber();
+        //                if (Counts.ToString().Length == 1)
+        //                {
+        //                    SerailNO = "INV-" + TotdayNumber + "0" + Counts;
+        //                }
+        //                else
+        //                {
+        //                    SerailNO = "INV-" + TotdayNumber + Counts.ToString();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                AlreadyNumber = POClass.PONumber();
 
-                SerailNO = "INV-" + AlreadyNumber;
-            }
+        //                SerailNO = "INV-" + AlreadyNumber;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            AlreadyNumber = POClass.PONumber();
 
-            return SerailNO;
-        }
+        //            SerailNO = "INV-" + AlreadyNumber;
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        AlreadyNumber = POClass.PONumber();
+
+        //        SerailNO = "INV-" + AlreadyNumber;
+        //    }
+
+        //    return SerailNO;
+        //}
     }
 }

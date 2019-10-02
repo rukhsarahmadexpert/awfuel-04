@@ -23,5 +23,10 @@ namespace IT.Web.Controllers
 
             return View();
         }
+
+        public ActionResult CustomerHome()
+        {
+            return View();
+        }
     }
 }
