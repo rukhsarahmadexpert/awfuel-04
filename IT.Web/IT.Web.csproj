@@ -515,6 +515,8 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="assets\staticImages\menalogo.png" />
+    <Content Include="assets\staticImages\main-login-2.png" />
+    <Content Include="assets\staticImages\main-login.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
