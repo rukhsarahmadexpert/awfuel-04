@@ -42,9 +42,6 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
-            // loginViewModel.UserName = "j12@gmail.com";
-            //  loginViewModel.Password = "123456";
-
             try
             {
                 var result = webServices.Post(loginViewModel, "User/Login");
