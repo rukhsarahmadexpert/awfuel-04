@@ -513,13 +513,15 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\Company\Create.cshtml" />
     <Content Include="assets\staticImages\menalogo.png" />
     <Content Include="assets\staticImages\main-login-2.png" />
     <Content Include="assets\staticImages\main-login.jpg" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="assets\staticImages\company.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
