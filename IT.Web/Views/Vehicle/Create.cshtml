@@ -105,12 +105,20 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-6">
-                                            <label class="form-label">Front side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                       <div class="col-md-6">
+
+                                           <div class="row">
+                                                 <div class="col-md-12">
+                                                      <label class="form-label">Front side</label>
+                                                 </div>
+                                                 <div class="col-md-12">
+                                                       <label class=newbtn>
+	                                                    <img id="blah" src="http://placehold.it/120x120" >
+	                                                   <input id="pic" class='pis' onchange="readURL(this);" type="file" >
+	                                                   </label>
+                                                 </div>
                                             </div>
+  
                                         </div>
 
                                         <div class="col-md-6">
@@ -176,4 +184,43 @@
         </div>
     </div>
 </main>
+
+
+
+<script>
+ 
+ $('.newbtn').bind("click" , function () {
+        $('#pic').click();
+ });
+ 
+  function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+<style>
+
+
+#pic{
+     display: none;
+       }
+       
+ .newbtn{
+         cursor: pointer;
+      }
+      #blah{
+  max-width:100%;
+  height:auto;
+  margin-top:20px;
+}
+
+</style>
 
