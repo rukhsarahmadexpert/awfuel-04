@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace IT.Core.ViewModels
 {
@@ -40,6 +41,8 @@ namespace IT.Core.ViewModels
         public int VehicleId { get; set; }
         public string DriverImageUrl { get; set; }
         public string PassportBack { get; set; }
+
+        public HttpPostedFile HttpPostedFile { get; set; }
 
         public string[] LicienceList { get; set; }
 

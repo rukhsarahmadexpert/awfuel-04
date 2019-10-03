@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
+using IT.Core.ViewModels;
 
 
 namespace IT.Web.Controllers
@@ -31,7 +32,7 @@ namespace IT.Web.Controllers
 
         // POST: Company/Create
         [HttpGet]
-        public ActionResult Creates()
+        public ActionResult Creates(CompnayModel compnayModel)
         {
             try
             {
@@ -48,12 +49,17 @@ namespace IT.Web.Controllers
                         FileName = "Sample.pdf"
                     };
 
+                    fileContent1.Headers.Add("Hello", compnayModel.Name);
+                    fileContent1.Headers.Add("Hello", compnayModel.Name);
+                    fileContent1.Headers.Add("Hello", compnayModel.Name);
+                    fileContent1.Headers.Add("Hello", compnayModel.Name);
+
                     // Add Second file content
-                   // var fileContent2 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"c:\Users\aisadmin\Desktop\Sample.txt"));
-                   // fileContent2.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                   // {
-                   //     FileName = "Sample.txt"
-                  //  };
+                    // var fileContent2 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"c:\Users\aisadmin\Desktop\Sample.txt"));
+                    // fileContent2.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                    // {
+                    //     FileName = "Sample.txt"
+                    //  };
 
                     content.Add(fileContent1);
                     //  content.Add(fileContent2);
