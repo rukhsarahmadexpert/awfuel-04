@@ -34,64 +34,64 @@
                                                 <label class="form-label" for="single-label">
                                                     Select Vehiclle Type
                                                 </label>
-                                                <select class="select2 form-control" id="single-label">
+                                                <select class="select2 form-control" name="VehicleTypeName" id="VehicleTypeName">
                                                     
-                                                        <option value="CA">California</option>
-                                                        <option value="NV">Nevada</option>
-                                                        <option value="OR">Oregon</option>
-                                                        <option value="WA">Washington</option>
+                                                        <option value="1">California</option>
+                                                        <option value="2">Nevada</option>
+                                                        <option value="3">Oregon</option>
+                                                        <option value="4">Washington</option>
                                                  
                                                 </select>
                                             </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Trafic Plate Number">
+                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Tc Number</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Tc Number">
+                                        <input type="text" id="TCNumber" name="TCNumber" class="form-control" placeholder="Enter Tc Number">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Model</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Model">
+                                        <input type="text" id="Model" name="Model" class="form-control" placeholder="Enter Model">
                                     </div>
 
 
                                    <div class="form-group">
                                         <label class="form-label" for="simpleinput">Brand</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Brand">
+                                        <input type="text" id="Brand" name="Brand" class="form-control" placeholder="Enter Brand">
                                     </div>
 
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Color</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Color">
+                                        <input type="text" id="Color" name="Color" class="form-control" placeholder="Enter Color">
                                     </div>
 
 
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Mulkia Expiry</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Mulkia Expiry">
+                                        <input type="text" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" placeholder="Enter Mulkia Expiry">
                                     </div>
 
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Insurance Expiry</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Insurance Expiry">
+                                        <input type="text" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" placeholder="Enter Insurance Expiry">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Region</label>
-                                        <input type="text" id="simpleinput" class="form-control" placeholder="Enter Region">
+                                        <input type="text" id="RegisteredRegion" name="RegisteredRegion" class="form-control" placeholder="Enter Region">
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Region</label>
-                                       <textarea class="form-control"></textarea>
+                                        <label class="form-label" for="simpleinput">Notes</label>
+                                       <textarea name="Comments" id="Comments" class="form-control"></textarea>
                                     </div>
 
 
@@ -114,7 +114,7 @@
                                                  <div class="col-md-12">
                                                        <label class=newbtn>
 	                                                    <img id="blah" src="/assets/staticImages/icon1.png" >
-	                                                   <input id="pic" class='pis' onchange="readURL(this);" type="file" >
+	                                                   <input id="MulkiaFront1" name="MulkiaFront1" class='pis' onchange="readURL(this);" type="file" >
 	                                                   </label>
                                                  </div>
                                             </div>
@@ -122,16 +122,10 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                             <div class="row">
-                                                 <div class="col-md-12">
-                                                      <label class="form-label">Front side</label>
-                                                 </div>
-                                                 <div class="col-md-12">
-                                                       <label class=newbtn>
-	                                                    <img id="blah" src="/assets/staticImages/icon1.png" >
-	                                                   <input id="pic" class='pis' onchange="readURL(this);" type="file" >
-	                                                   </label>
-                                                 </div>
+                                            <label class="form-label">Front side</label>
+                                            <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="MulkiaBack1" name="MulkiaBack1">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>
 
@@ -147,7 +141,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Front side</label>
                                             <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <input type="file" class="custom-file-input" id="MulkiaFront2" name="MulkiaFront2">
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>
@@ -155,7 +149,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Back side</label>
                                             <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <input type="file" class="custom-file-input" id="MulkiaBack2" name="MulkiaBack2">
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>
@@ -170,8 +164,8 @@
                                     <div class="row py-5">
 
                                         <div class="col-md-12">
-                                           <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Block
-                                            <span>large</span>
+                                           <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Submit
+                                            <span>Vehicle</span>
                                              </button>
                                         </div>
 
@@ -196,7 +190,7 @@
 <script>
  
  $('.newbtn').bind("click" , function () {
-        $('#pic').click();
+        $('#MulkiaFront1').click();
  });
  
   function readURL(input) {
@@ -215,7 +209,7 @@
 <style>
 
 
-#pic{
+#MulkiaFront1{
      display: none;
        }
        
