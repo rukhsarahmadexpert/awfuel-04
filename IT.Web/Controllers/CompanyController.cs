@@ -95,7 +95,6 @@ namespace IT.Web.Controllers
                         FileName = "Sample.pdf"
                     };
 
-
                     fileContent1.Headers.Add("Hello", compnayModel.Name);
 
                     // Add Second file content
