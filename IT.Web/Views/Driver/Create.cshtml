@@ -1,4 +1,4 @@
-﻿
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <h3 class="py-5">Driving License</h3>
+                                 <!--   <h3 class="py-5">Driving License</h3> -->
 
                                     <div class="row">
 
@@ -86,12 +86,12 @@
 
                                            <div class="row">
                                                  <div class="col-md-12">
-                                                      <label class="form-label">Front side</label>
+                                                      <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
                                                  </div>
                                                  <div class="col-md-12">
                                                        <label class=newbtn>
-	                                                    <img id="blah" src="/assets/staticImages/icon1.png" >
-	                                                   <input id="DrivingLicenseFront" name="DrivingLicenseFront" class='pis' onchange="readURL(this);" type="file" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                   <input id="DrivingLicenseFront" name="DrivingLicenseFront" class='pic' onchange="readURL(this);" type="file" >
 	                                                   </label>
                                                  </div>
                                             </div>  
@@ -100,12 +100,12 @@
                                         <div class="col-md-6">
                                              <div class="row">
                                                  <div class="col-md-12">
-                                                      <label class="form-label">Front side</label>
+                                                      <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
                                                  </div>
                                                  <div class="col-md-12">
                                                        <label class=newbtn>
-	                                                    <img id="blah" src="/assets/staticImages/icon1.png" >
-	                                                   <input id="DrivingLicenseBack" name="DrivingLicenseBack" class='pis' onchange="readURL(this);" type="file" >
+	                                                    <img id="DrivingLicenseBackPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                   <input id="DrivingLicenseBack" name="DrivingLicenseBack" class='pic' onchange="readURL(this);" type="file" >
 	                                                   </label>
                                                  </div>
                                             </div>
@@ -113,19 +113,19 @@
 
                                     </div>
 
-                                    <h3 class="py-5">UAE ID</h3>
+                                   
 
                                     <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="form-label">Front side</label>
-                                                </div>
+                                               <div class="col-md-12">
+                                                      <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Front side</label>
+                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="IDUAECopyFrontPreview" src="/assets/staticImages/icon1.png" style="width:50px;height:50px">
-                                                        <input id="IDUAECopyFront" name="IDUAECopyFront" class='pis' onchange="readURL(this);" type="file">
+                                                        <img id="IDUAECopyFrontPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="IDUAECopyFront" name="IDUAECopyFront" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
                                             </div>
@@ -135,60 +135,85 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label class="form-label">Front side</label>
+                                                     <label class="form-label" style="margin-top:20px"><b>UAE ID</b> Back side</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="IDUAECopyBackPreview" src="/assets/staticImages/icon1.png" style="width:50px;height:50px">
-                                                        <input id="IDUAECopyBack" name="IDUAECopyBack" class='pis' onchange="readURL(this);" type="file">
+                                                        <img id="IDUAECopyBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="IDUAECopyBack" name="IDUAECopyBack" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>                                    
-                                     <h3 class="py-5">Passport (Details page)</h3>
+                                   
 
+                                     <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="PassportCopyPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="PassportCopy" name="PassportCopy" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                     <label class="form-label" style="margin-top:20px"><b>Passport (Details page)</b> Front </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="PassportBackPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="PassportBack" name="PassportBack" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>        
+
+                                   
                                     <div class="row">
-
-                                        <div class="col-md-6">
-                                            <label class="form-label">Front side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="PassportCopy" name="PassportCopy">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                         <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                     <label class="form-label" style="margin-top:20px"><b>Visa</b>  </label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="VisaCopyPreview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <input id="VisaCopy" name="VisaCopy" class='pic' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-6">
-                                            <label class="form-label">Back side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="PassportBack" name="PassportBack">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                      <h3 class="py-5">Visa</h3>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Front side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="VisaCopy" name="VisaCopy">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-                                        </div>
+  
                                     </div>
                                     <input type="hidden" name="ClientDocs" value="ClientDocs"/>  
                                     <input type="hidden" name="CompanyId" value="1057"/>  
                                     <input type="hidden" name="CreatedBy" value="2099"/>  
                                     <div class="row py-5">
 
-                                        <div class="col-md-12">
-                                           <button type="button" id="Save" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Block
-                                            <span>large</span>
+                                       
+                                    </div>
+
+                                </div>
+                                 <div class="col-md-12">
+                                           <button type="button" id="Save" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Vehicle
+
+                                            <span>submit</span>
                                              </button>
                                         </div>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -209,19 +234,47 @@
         $('#Save').click(function () {
             PostApiRequest();
         })
-    })
 
- 
-    $("#IDUAECopyFront").change(function () {
+
+        $("#IDUAECopyFront").change(function () {
         readURL(this,"IDUAECopyFrontPreview");
     });
 
 
-    $("#IDUAECopyBack").change(function () {
+        $("#IDUAECopyBack").change(function () {
         readURL(this, "IDUAECopyBackPreview");
     });
 
+
+        $("#DrivingLicenseFront").change(function () {
+        readURL(this, "DrivingLicenseFrontPreview");
+    });
+
+
+        $("#DrivingLicenseBack").change(function () {
+        readURL(this, "DrivingLicenseBackPreview");
+    });
+
+        $("#PassportCopy").change(function () {
+        readURL(this, "PassportCopyPreview");
+    });
+
+        $("#PassportBack").change(function () {
+        readURL(this, "PassportBackPreview");
+    });
+
+
+        $("#VisaCopy").change(function () {
+        readURL(this, "VisaCopyPreview");
+    });
+        
+    })
+
+
+
+
    
+
   
 
     function PostApiRequest() {
@@ -260,15 +313,16 @@
 <style>
 
 
-#pic{
+.pic{
      display: none;
        }
        
  .newbtn{
          cursor: pointer;
       }
-      #blah{
+      .blah{
   max-width:100%;
+  width:100%;
   height:auto;
   margin-top:20px;
 }

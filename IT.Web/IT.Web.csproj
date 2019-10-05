@@ -174,6 +174,7 @@
     <Compile Include="Models\VenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\DriverController.cs" />
+    <Compile Include="Controllers\CustomerOrderController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -523,9 +524,13 @@
     <Content Include="assets\staticImages\company.png" />
     <Content Include="Views\Vehicle\Create.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
+    <Content Include="Views\CustomerOrder\index.cshtml" />
+    <Content Include="Views\CustomerOrder\create.cshtml" />
+    <Content Include="assets\staticImages\icon1.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
+    <Folder Include="Views\CustomerOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
