@@ -25,55 +25,10 @@ namespace IT.Web.Controllers
         }
 
         // GET: Company/Create
-        public ActionResult Create()
+        public ActionResult Create(HttpPostedFileBase file)
         {
-            try
-            {
-                using (var client = new HttpClient())
-                using (var content = new MultipartFormDataContent())
-                {
-                    // Make sure to change API address
-                      client.BaseAddress = new Uri("http://localhost:64299/api/");
-                    //client.BaseAddress = new Uri("http://itmolen-001-site8.htempurl.com/api/");
-
-                    // Add first file content 
-                    var fileContent1 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"C:\Users\IT Molen\Pictures\pic 2.PNG"));
-                    fileContent1.Headers.ContentDisposition = new ContentDispositionHeaderValue("LogoUrl")
-                    {
-                        FileName = "Sample.pdf"
-                    };
-
-                    fileContent1.Headers.Add("Hello", "Hello");
-                    fileContent1.Headers.Add("Address", "Hello");
-                    fileContent1.Headers.Add("City", "Hello");
-                    fileContent1.Headers.Add("Country", "Hello");
-                    fileContent1.Headers.Add("Id", "2097");
-                    fileContent1.Headers.Add("ClientDocs", "ClientDocs");
-
-                    // Add Second file content
-                    // var fileContent2 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"c:\Users\aisadmin\Desktop\Sample.txt"));
-                    // fileContent2.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                    // {
-                    //     FileName = "Sample.txt"
-                    //  };
-
-                    content.Add(fileContent1);
-                    //  content.Add(fileContent2);
-
-                    // Make a call to Web API
-                    var result = client.PostAsync("Company/Add", content).Result;
-
-                    Console.WriteLine(result.StatusCode);
-                    Console.ReadLine();
-                }
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-            
+            return View();
+           
         }
 
         // POST: Company/Create
@@ -167,3 +122,7 @@ namespace IT.Web.Controllers
         }
     }
 }
+
+
+//client.BaseAddress = new Uri("http://localhost:64299/api/");
+//client.BaseAddress = new Uri("http://itmolen-001-site8.htempurl.com/api/");
