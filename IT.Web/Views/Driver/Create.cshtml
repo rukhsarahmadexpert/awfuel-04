@@ -24,7 +24,7 @@
                         <div class="panel-tag">
                             Please add your vehicle from here...
                         </div>
-                        <form id="form1">
+                        <form id="form1" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -66,9 +66,6 @@
                                         <label class="form-label" for="simpleinput">License Expiry</label>
                                         <input type="text" id="LicenseExpiry" name="LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
                                     </div>
-
-
-                                    
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Nationality</label>
@@ -121,20 +118,34 @@
                                     <div class="row">
 
                                         <div class="col-md-6">
-                                            <label class="form-label">Front side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="IDUAECopyFront" name="IDUAECopyFront">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Front side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="IDUAECopyFrontPreview" src="/assets/staticImages/icon1.png" style="width:50px;height:50px">
+                                                        <input id="IDUAECopyFront" name="IDUAECopyFront" class='pis' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
 
+
                                         <div class="col-md-6">
-                                            <label class="form-label">Back side</label>
-                                            <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="IDUAECopyBack" name="IDUAECopyBack">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Front side</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class=newbtn>
+                                                        <img id="IDUAECopyBackPreview" src="/assets/staticImages/icon1.png" style="width:50px;height:50px">
+                                                        <input id="IDUAECopyBack" name="IDUAECopyBack" class='pis' onchange="readURL(this);" type="file">
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>                                    
                                      <h3 class="py-5">Passport (Details page)</h3>
 
@@ -190,12 +201,10 @@
 
 
 @section Scripts{
-
+<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
 <script>
 
     $(document).ready(function () {
-
-        alert();
 
         $('#Save').click(function () {
             PostApiRequest();
@@ -203,22 +212,17 @@
     })
 
  
- $('.newbtn').bind("click" , function () {
-        $('#pic').click();
- });
- 
-  function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+    $("#IDUAECopyFront").change(function () {
+        readURL(this,"IDUAECopyFrontPreview");
+    });
 
-                reader.onload = function (e) {
-                    $('#blah')
-                        .attr('src', e.target.result);
-                };
 
-                reader.readAsDataURL(input.files[0]);
-            }
-    }
+    $("#IDUAECopyBack").change(function () {
+        readURL(this, "IDUAECopyBackPreview");
+    });
+
+   
+  
 
     function PostApiRequest() {
         $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
