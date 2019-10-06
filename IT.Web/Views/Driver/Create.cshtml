@@ -1,6 +1,6 @@
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Driver";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,7 +8,7 @@
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-edit'></i> Create Vehicle
+            <i class='subheader-icon fal fa-edit'></i> Create Driver
         </h1>
     </div>
     <div class="row">
@@ -16,13 +16,13 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Vehicle <span class="fw-300"></span>
+                        Driver <span class="fw-300"></span>
                     </h2>                    
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add your vehicle from here...
+                            Please add your Driver from here...
                         </div>
                         <form id="form1" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -30,7 +30,7 @@
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Driver Name</label>
-                                        <input type="text" id="DriverName" name="DriverName" class="form-control" placeholder="Enter Driver Name">
+                                        <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Driver Name">
                                     </div>                                    
 
                                     <div class="form-group">
@@ -64,7 +64,7 @@
 
                                    <div class="form-group">
                                         <label class="form-label" for="simpleinput">License Expiry</label>
-                                        <input type="text" id="LicenseExpiry" name="LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
+                                        <input type="date" id="LicenseExpiry" name="LicenseExpiry" class="form-control" placeholder="Enter License Expiry">
                                     </div>
 
                                     <div class="form-group">
@@ -199,9 +199,9 @@
                                         </div>
   
                                     </div>
-                                    <input type="hidden" name="ClientDocs" value="ClientDocs"/>  
-                                    <input type="hidden" name="CompanyId" value="1057"/>  
-                                    <input type="hidden" name="CreatedBy" value="2099"/>  
+                                   @* <input type="hidden" name="ClientDocs" id="ClientDocs" value="ClientDocs"/>  *@
+                                    <input type="hidden" name="CompanyId" id="CompanyId" value="1057"/>  
+                                    <input type="hidden" name="CreatedBy" id="CreatedBy" value="2099"/>  
                                     <div class="row py-5">
 
                                        
@@ -209,11 +209,13 @@
 
                                 </div>
                                  <div class="col-md-12">
-                                           <button type="button" id="Save" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Vehicle
+                                           <button type="submit" id="Save"  class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Driver
 
                                             <span>submit</span>
                                              </button>
                                         </div>
+
+                               <div id="response"></div>
                             </div>
                         </form>
                     </div>
@@ -229,44 +231,96 @@
 <script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
 <script>
 
+
     $(document).ready(function () {
 
-        $('#Save').click(function () {
-            PostApiRequest();
-        })
 
 
-        $("#IDUAECopyFront").change(function () {
-        readURL(this,"IDUAECopyFrontPreview");
+        $('#form1').submit(function(){
+     
+        // show that something is loading
+        $('#response').html("<b>Loading response...</b>");
+         
+        /*
+         * 'post_receiver.php' - where you will pass the form data
+         * $(this).serialize() - to easily read form data
+         * function(data){... - data contains the response from post_receiver.php
+         */
+        $.post('POST','http://itmolen-001-site8.htempurl.com/api/Driver/Add', $(this).serialize(), function(data){
+             
+            // show the response
+            $('#response').html(data);
+             
+        }).fail(function(x) {
+         
+            // just in case posting your form failed
+           alert('#response');
+             
+        });
+ 
+        // to prevent refreshing the whole page page
+        return false;
+ 
     });
 
 
-        $("#IDUAECopyBack").change(function () {
-        readURL(this, "IDUAECopyBackPreview");
-    });
 
 
-        $("#DrivingLicenseFront").change(function () {
-        readURL(this, "DrivingLicenseFrontPreview");
-    });
+       @*  $("#Save").click(function () {
+
+            
+                 var formData = new FormData();
+                            formData.append('Name', $('#Name').val());
+                            formData.append('Contact', $('#Contact').val());
+                            formData.append('Email', $('#Email').val());
+                            formData.append('Facebook', $('#Facebook').val());
+                            formData.append('LicenseTypes', $('#LicenseTypes').val());
+                            formData.append('LicenseExpiry', $('#LicenseExpiry').val());
+                            formData.append('Nationality', $('#Nationality').val());
+                            formData.append('Comments', $('#Comments').val());
+                          
+                            formData.append( 'ClientDocs', 'ClientDocs');
+                            formData.append( 'CompanyId', 1);
+                            formData.append( 'CreatedBy', 2 );
+               
+                
+                            $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", formData, function (msg) {
+                            console.log(msg);
+                });
+        }) *@
 
 
-        $("#DrivingLicenseBack").change(function () {
-        readURL(this, "DrivingLicenseBackPreview");
-    });
-
-        $("#PassportCopy").change(function () {
-        readURL(this, "PassportCopyPreview");
-    });
-
-        $("#PassportBack").change(function () {
-        readURL(this, "PassportBackPreview");
-    });
+                                    $("#IDUAECopyFront").change(function () {
+                                    readURL(this,"IDUAECopyFrontPreview");
+                                });
 
 
-        $("#VisaCopy").change(function () {
-        readURL(this, "VisaCopyPreview");
-    });
+                                    $("#IDUAECopyBack").change(function () {
+                                    readURL(this, "IDUAECopyBackPreview");
+                                });
+
+
+                                    $("#DrivingLicenseFront").change(function () {
+                                    readURL(this, "DrivingLicenseFrontPreview");
+                                });
+
+
+                                    $("#DrivingLicenseBack").change(function () {
+                                    readURL(this, "DrivingLicenseBackPreview");
+                                });
+
+                                    $("#PassportCopy").change(function () {
+                                    readURL(this, "PassportCopyPreview");
+                                });
+
+                                    $("#PassportBack").change(function () {
+                                    readURL(this, "PassportBackPreview");
+                                });
+
+
+                                    $("#VisaCopy").change(function () {
+                                    readURL(this, "VisaCopyPreview");
+                                });
         
     })
 
@@ -277,39 +331,22 @@
 
   
 
-    function PostApiRequest() {
+   @* function PostApiRequest() {
         $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
             alert("success");
-        });
-    }
-
-  
-
-
-    @*function SaveStundent () {
-    var formData = new FormData();
-
-        var file = document.getElementById("studImg").files[0];
-        formData.append("studImg", file);
-
-        var Name= $('#txtName').val().trim()
-
-        formData.append("Name", Name);
-
-        $.ajax({
-        type: "POST",
-        url: "@(Url.Action("CreateStudent", "Student"))",          
-        data: formData,
-        processData: false,
-        contentType: false,
-            success: function (response) {
-            }
         });
     }*@
 
 
+  
+
 </script>
     }
+
+
+
+
+
 <style>
 
 
