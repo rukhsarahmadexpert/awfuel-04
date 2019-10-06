@@ -1,4 +1,5 @@
 ﻿using IT.Core.ViewModels;
+using IT.Repository.WebServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,15 @@ namespace IT.Web.Controllers
 {
     public class DriverController : Controller
     {
+
+        WebServices webServices = new WebServices();
+        List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
+
         public ActionResult Index()
         {
+
+            
+
             return View ();
         }
 

@@ -527,6 +527,7 @@
     <Content Include="Views\CustomerOrder\index.cshtml" />
     <Content Include="Views\CustomerOrder\create.cshtml" />
     <Content Include="assets\staticImages\icon1.png" />
+    <Content Include="Views\Driver\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
