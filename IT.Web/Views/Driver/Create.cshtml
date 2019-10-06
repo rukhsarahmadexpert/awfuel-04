@@ -24,7 +24,7 @@
                         <div class="panel-tag">
                             Please add your Driver from here...
                         </div>
-                        <form id="form1" method="post" enctype="multipart/form-data">
+                        <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -179,10 +179,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>    
 
-                                    </div>        
-
-                                   
                                     <div class="row">
                                          <div class="col-md-6">
                                             <div class="row">
@@ -234,19 +232,32 @@
 
     $(document).ready(function () {
 
+        alert();
+      
+            $("#form1").submit(function () {
+                var jqxhr = $.post('http://localhost:64299/api/Driver/Add', $('#form1').serialize())
+                    .success(function (e) {
+                        alert(e.data);
+                    
+                         })
+                    .error(function (er) {
+                        alert(er.data);
+                    });
+                return false;
+            });
+     
 
 
-        $('#form1').submit(function(){
+        $('#Save').click(function(){
      
         // show that something is loading
-        $('#response').html("<b>Loading response...</b>");
-         
+        $('#response').html("<b>Loading response...</b>");         
         /*
          * 'post_receiver.php' - where you will pass the form data
          * $(this).serialize() - to easily read form data
          * function(data){... - data contains the response from post_receiver.php
          */
-        $.post('POST','http://itmolen-001-site8.htempurl.com/api/Driver/Add', $(this).serialize(), function(data){
+            $.post('POST', 'http://localhost:64299/api/Driver/Add', $('#form1').serialize(), function(data){
              
             // show the response
             $('#response').html(data);
