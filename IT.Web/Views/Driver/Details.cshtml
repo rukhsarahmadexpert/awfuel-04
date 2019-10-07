@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IT.Core.ViewModels.DriverViewModel
+@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -39,7 +40,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">Driver Name</th>
-                                                            <td>Rizwan afridi</td>
+                                                            <td>@Model.Name</td>
                                                             
                                                             
                                                         </tr>
@@ -115,7 +116,7 @@
                                                  </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.DrivingLicenseFront">
 	                                                   
                                                  </div>
                                             </div>
