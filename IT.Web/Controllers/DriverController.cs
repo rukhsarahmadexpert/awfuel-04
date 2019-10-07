@@ -29,7 +29,7 @@ namespace IT.Web.Controllers
 
             if(DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
-                driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString());
+                driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
             }
 
             return View(driverViewModels);    
