@@ -50,6 +50,7 @@
     <Compile Include="ViewModels\DataTablesParm.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PagingParameterModel.cs" />
     <Compile Include="ViewModels\ServiceResponseModel.cs" />
     <Compile Include="ViewModels\UserCompanyViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />

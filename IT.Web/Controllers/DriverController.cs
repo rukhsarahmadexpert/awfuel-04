@@ -1,10 +1,12 @@
 ﻿using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace IT.Web.Controllers
 {
@@ -16,10 +18,21 @@ namespace IT.Web.Controllers
 
         public ActionResult Index()
         {
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-            
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 1;
+            pagingParameterModel.CompanyId = 2;
+            pagingParameterModel.pageSize = 100;
 
-            return View ();
+            var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+
+            if(DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString());
+            }
+
+            return View(driverViewModels);    
         }
 
         public ActionResult Create()
