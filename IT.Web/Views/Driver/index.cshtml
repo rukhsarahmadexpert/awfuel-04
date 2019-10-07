@@ -1,4 +1,4 @@
-﻿@inherits System.Web.Mvc.WebViewPage<dynamic>  
+﻿ 
 @using System.Web.Mvc.Html 
 
 @model List<IT.Core.ViewModels.DriverViewModel>
@@ -40,10 +40,10 @@
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Conatct</th>
-                                                        <th>Office</th>
-                                                        <th>Age</th>
-                                                        <th>Start date</th>
-                                                        <th>Salary</th>
+                                                        <th>Email</th>
+                                                        <th>License Expiry</th>
+                                                        <th>Facebook</th>
+                                                        <th>IsActive</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -52,14 +52,14 @@
                                                     {
 
                                                         <tr>
-                                                            <td></td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>29</td>
-                                                            <td>2011/06/27</td>
-                                                            <td>$183,000</td>
+                                                            <td>@item.Name</td>
+                                                            <td>@item.Contact</td>
+                                                            <td>@item.Email</td>
+                                                            <td>@item.LicenseExpiry</td>
+                                                            <td>@item.Facebook</td>
+                                                            <td>@item.IsActive</td>
                                                             <td>
-                                                                <i class="fal fa-eye"></i> &nbsp; &nbsp;
+                                                               <a href="/Driver/Details"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                                                 <i class="fal fa-edit"></i>&nbsp; &nbsp;
                                                                 <i class="fal fa-trash-alt">
                                                             </td>

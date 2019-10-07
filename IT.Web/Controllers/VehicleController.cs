@@ -16,11 +16,29 @@ namespace IT.Web.Controllers
         List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
         VehicleViewModel vehicleViewModel = new VehicleViewModel();
         List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
-        
+
+        public List<DriverViewModel> VehicleViewModel { get; private set; }
+        public List<VehicleViewModel> VehicleViewModels { get; private set; }
+
         // GET: Vehicle
         public ActionResult Index()
         {
-            return View();
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 1;
+            pagingParameterModel.CompanyId = 1055;
+            pagingParameterModel.pageSize = 100;
+
+            var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
+
+            if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+            }
+
+            return View(VehicleViewModels);
+            
         }
 
 
