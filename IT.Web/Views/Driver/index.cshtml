@@ -1,7 +1,14 @@
-﻿@model List<IT.Core.ViewModels.DriverViewModel>
+﻿@inherits System.Web.Mvc.WebViewPage<dynamic>  
+@using System.Web.Mvc.Html 
+
+@model List<IT.Core.ViewModels.DriverViewModel>
 @{
     ViewBag.Title = "Create Driver";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
+    driverViewModels = Model as List<IT.Core.ViewModels.DriverViewModel>;
+
 }
 
 
@@ -44,11 +51,11 @@
                                                 <tbody>
 
                                                     
-                                                    @foreach (var item in Model)
+                                                    @foreach (var item in driverViewModels)
                                                     {
 
                                                         <tr>
-                                                            <td>Michael Bruce</td>
+                                                            <td></td>
                                                             <td>Javascript Developer</td>
                                                             <td>Singapore</td>
                                                             <td>29</td>
