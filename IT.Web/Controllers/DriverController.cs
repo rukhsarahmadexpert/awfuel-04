@@ -15,6 +15,7 @@ namespace IT.Web.Controllers
 
         WebServices webServices = new WebServices();
         List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
+        DriverViewModel driverViewModel = new DriverViewModel();
 
         public ActionResult Index()
         {
@@ -47,9 +48,18 @@ namespace IT.Web.Controllers
         }
 
        
-        public ActionResult Details()
+        public ActionResult Details(int Id)
         {
-            return View();
+            driverViewModel.Id = Id;
+
+            var result = webServices.Post(driverViewModel, "Driver/Edit");
+
+            if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(result.Data.ToString()));
+            }
+
+            return View(driverViewModel);
         }
     }
 }
