@@ -22,7 +22,7 @@ namespace IT.Web.Controllers
 
             pagingParameterModel.pageNumber = 1;
             pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = 2;
+            pagingParameterModel.CompanyId = 1055;
             pagingParameterModel.pageSize = 100;
 
             var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
