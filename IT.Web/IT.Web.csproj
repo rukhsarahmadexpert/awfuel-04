@@ -533,7 +533,8 @@
     <Content Include="Views\Vehicle\Details.cshtml" />
     <Content Include="Views\CustomerOrder\Index.cshtml" />
     <Content Include="Views\CustomerOrder\Details.cshtml" />
-    <Content Include="Views\Shared\_layout_admin.cshtml" />
+    <Content Include="Views\Shared\_layoutAdmin.cshtml" />
+    <Content Include="Views\Home\AdminHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
