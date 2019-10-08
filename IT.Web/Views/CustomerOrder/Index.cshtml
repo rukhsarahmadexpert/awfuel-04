@@ -1,13 +1,13 @@
 ﻿@using System.Web.Mvc.Html 
 
-@model List<IT.Core.ViewModels.CustomerOrderViewModel>
+@model List<IT.Core.ViewModels.CustomerNoteOrderViewModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    List<IT.Core.ViewModels.CustomerOrderViewModel> customerOrderViewModels = new List<IT.Core.ViewModels.CustomerOrderViewModel>();
-    customerOrderViewModels = Model as List<IT.Core.ViewModels.CustomerOrderViewModel>;
+    List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
+    customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
 
 
 }
@@ -41,30 +41,30 @@
                                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                                                 <thead class="bg-primary-600">
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Vehicle Number</th>
-                                                        <th>User Name</th>
-                                                        <th>Create Dates</th>
-                                                        <th>Created Time</th>
+                                                        <th>Requested Quantity</th>
+                                                      
+                                                        <th>Delivery Note Number</th>
+                                                        <th>Order Quantity</th>
+                                                        <th>Customer Order Number</th>
                                                         <th>OrderProgress</th>
-                                                        <th>Company Name</th>
-                                                        <th>IsActive</th>
+                                                        <th>UserName</th>
+                                                      
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>                                                    
-                                                    @foreach (var item in customerOrderViewModels)
+                                                    @foreach (var item in customerNoteOrderViewModel)
                                                     {
 
                                                         <tr>
-                                                            <td>@item.Name</td>
-                                                            <td>@item.VehicleNumber</td>
-                                                            <td>@item.UserName</td>
-                                                            <td>@item.CreateDates</td>
-                                                            <td>@item.CreatedTime</td>
+                                                            <td>@item.RequestedQuantity</td>
+                                                         
+                                                            <td>@item.DeliveryNoteNumber</td>
+                                                            <td>@item.OrderQuantity</td>
+                                                            <td>@item.CustomerOrderNumber</td>
                                                             <td>@item.OrderProgress</td>
-                                                            <td>@item.CompanyName</td>
-                                                            <td>@item.IsActive</td>
+                                                            <td>@item.UserName</td>
+                                                            
                                                             <td>
                                                                <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
                                                                 <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
