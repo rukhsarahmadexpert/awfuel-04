@@ -38,7 +38,7 @@ namespace IT.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new DriverViewModel());
         }
 
         [HttpPost]
@@ -64,6 +64,26 @@ namespace IT.Web.Controllers
             }
 
             return View(driverViewModel);
+        }
+
+
+        public ActionResult Edit(int Id)
+        {
+
+            driverViewModel.Id = Id;
+            driverViewModel.CompanyId = 1050;
+
+            var result = webServices.Post(driverViewModel, "Driver/Edit");
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != "[]")
+                {
+                    driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(result.Data.ToString()));
+                }
+            }
+
+            return View("Create", driverViewModel);
         }
     }
 }
