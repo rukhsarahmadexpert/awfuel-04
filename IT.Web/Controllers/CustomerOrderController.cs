@@ -13,7 +13,7 @@ namespace IT.Web.Controllers
     {
 
         WebServices webServices = new WebServices();
-        List<CustomerOrderViewModel>  customerOrderViewModels = new List<CustomerOrderViewModel>();
+        List<CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<CustomerNoteOrderViewModel>();
         CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
        CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
 
@@ -26,6 +26,8 @@ namespace IT.Web.Controllers
             pagingParameterModel.pageNumber = 1;
             pagingParameterModel._pageSize = 1;
             pagingParameterModel.CompanyId = 1055;
+            pagingParameterModel.OrderProgress = "all";
+            pagingParameterModel.IsSend = true;
             pagingParameterModel.pageSize = 100;
 
 
@@ -33,10 +35,10 @@ namespace IT.Web.Controllers
 
             if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
-                customerOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
             }
 
-            return View(customerOrderViewModels);
+            return View(customerNoteOrderViewModel);
         }
 
 

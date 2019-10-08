@@ -31,5 +31,6 @@ namespace IT.Core.ViewModels
         public string AcceptDate { get; set; }
         public string OrderDate { get; set; }
         public string Name { get; set; }
+       
     }
 }
