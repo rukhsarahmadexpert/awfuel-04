@@ -532,6 +532,7 @@
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
     <Content Include="Views\CustomerOrder\Index.cshtml" />
+    <Content Include="Views\CustomerOrder\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

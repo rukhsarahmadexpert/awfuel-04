@@ -15,6 +15,8 @@ namespace IT.Web.Controllers
         WebServices webServices = new WebServices();
         List<CustomerOrderViewModel>  customerOrderViewModels = new List<CustomerOrderViewModel>();
         CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
+       CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
+
 
 
         public ActionResult Index()
@@ -26,7 +28,7 @@ namespace IT.Web.Controllers
             pagingParameterModel.CompanyId = 1055;
             pagingParameterModel.pageSize = 100;
 
-            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrderViewModel/All");
+            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/All");
 
             if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -37,10 +39,28 @@ namespace IT.Web.Controllers
         }
 
 
-      
+        public ActionResult Details(int Id)
+        {
 
-      
+            var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id);
+
+            if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
+            }
+
+
+            var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id);
+
+            if(CustomerOrderGroupDetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                customerOrderGroupViewModel.customerGroupOrderDetailsViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerGroupOrderDetailsViewModel>>(CustomerOrderGroupDetailsList.Data.ToString()));
+            }
+
+            return View(customerOrderGroupViewModel);
+
+        }
+
     }
-
 
 }
