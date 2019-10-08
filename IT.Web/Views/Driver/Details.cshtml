@@ -1,6 +1,9 @@
+
 ﻿@model IT.Core.ViewModels.DriverViewModel
-@{
-    ViewBag.Title = "Details";
+
+﻿@{
+    ViewBag.Title = "Driver Details";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -46,43 +49,43 @@
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Contact Number</th>
-                                                            <td>Lisa</td>
+                                                            <td>@Model.Contact</td>
                                                            
                                                             
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Email Address</th>
-                                                            <td>rizwan@itmolen.nl</td>
+                                                            <td>@Model.Email</td>
                                                         </tr>
 
                                                          <tr>
                                                             <th scope="row">facebook</th>
-                                                            <td>rizwan@itmolen.nl</td>
+                                                            <td>@Model.Facebook</td>
                                                         </tr>
 
 
                                                          <tr>
                                                             <th scope="row">License Type</th>
-                                                            <td>test</td>
+                                                            <td>@Model.LicenseType</td>
                                                         </tr>
 
                                                          <tr>
                                                             <th scope="row">License Expiry</th>
-                                                            <td>12-12-2020</td>
+                                                            <td>@Model.LicenseExpiry</td>
                                                         </tr>
 
 
 
                                                          <tr>
                                                             <th scope="row">Nationality</th>
-                                                            <td>Pakistan</td>
+                                                            <td>@Model.Nationality</td>
                                                         </tr>
 
                                                           <tr>
                                                             <th colspan="2" scope="row">Notes</th>
                                                           </tr>
                                                            <tr>
-                                                            <td colspan="2" >Description</td>
+                                                            <td colspan="2" >@Model.Comments</td>
                                                         </tr>
 
                                                     </tbody>
@@ -103,7 +106,7 @@
                                                  </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.DrivingLicenseFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>  
@@ -112,11 +115,11 @@
                                         <div class="col-md-6">
                                              <div class="row">
                                                  <div class="col-md-12">
-                                                      <label class="form-label" style="margin-top:20px"><b>Driving License</b> Front side</label>
+                                                      <label class="form-label" ><b>Driving License</b> Back side</label>
                                                  </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.DrivingLicenseFront">
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.DrivingLicenseBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>
@@ -135,7 +138,7 @@
                                                  </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.IDUAECopyFront" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>
@@ -149,7 +152,7 @@
                                                 </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.IDUAECopyBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>
@@ -167,7 +170,7 @@
                                                 </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.PassportCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>
@@ -181,7 +184,7 @@
                                                 </div>
                                                  <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.PassportBack" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image" >
 	                                                   
                                                  </div>
                                             </div>
@@ -196,7 +199,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                       
-	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="/assets/staticImages/icon1.png" >
+	                                                    <img id="DrivingLicenseFrontPreview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.VisaCopy" onerror="this.src='/assets/staticImages/icon1.png';" alt="Missing Image">
 	                                                   
                                                  </div>
                                             </div>
@@ -220,139 +223,6 @@
 
 
 
-@section Scripts{
-<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
-<script>
-
-
-    $(document).ready(function () {
-
-        
-      
-            $("#form1").submit(function () {
-                var jqxhr = $.post('http://localhost:64299/api/Driver/Add', $('#form1').serialize())
-                    .success(function (e) {
-                        alert(e.data);
-                    
-                         })
-                    .error(function (er) {
-                        alert(er.data);
-                    });
-                return false;
-            });
-     
-
-
-        $('#Save').click(function(){
-     
-        // show that something is loading
-        $('#response').html("<b>Loading response...</b>");         
-        /*
-         * 'post_receiver.php' - where you will pass the form data
-         * $(this).serialize() - to easily read form data
-         * function(data){... - data contains the response from post_receiver.php
-         */
-            $.post('POST', 'http://localhost:64299/api/Driver/Add', $('#form1').serialize(), function(data){
-             
-            // show the response
-            $('#response').html(data);
-             
-        }).fail(function(x) {
-         
-            // just in case posting your form failed
-           alert('#response');
-             
-        });
- 
-        // to prevent refreshing the whole page page
-        return false;
- 
-    });
-
-
-
-
-       @*  $("#Save").click(function () {
-
-            
-                 var formData = new FormData();
-                            formData.append('Name', $('#Name').val());
-                            formData.append('Contact', $('#Contact').val());
-                            formData.append('Email', $('#Email').val());
-                            formData.append('Facebook', $('#Facebook').val());
-                            formData.append('LicenseTypes', $('#LicenseTypes').val());
-                            formData.append('LicenseExpiry', $('#LicenseExpiry').val());
-                            formData.append('Nationality', $('#Nationality').val());
-                            formData.append('Comments', $('#Comments').val());
-                          
-                            formData.append( 'ClientDocs', 'ClientDocs');
-                            formData.append( 'CompanyId', 1);
-                            formData.append( 'CreatedBy', 2 );
-               
-                
-                            $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", formData, function (msg) {
-                            console.log(msg);
-                });
-        }) *@
-
-
-                                    $("#IDUAECopyFront").change(function () {
-                                    readURL(this,"IDUAECopyFrontPreview");
-                                });
-
-
-                                    $("#IDUAECopyBack").change(function () {
-                                    readURL(this, "IDUAECopyBackPreview");
-                                });
-
-
-                                    $("#DrivingLicenseFront").change(function () {
-                                    readURL(this, "DrivingLicenseFrontPreview");
-                                });
-
-
-                                    $("#DrivingLicenseBack").change(function () {
-                                    readURL(this, "DrivingLicenseBackPreview");
-                                });
-
-                                    $("#PassportCopy").change(function () {
-                                    readURL(this, "PassportCopyPreview");
-                                });
-
-                                    $("#PassportBack").change(function () {
-                                    readURL(this, "PassportBackPreview");
-                                });
-
-
-                                    $("#VisaCopy").change(function () {
-                                    readURL(this, "VisaCopyPreview");
-                                });
-        
-    })
-
-
-
-
-   
-
-  
-
-   @* function PostApiRequest() {
-        $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
-            alert("success");
-        });
-    }*@
-
-
-  
-
-</script>
-    }
-
-
-
-
-
 <style>
 
 
@@ -366,7 +236,8 @@
       .blah{
   max-width:100%;
   width:100%;
-  height:auto;
+  height:100%;
+  max-height:160px;
   margin-top:20px;
 }
 
