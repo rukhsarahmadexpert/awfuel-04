@@ -23,6 +23,7 @@ namespace IT.Core.ViewModels
         public string LogoUrl { get; set; }
         public bool IsActive { get; set; }
         public string TRN { get; set; }
+        public string Remarks { get; set; }
         public string OwnerRepresentaive { get; set; }
     }
 }

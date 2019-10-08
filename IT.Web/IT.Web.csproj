@@ -524,7 +524,6 @@
     <Content Include="assets\staticImages\company.png" />
     <Content Include="Views\Vehicle\Create.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
-    <Content Include="Views\CustomerOrder\index.cshtml" />
     <Content Include="Views\CustomerOrder\create.cshtml" />
     <Content Include="assets\staticImages\icon1.png" />
     <Content Include="Views\Driver\Index.cshtml" />
@@ -532,6 +531,7 @@
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
+    <Content Include="Views\CustomerOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

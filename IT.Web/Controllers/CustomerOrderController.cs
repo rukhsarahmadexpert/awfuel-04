@@ -26,7 +26,7 @@ namespace IT.Web.Controllers
             pagingParameterModel.CompanyId = 1055;
             pagingParameterModel.pageSize = 100;
 
-            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/All");
+            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrderViewModel/All");
 
             if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -37,6 +37,10 @@ namespace IT.Web.Controllers
         }
 
 
+      
 
+      
     }
+
+
 }
