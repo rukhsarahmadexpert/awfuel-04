@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CompnayModel.cs" />
     <Compile Include="ViewModels\CustomerGroupOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\CustomerNoteOrderViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderGroupViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderViewModel.cs" />
     <Compile Include="ViewModels\DataTablesParm.cs" />
