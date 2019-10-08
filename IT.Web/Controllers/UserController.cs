@@ -12,7 +12,8 @@ namespace IT.Web.Controllers
     public class UserController : Controller
     {
         UserViewModel userViewModel = new UserViewModel();
-        List<UserViewModel> userViewModelList = new List<UserViewModel>();        
+        List<UserViewModel> userViewModelList = new List<UserViewModel>();
+        UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
         WebServices webServices = new WebServices();
         public ActionResult Index()
         {
@@ -34,9 +35,7 @@ namespace IT.Web.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            LoginViewModel loginViewModel = new LoginViewModel();
-
-            return View();
+            return View(new LoginViewModel());
         }
 
         [HttpPost]
@@ -48,9 +47,21 @@ namespace IT.Web.Controllers
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    var UserDate = (new JavaScriptSerializer()).Deserialize<object>(result.Data.ToString());
+                    userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
 
-                    return RedirectToAction("Index", "Home");
+                    if (userCompanyViewModel.Authority == "CustomerAdmin")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if (userCompanyViewModel.Authority == "Admin")
+                    {
+                        return RedirectToAction("AdminHome", "Home");
+                    }
+                }
+                else
+                {
+                    loginViewModel.UserName.e
+                    return View(loginViewModel);
                 }
             }
 
