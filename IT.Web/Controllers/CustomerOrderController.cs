@@ -25,13 +25,13 @@ namespace IT.Web.Controllers
 
             pagingParameterModel.pageNumber = 1;
             pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = 1055;
+            pagingParameterModel.CompanyId = 1047;
             pagingParameterModel.OrderProgress = "all";
-            pagingParameterModel.IsSend = true;
+            pagingParameterModel.IsSend = false;
             pagingParameterModel.pageSize = 100;
 
 
-            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/All");
+            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId");
 
             if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {

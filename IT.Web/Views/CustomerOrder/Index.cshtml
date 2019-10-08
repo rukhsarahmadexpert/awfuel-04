@@ -41,14 +41,12 @@
                                             <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                                                 <thead class="bg-primary-600">
                                                     <tr>
-                                                        <th>Requested Quantity</th>
-                                                      
-                                                        <th>Delivery Note Number</th>
-                                                        <th>Order Quantity</th>
                                                         <th>Customer Order Number</th>
+                                                        <th>Delivery Note Number</th>
+                                                        <th>Order Quantity</th>                                                    
+                                                        <th>Deliver Quantity</th>                                                    
                                                         <th>OrderProgress</th>
                                                         <th>UserName</th>
-                                                      
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -56,21 +54,20 @@
                                                     @foreach (var item in customerNoteOrderViewModel)
                                                     {
 
-                                                        <tr>
-                                                            <td>@item.RequestedQuantity</td>
-                                                         
-                                                            <td>@item.DeliveryNoteNumber</td>
-                                                            <td>@item.OrderQuantity</td>
-                                                            <td>@item.CustomerOrderNumber</td>
-                                                            <td>@item.OrderProgress</td>
-                                                            <td>@item.UserName</td>
-                                                            
-                                                            <td>
-                                                               <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                                                <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                                <i class="fal fa-trash-alt">
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td>@item.CustomerOrderNumber</td>
+                                                        <td>@item.DeliveryNoteNumber</td>                                                     
+                                                        <td>@item.OrderQuantity</td>
+                                                        <td>@item.DeliverdQuantity</td>
+                                                        <td>@item.OrderProgress</td>
+                                                        <td>@item.UserName</td>
+
+                                                        <td>
+                                                            <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                                            <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                                            <i class="fal fa-trash-alt">
+                                                        </td>
+                                                    </tr>
                                                     }                                                    
                                                     
                                                 </tbody>

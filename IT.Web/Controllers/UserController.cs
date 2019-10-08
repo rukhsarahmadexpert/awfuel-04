@@ -60,7 +60,7 @@ namespace IT.Web.Controllers
                 }
                 else
                 {
-                    loginViewModel.UserName.e
+                   // loginViewModel.UserName.e
                     return View(loginViewModel);
                 }
             }

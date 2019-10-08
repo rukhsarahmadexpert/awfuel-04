@@ -14,6 +14,7 @@ namespace IT.Core.ViewModels
         public int VehicleId { get; set; }
         public string Company { get; set; }
         public int OrderQuantity { get; set; }
+        public int DeliverdQuantity { get; set; }
         public string DriverName { get; set; }
         public string TraficPlateNumber { get; set; }
         public string Cell { get; set; }
