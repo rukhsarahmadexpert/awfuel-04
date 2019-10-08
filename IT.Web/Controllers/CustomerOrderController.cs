@@ -1,4 +1,4 @@
-﻿using IT.Core.ViewModels;
+using IT.Core.ViewModels;
 using IT.Repository.WebServices;
 using System;
 using System.Collections.Generic;
@@ -42,8 +42,9 @@ namespace IT.Web.Controllers
 
         public ActionResult Details(int Id)
         {
+            
 
-            var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id);
+            var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerOrderAllByCompanyId/ " + Id);
 
             if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -63,5 +64,10 @@ namespace IT.Web.Controllers
         }
 
     }
+
+
+    
+
+
 
 }
