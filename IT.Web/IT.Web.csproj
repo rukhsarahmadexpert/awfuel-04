@@ -535,7 +535,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
-    <Folder Include="Views\CustomerOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

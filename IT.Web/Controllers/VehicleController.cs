@@ -67,7 +67,10 @@ namespace IT.Web.Controllers
         {
             try
             {
-                var result = webServices.Post(new VehicleViewModel(), "Vehicle/Edit/" + id);
+                vehicleViewModel.CompanyId = 1;
+                vehicleViewModel.Id = id;
+
+                var result = webServices.Post(vehicleViewModel, "Vehicle/Edit");
                 if (result.Data != null)
                 {
                     vehicleViewModel = (new JavaScriptSerializer()).Deserialize<List<VehicleViewModel>>(result.Data.ToString()).FirstOrDefault();
