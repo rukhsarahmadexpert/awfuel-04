@@ -34,5 +34,10 @@ namespace IT.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Policy()
+        {
+            return View();
+        }
     }
 }

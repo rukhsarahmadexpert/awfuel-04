@@ -52,9 +52,22 @@ namespace IT.Web.Controllers
         }
 
         // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
+            employeeViewModel.Id = Id;
+            employeeViewModel.CompanyId = 2;
+
+            var result = webServices.Post(new EmployeeViewModel(), "AWFEmployee/Edit/"+Id);
+
+            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (result.Data != "[]")
+                {
+                    employeeViewModel = (new JavaScriptSerializer().Deserialize<EmployeeViewModel>(result.Data.ToString()));
+                }
+            }
+
+            return View(employeeViewModel);
         }
 
         // GET: Employee/Create
