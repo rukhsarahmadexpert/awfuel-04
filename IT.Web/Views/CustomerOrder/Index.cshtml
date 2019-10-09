@@ -1,84 +1,84 @@
-﻿@using System.Web.Mvc.Html 
+﻿@using System.Web.Mvc.Html
 
 @model List<IT.Core.ViewModels.CustomerNoteOrderViewModel>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
 
-    List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
-    customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+
+                List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
+                customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
 
 
 }
 
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+
+    <li class="breadcrumb-item active">Drivers</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Driver</i></span>
+                </h2></a>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                                <p>Drivers Base Information</p>
 
 
- <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
-                            
-                            <li class="breadcrumb-item active">Drivers</li>
-                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-                        </ol>
-                      
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div id="panel-1" class="panel">
-                                    <div class="panel-hdr">
-                                        <h2>
-                                           <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Driver</i></span>
-                                        </h2></a>
-                                       
-                                    </div>
-                                    <div class="panel-container show">
-                                        <div class="panel-content">
-                                    <!--      <div class="panel-tag">
-                                                <p>Drivers Base Information</p>
-                                               
-                                               
-                                            </div>-->  
-                                            <!-- datatable start -->
-                                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                                                <thead class="bg-primary-600">
-                                                    <tr>
-                                                        <th>Customer Order Number</th>
-                                                        <th>Delivery Note Number</th>
-                                                        <th>Order Quantity</th>                                                    
-                                                        <th>Deliver Quantity</th>                                                    
-                                                        <th>OrderProgress</th>
-                                                        <th>UserName</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>                                                    
-                                                    @foreach (var item in customerNoteOrderViewModel)
-                                                    {
+                            </div>-->
+                    <!-- datatable start -->
+                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>Customer Order Number</th>
+                                <th>Delivery Note Number</th>
+                                <th>Order Quantity</th>
+                                <th>Deliver Quantity</th>
+                                <th>OrderProgress</th>
+                                <th>UserName</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in customerNoteOrderViewModel)
+                            {
 
-                                                    <tr>
-                                                        <td>@item.CustomerOrderNumber</td>
-                                                        <td>@item.DeliveryNoteNumber</td>                                                     
-                                                        <td>@item.OrderQuantity</td>
-                                                        <td>@item.DeliverdQuantity</td>
-                                                        <td>@item.OrderProgress</td>
-                                                        <td>@item.UserName</td>
+                                <tr>
+                                    <td>@item.CustomerOrderNumber</td>
+                                    <td>@item.DeliveryNoteNumber</td>
+                                    <td>@item.OrderQuantity</td>
+                                    <td>@item.DeliverdQuantity</td>
+                                    <td>@item.OrderProgress</td>
+                                    <td>@item.UserName</td>
 
-                                                        <td>
-                                                            <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                                            <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                            <i class="fal fa-trash-alt">
-                                                        </td>
-                                                    </tr>
-                                                    }                                                    
-                                                    
-                                                </tbody>
-                                                
-                                            </table>
-                                            <!-- datatable end -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
+                                    <td>
+                                        <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <i class="fal fa-trash-alt">
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 

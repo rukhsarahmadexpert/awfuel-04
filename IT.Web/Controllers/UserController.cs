@@ -43,33 +43,36 @@ namespace IT.Web.Controllers
         {
             try
             {
+                if(ModelState.IsValid)
+                { 
                 var result = webServices.Post(loginViewModel, "User/Login");
 
-                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
 
-                    if (userCompanyViewModel.Authority == "CustomerAdmin")
-                    {
-                        return RedirectToAction("Index", "Home");
+                        if (userCompanyViewModel.Authority == "CustomerAdmin")
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else if (userCompanyViewModel.Authority == "Admin")
+                        {
+                            return RedirectToAction("AdminHome", "Home");
+                        }
                     }
-                    else if (userCompanyViewModel.Authority == "Admin")
-                    {
-                        return RedirectToAction("AdminHome", "Home");
-                    }
+
+                    ModelState.AddModelError("UserName", "Username or Password Incorrect");
+                    return View(loginViewModel);
                 }
                 else
-                {
-                   // loginViewModel.UserName.e
+                {                    
                     return View(loginViewModel);
                 }
             }
-
             catch (Exception ex)
             {
                 throw;
-            }
-            return View(loginViewModel);
+            }            
         }
 
         [HttpGet]
