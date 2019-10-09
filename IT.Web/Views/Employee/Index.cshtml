@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IT.Web.Models.EmployeeModel>
+﻿@model List<IT.Core.ViewModels.EmployeeViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,4 +6,9 @@
 }
 
 <h2>Index</h2>
+
+@foreach(var item in Model)
+{
+    <li>@item.Name</li>
+}
 

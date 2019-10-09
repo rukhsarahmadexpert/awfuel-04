@@ -31,7 +31,7 @@ namespace IT.Web.Controllers
                 }
                 else
                 {
-                    var results = webServices.Post(new EmployeeViewModel(), "Employee/All/" + CompanyId);
+                    var results = webServices.Post(new EmployeeViewModel(), "AWFEmployee/All/" + CompanyId);
                     if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
                         employeeViewModels = (new JavaScriptSerializer()).Deserialize<List<EmployeeViewModel>>(results.Data.ToString());
