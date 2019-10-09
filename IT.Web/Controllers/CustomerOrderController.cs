@@ -65,6 +65,53 @@ namespace IT.Web.Controllers
 
         }
 
+
+
+        public ActionResult Admin()
+        {
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 1;
+            pagingParameterModel.CompanyId = 0;
+            pagingParameterModel.OrderProgress = "All";
+            pagingParameterModel.IsSend = true;
+            pagingParameterModel.pageSize = 10;
+
+
+            var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin");
+
+            if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+            }
+
+            return View(customerNoteOrderViewModel);
+        }
+
+
+
+
+        public ActionResult AdminDetails(int Id)
+        {
+            var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/GetAllCustomerOrderGroupByAdmin/ " + Id);
+
+            if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
+            }
+
+
+            var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id);
+
+            if (CustomerOrderGroupDetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                customerOrderGroupViewModel.customerGroupOrderDetailsViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerGroupOrderDetailsViewModel>>(CustomerOrderGroupDetailsList.Data.ToString()));
+            }
+
+            return View(customerOrderGroupViewModel);
+        }
+
     }
 
 

@@ -9,6 +9,7 @@ namespace IT.Core.ViewModels
     public class PagingParameterModel
     {
         const int maxPageSize = 20;
+        public int requestedQuantity;
 
         public int pageNumber { get; set; } = 1;
 

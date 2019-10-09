@@ -175,6 +175,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\CustomerOrderController.cs" />
+    <Compile Include="Controllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AwfDriverController.cs" />
+    <Compile Include="Controllers\AwfVehicleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -535,12 +538,22 @@
     <Content Include="Views\CustomerOrder\Details.cshtml" />
     <Content Include="Views\Shared\_layoutAdmin.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
+    <Content Include="Views\AdminHome\Index.cshtml" />
+    <Content Include="Views\AwfDriver\Index.cshtml" />
+    <Content Include="Views\AwfVehicle\Index.cshtml" />
+    <Content Include="Views\AwfVehicle\Details.cshtml" />
+    <Content Include="Views\AwfDriver\Details.cshtml" />
+    <Content Include="Views\CustomerOrder\Admin.cshtml" />
+    <Content Include="Views\CustomerOrder\AdminDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AdminHome\" />
+    <Folder Include="Views\AwfDriver\" />
+    <Folder Include="Views\AwfVehicle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
