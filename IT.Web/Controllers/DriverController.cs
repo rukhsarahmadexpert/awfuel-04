@@ -26,7 +26,7 @@ namespace IT.Web.Controllers
             pagingParameterModel.CompanyId = 1055;
             pagingParameterModel.pageSize = 100;
 
-            var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
+            var DriverList = webServices.Post(pagingParameterModel, "AwfDriver/All");
 
             if(DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
