@@ -3,143 +3,151 @@
 @model List<IT.Core.ViewModels.CustomerNoteOrderViewModel>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Customer Order List";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    /**/
 
-                List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
-                customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
+    ViewBag.Title = "Customer Order List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+    List<IT.Core.ViewModels.CustomerNoteOrderViewModel> customerNoteOrderViewModel = new List<IT.Core.ViewModels.CustomerNoteOrderViewModel>();
+    customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
 
 }
 
 
- <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
-                            
-                            <li class="breadcrumb-item active">Customer Order</li>
-                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+
+    <li class="breadcrumb-item active">Customer Order</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
+<!-- Page heading removed for composed layout -->
+<div class="px-3 px-sm-5 pt-4">
 
-
-
-                        <!-- Page heading removed for composed layout -->
-                        <div class="px-3 px-sm-5 pt-4">
-                          
-                        </div>
-                        <ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
-                            </li>
-                        </ul>
-
-
-
-
-
-
-
-
-                       
-                        <div class="px-3 px-sm-5 pb-4">
-                            <div class="tab-content">
-
-
-<!-- All tab stated -->
-<div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
-                                   
-                       @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-   </div>
-
-<!-- All tab End -->
-
-
-
-
-
-
-
-
-<!-- Created tab stated -->
-<div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
-                                   
-      
-                         @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    
-   </div>
-
-<!-- Created tab End -->
-
-
-
-
-
-
-<!-- Rejected tab stated -->
-<div class="tab-pane" id="tab-accepted" role="tabpanel" aria-labelledby="tab-accepted">
-                                   
-      
-                           @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-     
-   </div>
-
-<!-- Rejected tab End -->
-
-<!-- rejected tab stated -->
-<div class="tab-pane" id="tab-rejected" role="tabpanel" aria-labelledby="tab-rejected">
-                                   
-     
-                           @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-    
-   </div>
-
-<!-- rejected tab End -->
-
-
-<!-- running tab stated -->
-<div class="tab-pane" id="tab-running" role="tabpanel" aria-labelledby="tab-running">
-                                   
-     
-                           @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-   
-   </div>
-
-<!-- running tab End -->
-
-<!-- running tab stated -->
-<div class="tab-pane" id="tab-delivered" role="tabpanel" aria-labelledby="tab-delivered">
-                                   
-      
-                           @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")   
-    
-   </div>
-
-<!-- running tab End -->
-
-  </div>                          
 </div>
-             
+<ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
+    </li>
+</ul>
+
+
+<div class="px-3 px-sm-5 pb-4">
+    <div class="tab-content">
+
+
+        <!-- All tab stated -->
+        <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+        </div>
+
+        <!-- All tab End -->
+        <!-- Created tab stated -->
+        <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
+
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+
+        </div>
+
+        <!-- Created tab End -->
+        <!-- Rejected tab stated -->
+        <div class="tab-pane" id="tab-accepted" role="tabpanel" aria-labelledby="tab-accepted">
+
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+
+        </div>
+
+        <!-- Rejected tab End -->
+        <!-- rejected tab stated -->
+        <div class="tab-pane" id="tab-rejected" role="tabpanel" aria-labelledby="tab-rejected">
+
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+
+        </div>
+
+        <!-- rejected tab End -->
+        <!-- running tab stated -->
+        <div class="tab-pane" id="tab-running" role="tabpanel" aria-labelledby="tab-running">
+
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+
+        </div>
+
+        <!-- running tab End -->
+        <!-- running tab stated -->
+        <div class="tab-pane" id="tab-delivered" role="tabpanel" aria-labelledby="tab-delivered">
+
+
+            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+
+        </div>
+
+        <!-- running tab End -->
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            PostAjax('All');
+        })
+
+        $('All').change(function () {
+            PostAjax('All');
+        })
+
+
+        function PostAjax(OrderStatus) {
+           
+            $.ajax({
+                type: "POST",
+                url: '/CustomerOrder/GetAll',
+                data: { "OrderProgress": OrderStatus},
+                dataType: 'json',
+                success: function (result)
+                {
+                    console.log(result);
+                },
+                error: function (ex)
+                {
+                    console.log('error');
+                }
+               
+            });
+        }
+
+    </script>
+    }
 
 
 
@@ -153,8 +161,10 @@
 
 
 
-                      
-                      
+
+
+
+
 
 
 

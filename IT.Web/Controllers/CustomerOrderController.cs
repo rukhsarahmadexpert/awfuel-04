@@ -41,6 +41,37 @@ namespace IT.Web.Controllers
             return View(customerNoteOrderViewModel);
         }
 
+        [HttpPost]
+        public JsonResult GetAll(string OrderProgress)
+        {
+            try
+            {
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = 1047;
+                pagingParameterModel.OrderProgress = OrderProgress;
+                pagingParameterModel.IsSend = false;
+                pagingParameterModel.pageSize = 100;
+
+
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId");
+
+                if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                }
+
+                return Json(customerNoteOrderViewModel,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public ActionResult Details(int Id)
         {
