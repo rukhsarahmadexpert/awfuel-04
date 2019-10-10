@@ -555,6 +555,7 @@
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Shared\PartialView\CustomerOrder\CustomerOrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
@@ -562,6 +563,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Product\" />
+    <Folder Include="Views\Shared\PartialView\" />
+    <Folder Include="Views\Shared\PartialView\CustomerOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
