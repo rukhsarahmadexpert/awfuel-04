@@ -27,27 +27,27 @@
 <div class="px-3 px-sm-5 pt-4">
 
 </div>
-<ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
+<ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" id="tabs" role="tablist">
+    <li class="nav-item all">
+        <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
+    <li class="nav-item created">
+        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item accepted">
         <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item rejected">
         <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item running">
         <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item delivered">
         <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
     </li>
 </ul>
@@ -120,19 +120,41 @@
         $(document).ready(function () {
 
             PostAjax('All');
+
+            $('.created').click(function () {
+                PostAjax('Order Created');
+            })
+
+            $('.accepted').click(function () {
+                PostAjax('Order Accepted');
+            })
+
+            $('.rejected').click(function () {
+                PostAjax('Order Rejected');
+            })
+
+            $('.running').click(function () {
+                PostAjax('Order Running');
+            })
+
+            $('.delivered').click(function () {
+                PostAjax('Order Delivered');
+            })
+
+            
         })
 
-        $('All').change(function () {
-            PostAjax('All');
-        })
-
+        
 
         function PostAjax(OrderStatus) {
-           
+
+            var data = {
+                OrderProgress: OrderStatus
+            }
             $.ajax({
                 type: "POST",
                 url: '/CustomerOrder/GetAll',
-                data: { "OrderProgress": OrderStatus},
+                data: data,
                 dataType: 'json',
                 success: function (result)
                 {

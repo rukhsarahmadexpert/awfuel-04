@@ -52,7 +52,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = 1047;
                 pagingParameterModel.OrderProgress = OrderProgress;
-                pagingParameterModel.IsSend = false;
+                pagingParameterModel.IsSend = true;
                 pagingParameterModel.pageSize = 100;
 
 
@@ -119,6 +119,9 @@ namespace IT.Web.Controllers
 
             return View(customerNoteOrderViewModel);
         }
+
+
+        
 
 
 
