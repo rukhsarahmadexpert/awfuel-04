@@ -19,33 +19,44 @@ namespace IT.Web.Controllers
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
+        int CompanyId;
 
 
         public ActionResult Index()
         {
-            PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-            pagingParameterModel.pageNumber = 1;
-            pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = 2;
-            pagingParameterModel.pageSize = 100;
-
-            var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
-
-            if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            try
             {
-                VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
-            }
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-            return View(VehicleViewModels);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.pageSize = 100;
+
+                var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                }
+
+                return View(VehicleViewModels);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
+
 
         public ActionResult Details(int id)
         {
             try
             {
-
-                vehicleViewModel.CompanyId = 2;
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                vehicleViewModel.CompanyId = CompanyId;
                 vehicleViewModel.Id = id;
 
                 var result = webServices.Post(vehicleViewModel, "AWFVehicle/Edit");

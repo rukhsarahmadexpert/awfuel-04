@@ -17,12 +17,13 @@ namespace IT.Web.Controllers
         List<DesignationViewModel> designationViewModels = new List<DesignationViewModel>();
         List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
         EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+        int CompanyId =0;
         // GET: Employee
         public ActionResult Index()
         {
             try
             {
-                int CompanyId = 2;
+                CompanyId = Convert.ToInt32(Session["CompanyId"]); 
 
                 if (HttpContext.Cache["EmployeeDatas"] != null)
                 {
@@ -54,8 +55,9 @@ namespace IT.Web.Controllers
         // GET: Employee/Details/5
         public ActionResult Details(int Id)
         {
+           CompanyId =  Convert.ToInt32(Session["CompanyId"]);
             employeeViewModel.Id = Id;
-            employeeViewModel.CompanyId = 2;
+            employeeViewModel.CompanyId = CompanyId;
 
             var result = webServices.Post(new EmployeeViewModel(), "AWFEmployee/Edit/"+Id);
 

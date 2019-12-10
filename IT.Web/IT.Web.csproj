@@ -183,6 +183,7 @@
     <Compile Include="Controllers\ProductController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\staticImages\logo-aw.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -562,9 +563,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Product\" />
-    <Folder Include="Views\Shared\PartialView\" />
-    <Folder Include="Views\Shared\PartialView\CustomerOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -607,7 +605,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64287</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64287/</IISUrl>
+          <IISUrl>http://localhost:64288/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -51,6 +51,13 @@ namespace IT.Web.Controllers
                     {
                         userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
 
+                        if (userCompanyViewModel != null)
+                        {
+                            Session["userCompanyViewModel"] = userCompanyViewModel;
+                            Session["CompanyId"] = userCompanyViewModel.CompanyId;
+                            Session["UserId"] = userCompanyViewModel.UserId;
+                        }
+
                         if (userCompanyViewModel.Authority == "CustomerAdmin")
                         {
                             return RedirectToAction("Index", "Home");

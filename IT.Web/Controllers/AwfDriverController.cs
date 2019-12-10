@@ -16,32 +16,42 @@ namespace IT.Web.Controllers
         WebServices webServices = new WebServices();
         List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
         DriverViewModel driverViewModel = new DriverViewModel();
+        int CompanyId;
 
         public ActionResult Index()
         {
-            PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-            pagingParameterModel.pageNumber = 1;
-            pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = 2;
-            pagingParameterModel.pageSize = 100;
-
-            var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
-
-            if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            try
             {
-                driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
-            }
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-            return View(driverViewModels);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.pageSize = 100;
+
+                var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
+
+                if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    driverViewModels = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverList.Data.ToString()));
+                }
+
+                return View(driverViewModels);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public ActionResult Details(int id)
         {
             try
             {
-
-                driverViewModel.CompanyId = 2;
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                driverViewModel.CompanyId = CompanyId;
                 driverViewModel.Id = id;
 
                 var result = webServices.Post(driverViewModel, "AWFDriver/Edit");

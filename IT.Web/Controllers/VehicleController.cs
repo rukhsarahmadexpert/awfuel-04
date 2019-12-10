@@ -19,25 +19,34 @@ namespace IT.Web.Controllers
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
-
+        int CompanyId = 0;
         // GET: Vehicle
         public ActionResult Index()
         {
-            PagingParameterModel pagingParameterModel = new PagingParameterModel();
-
-            pagingParameterModel.pageNumber = 1;
-            pagingParameterModel._pageSize = 1;
-            pagingParameterModel.CompanyId = 1055;
-            pagingParameterModel.pageSize = 100;
-
-            var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
-
-            if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+            try
             {
-                VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
-            }
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
-            return View(VehicleViewModels);
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = 1055;
+                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.CompanyId = CompanyId;
+
+                var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                }
+
+                return View(VehicleViewModels);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             
         }
 
@@ -46,7 +55,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-            int CompanyId = 1;
+            CompanyId = Convert.ToInt32(Session["CompanyId"]); ;
             var result = webServices.Post(new VehicleViewModel(), "Vehicle/All/" + CompanyId);
             if (result.Data != null)
             {
@@ -67,8 +76,8 @@ namespace IT.Web.Controllers
         {
             try
             {
-
-                vehicleViewModel.CompanyId = 1;
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                vehicleViewModel.CompanyId = CompanyId;
                 vehicleViewModel.Id = id;
 
                 var result = webServices.Post(vehicleViewModel, "Vehicle/Edit");

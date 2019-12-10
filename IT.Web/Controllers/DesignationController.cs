@@ -142,7 +142,6 @@ namespace IT.Web.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult Edit(DesignationViewModel designationViewModel)
         {
