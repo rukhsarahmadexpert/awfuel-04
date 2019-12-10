@@ -557,6 +557,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Shared\PartialView\CustomerOrder\CustomerOrderList.cshtml" />
+    <Content Include="Views\AwfDriver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

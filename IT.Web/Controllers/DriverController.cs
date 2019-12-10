@@ -1,5 +1,6 @@
 using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web.Controllers
 {
+    [Autintication]
     public class DriverController : Controller
     {
 

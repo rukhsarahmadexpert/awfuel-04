@@ -6,10 +6,11 @@ using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using IT.Core.ViewModels;
-
+using IT.Web.MISC;
 
 namespace IT.Web.Controllers
 {
+    [Autintication]
     public class CompanyController : Controller
     {
         // GET: Company

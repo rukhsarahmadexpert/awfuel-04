@@ -15,9 +15,8 @@ namespace IT.Web.MISC
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
-                    action = "Index",
-                    controller = "Login",
-                    area = "Login"
+                    action = "Login",
+                    controller = "User"
                 }));
             }
             else

@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using IT.Web.MISC;
+using System.Web.Mvc;
 
 namespace IT.Web.Controllers
 {
+    [Autintication]
     public class HomeController : Controller
     {
          
