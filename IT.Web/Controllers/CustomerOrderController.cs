@@ -57,13 +57,16 @@ namespace IT.Web.Controllers
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                //CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
                 pagingParameterModel.OrderProgress = OrderProgress;
+                //if (OrderProgress != "All")
+                //{
+                //    pagingParameterModel.CompanyId = CompanyId;
+                //}                
                 pagingParameterModel.IsSend = true;
                 pagingParameterModel.pageSize = 100;
 
@@ -117,17 +120,22 @@ namespace IT.Web.Controllers
 
 
 
-        public ActionResult Admin()
+        public ActionResult Admin(string OrderProgress)
         {
+            List<CustomerNoteOrderViewModel> customerNoteOrderViewModels = new List<CustomerNoteOrderViewModel>();
             try
             {
+                if(OrderProgress == null)
+                {
+                    OrderProgress = "All";
+                }
                
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.OrderProgress = "All";
+                pagingParameterModel.OrderProgress = OrderProgress;
                 pagingParameterModel.IsSend = true;
                 pagingParameterModel.pageSize = 10;
 
@@ -136,10 +144,13 @@ namespace IT.Web.Controllers
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                    if (CustomerOrderList.Data != null && CustomerOrderList.Data != "[]")
+                    {
+                        customerNoteOrderViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
+                    }
                 }
 
-                return View(customerNoteOrderViewModel);
+                return View(customerNoteOrderViewModels);
             }
             catch(Exception ex)
             {

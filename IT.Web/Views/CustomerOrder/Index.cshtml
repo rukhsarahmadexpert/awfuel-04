@@ -14,7 +14,7 @@
     customerNoteOrderViewModel = Model as List<IT.Core.ViewModels.CustomerNoteOrderViewModel>;
 
 }
-
+@*<label>Rukhsar</label>*@
 
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
@@ -119,6 +119,8 @@
     <script>
         $(document).ready(function () {
 
+            alert();
+
             PostAjax('All');
 
             $('.created').click(function () {
@@ -140,8 +142,6 @@
             $('.delivered').click(function () {
                 PostAjax('Order Delivered');
             })
-
-            
         })
 
         
