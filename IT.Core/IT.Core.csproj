@@ -65,6 +65,13 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
+    <Compile Include="ViewModels\DriverLoginHistoryViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\SiteViewModel.cs" />
+    <Compile Include="ViewModels\LPOInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\LPOInvoiceDetails.cs" />
+    <Compile Include="ViewModels\FuelTransferViewModel.cs" />
+    <Compile Include="ViewModels\OrderTransferRequestsViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

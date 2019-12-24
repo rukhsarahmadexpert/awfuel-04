@@ -17,6 +17,7 @@ namespace IT.Web.Controllers
     {
         WebServices webServices = new WebServices();
         List<DriverViewModel> driverViewModels = new List<DriverViewModel>();
+        List<DriverLoginHistoryViewModel> driverLoginHistoryViewModels = new List<DriverLoginHistoryViewModel>();
         DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId;
 
@@ -71,10 +72,98 @@ namespace IT.Web.Controllers
             return View(driverViewModel);
         }
 
-
         public ActionResult Create()
         {
             return View(new DriverViewModel());
+        }
+
+        public ActionResult DriverLoginHistoryWithAsignVehicle()
+        {
+            try
+            {
+
+                return View();
+
+            }
+            catch(Exception ex)
+            {
+
+                throw ex;
+
+            }
+        }
+
+
+        public ActionResult DriverLoginHistoryAllForAdmin()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.Id = CompanyId;
+                pagingParameterModel.pageSize = 100;
+
+                var DriverLoginList = webServices.Post(pagingParameterModel, "AWFDriver/DriverLoginHistoryAllForAdmin");
+                if (DriverLoginList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+
+                    driverLoginHistoryViewModels = (new JavaScriptSerializer().Deserialize<List<DriverLoginHistoryViewModel>>(DriverLoginList.Data.ToString()));
+                }
+
+                return View(driverLoginHistoryViewModels);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ReleaseVehicle(SearchViewModel searchViewModel)
+        {
+            try
+            {
+                var DriverInfo = webServices.Post(searchViewModel, "AWFDriver/ReleaseVehicle");
+                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+
+                    driverViewModel = (new JavaScriptSerializer().Deserialize<DriverViewModel>(DriverInfo.Data.ToString()));
+                }
+
+                return Redirect(nameof(DriverLoginHistoryAllForAdmin));
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DriverLogouByAdmin(SearchViewModel searchViewModel)
+        {
+            try
+            {
+                var DriverInfo = webServices.Post(searchViewModel, "AWFDriver/DriverLogouByAdmin");
+                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+
+                   var Id = (new JavaScriptSerializer().Deserialize<int>(DriverInfo.Data.ToString()));
+                }
+
+                return Redirect(nameof(DriverLoginHistoryAllForAdmin));
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
     }

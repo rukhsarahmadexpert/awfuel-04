@@ -21,6 +21,15 @@ namespace IT.Web.Controllers
             //userViewModelList = (new JavaScriptSerializer()).Deserialize<List<UserViewModel>>(result.Data.ToString());
             return View();
         }
+
+        public ActionResult logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return Redirect(nameof(Login));
+
+
+        }
         public ActionResult Add()
         {
             return View();
@@ -90,8 +99,8 @@ namespace IT.Web.Controllers
 
         [HttpPost]
         public ActionResult Registration(UserViewModel userViewModel)
-        {
-            UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
+        { 
+
 
             try
             {
@@ -121,5 +130,9 @@ namespace IT.Web.Controllers
 
             return View();
         }
+
+
+
+        
     }
 }

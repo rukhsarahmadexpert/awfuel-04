@@ -10,7 +10,7 @@ namespace IT.Core.ViewModels
     {
         const int maxPageSize = 20;
         public int requestedQuantity;
-
+        public int Id { get; set; }
         public int pageNumber { get; set; } = 1;
 
         public int _pageSize { get; set; } = 10;
@@ -18,6 +18,7 @@ namespace IT.Core.ViewModels
         public int CompanyId { get; set; }
         public string OrderProgress { get; set; }
         public bool IsSend { get; set; }
+        public int DriverId { get; set; }
 
         public int pageSize
         {

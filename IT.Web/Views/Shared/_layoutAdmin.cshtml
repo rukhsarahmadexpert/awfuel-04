@@ -20,8 +20,8 @@
     <link rel="stylesheet" media="screen, print" href="~/assets/css/vendors.bundle.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/app.bundle.css">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/fav.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/fav.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/staticImages/logo-1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/staticImages/logo-1.png">
    
     
     <!-- Optional: page related CSS -->
@@ -31,6 +31,7 @@
 
     <!-- page related CSS below -->
 	<link rel="stylesheet" media="screen, print" href="~/assets/css/formplugins/select2/select2.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/assets/css/notifications/sweetalert2/sweetalert2.bundle.css">
 </head>
 <body class="mod-bg-1 ">
     <!-- DOC: script to save and load page settings -->
@@ -93,7 +94,7 @@
             <aside class="page-sidebar">
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="~/assets/staticImages/menalogo.png" alt="Mena energy" style="width:60px" aria-roledescription="logo">
+                        <img src="~/assets/staticImages/logo-1.png" alt="Mena energy" style="width:60px" aria-roledescription="logo">
                         <!--<span class="page-logo-text mr-1">Mena Energy</span>-->
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -126,6 +127,8 @@
                     </div>
 
                     <ul class="nav-menu" id="js-nav-menu">
+
+                         
 
                         <li class="open">
 
@@ -206,7 +209,7 @@
 
                         <li class="open">
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
-                                <i class="fal fa-dot-circle"></i>
+                                <i class="fal fa-list"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Products</span>
                             </a>
 
@@ -218,6 +221,49 @@
                                                 <span class="nav-link-text" data-i18n="">Product</span><span class="">List</span>
                                             </a>
 
+                                        </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-chart-line"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">sales</span>
+                            </a>
+                            <ul>
+                                        <li>
+                                            <a href="/Quotation/Index" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">Quotations</span><span class="">List</span>
+                                            </a>
+                                        </li>
+                            </ul>
+                        </li>
+
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-home"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Master</span>
+                            </a>
+                            <ul>
+                                        <li>
+                                            <a href="/AwfDriver/DriverLoginHistoryAllForAdmin" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">Driver Login History</span><span class="">List</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Site/Index" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a href="/FuelTransfer/Index" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">Fuel Transfer</span><span class="">List</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/FuelTransfer/OrderTransferRequestsAll" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">Order Transfer Requests</span><span class="">List</span>
+                                            </a>
                                         </li>
                             </ul>
                         </li>
@@ -243,7 +289,7 @@
                     <!-- we need this logo when user switches to nav-function-top -->
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-                            <img src="~/assets/staticImages/menalogo.png" alt="SmartAdmin for PHP" aria-roledescription="logo">
+                            <img src="~/assets/staticImages/logo-1.png" alt="SmartAdmin for PHP" aria-roledescription="logo">
                            <!-- <span class="page-logo-text mr-1">Mena energy</span>-->
                             <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -690,7 +736,7 @@
                                 </a>
                                 
                                 <div class="dropdown-divider m-0"></div>
-                                <a class="dropdown-item fw-500 pt-3 pb-3" href="page_login-alt.html">
+                                <a class="dropdown-item fw-500 pt-3 pb-3" href="/User/logout">
                                     <span data-i18n="drpdwn.page-logout">Logout</span>
                                     <span class="float-right fw-n">&commat;Rizwan afridi</span>
                                 </a>
@@ -791,7 +837,7 @@
         <a href="#" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Scroll Top">
             <i class="fal fa-arrow-up"></i>
         </a>
-        <a href="page_login-alt.html" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
+        <a href="/User/logout" class="menu-item btn" data-toggle="tooltip" data-placement="left" title="Logout">
             <i class="fal fa-sign-out"></i>
         </a>
         <a href="#" class="menu-item btn" data-action="app-fullscreen" data-toggle="tooltip" data-placement="left" title="Full Screen">
@@ -1346,6 +1392,8 @@
     <script src="~/assets/js/vendors.bundle.js"></script>
     <script src="~/assets/js/app.bundle.js"></script>
 
+  
+
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
         <!-- datatbles buttons bundle contains: 
     + "jszip.js",
@@ -1440,7 +1488,10 @@
             {
                 $(function()
                 {
+                 
                     $('.select2').select2();
+                   
+
 
                     $(".select2-placeholder-multiple").select2(
                     {
@@ -1571,7 +1622,12 @@
     <script src="~/assets/js/statistics/flot/flot.bundle.js"></script>
     <script src="~/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
+<<<<<<< HEAD
     <script src="~/Scripts/CustomScript/common-script.js"></script>
+=======
+    <script src="~/assets/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>
+
+>>>>>>> 18cc395... Rizwan changes
     <script>
         /* defined datas */
         var dataTargetProfit = [
@@ -1944,7 +2000,30 @@
 
         });
 
+
+         $("#js-sweetalert2-example-7").on("click", function()
+                {
+                    Swal.fire(
+                    {
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, delete it!"
+                    }).then(function(result)
+                    {
+                        if (result.value)
+                        {
+                            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                        }
+                    });
+         }); // ... and by passing a parameter, you can execute something else for "Cancel".
+
+        dropdownParent: $(".modal-body")
+
     </script>
+
+
 
 </body>
 
