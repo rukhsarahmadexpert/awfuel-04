@@ -37,7 +37,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageSize = 100;
 
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId");
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId",false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -71,7 +71,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageSize = 100;
 
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId");
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId",false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -94,7 +94,7 @@ namespace IT.Web.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerOrderAllByCompanyId/ " + Id);
+                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerOrderAllByCompanyId/ " + Id,false);
 
                 if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -102,7 +102,7 @@ namespace IT.Web.Controllers
                 }
 
 
-                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id);
+                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id,false);
 
                 if (CustomerOrderGroupDetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -140,7 +140,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageSize = 10;
 
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin");
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin",false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -163,7 +163,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/GetAllCustomerOrderGroupByAdmin/ " + Id);
+                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/GetAllCustomerOrderGroupByAdmin/ " + Id,false);
 
                 if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -171,7 +171,7 @@ namespace IT.Web.Controllers
                 }
 
 
-                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id);
+                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id,false);
 
                 if (CustomerOrderGroupDetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {

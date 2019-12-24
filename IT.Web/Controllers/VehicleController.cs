@@ -141,13 +141,13 @@ namespace IT.Web.Controllers
         {
             try
             {
-                var result = webServices.Post(new VehicleViewModel(), "Vehicle/Edit/" + id);
+                var result = webServices.Post(new VehicleViewModel(), "Vehicle/Edit/" + id,false);
                 if (result.Data != null)
                 {
                     vehicleViewModel = (new JavaScriptSerializer()).Deserialize<VehicleViewModel>(result.Data.ToString());
                 }
 
-                var resultVehicleType = webServices.Post(new VehicleViewModel(), "VehicleType/GetAll");
+                var resultVehicleType = webServices.Post(new VehicleViewModel(), "VehicleType/GetAll",false);
                 if (result.Data != null)
                 {
                     vehicleTypeViewModels = (new JavaScriptSerializer()).Deserialize<List<VehicleTypeViewModel>>(resultVehicleType.Data.ToString());

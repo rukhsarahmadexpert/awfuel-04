@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using IT.Core.ViewModels;
+using IT.Repository.WebServices;
 using IT.Web.MISC;
 
 namespace IT.Web.Controllers
@@ -13,6 +15,8 @@ namespace IT.Web.Controllers
     [Autintication]
     public class CompanyController : Controller
     {
+
+        WebServices webServices = new WebServices();
         // GET: Company
         public ActionResult Index()
         {
@@ -26,55 +30,71 @@ namespace IT.Web.Controllers
         }
 
         // GET: Company/Create
-        public ActionResult Create(HttpPostedFileBase file)
+        public ActionResult Create(CompnayModel compnayModel)
         {
             return View();
            
         }
 
-        // POST: Company/Create
         [HttpGet]
-        public ActionResult Creates(CompnayModel compnayModel)
+        public ActionResult Creates()
+        {
+            return View(new CompnayModel());
+        }
+
+        [HttpPost]
+        public ActionResult Creates(CompnayModel compnayModel, HttpPostedFileBase file)
+        {
+          // await Creat(compnayModel,file);
+            return View();
+        }
+
+        // POST: Company/Create
+        
+        [HttpPost]
+        public ActionResult Create(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
             try
             {
-                using (var client = new HttpClient())
-                using (var content = new MultipartFormDataContent())
+                if (Request.Files.Count > 0)
                 {
-                    // Make sure to change API address
-                    client.BaseAddress = new Uri("http://itmolen-001-site8.htempurl.com/api/");
+                    var file = LogoUrl;
 
-                    // Add first file content 
-                    var fileContent1 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"C:\Users\IT Molen\Pictures\pic 2.PNG"));
-                    fileContent1.Headers.ContentDisposition = new ContentDispositionHeaderValue("LogoUrl")
+                    using (HttpClient client = new HttpClient())
                     {
-                        FileName = "Sample.pdf"
-                    };
-
-                    fileContent1.Headers.Add("Hello", compnayModel.Name);
-
-                    // Add Second file content
-                    // var fileContent2 = new ByteArrayContent(System.IO.File.ReadAllBytes(@"c:\Users\aisadmin\Desktop\Sample.txt"));
-                    // fileContent2.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                    // {
-                    //     FileName = "Sample.txt"
-                    //  };
-
-                    content.Add(fileContent1);
-                    //  content.Add(fileContent2);
-
-                    // Make a call to Web API
-                    var result = client.PostAsync("Company/Add", content).Result;
-                    
-                    Console.WriteLine(result.StatusCode);
-                    Console.ReadLine();
+                        using (var content = new MultipartFormDataContent())
+                        {
+                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                            var fileContent = new ByteArrayContent(fileBytes);
+                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                            content.Add(fileContent);
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent("Name"), "Name");
+                            content.Add(new StringContent("street Data"), "Street");
+                            content.Add(new StringContent(compnayModel.Postcode == null ? "" : compnayModel.Postcode), "Postcode");
+                            content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
+                            content.Add(new StringContent(compnayModel.Street == null ? "" : compnayModel.Street), "State");
+                            content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
+                            
+                          //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content,"Company/Add", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                ViewBag.Message = "Created";
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
+                            }
+                        }
+                    }
                 }
-
-                return RedirectToAction("Index");
+                return View();              
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
         }
 

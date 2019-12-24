@@ -12,8 +12,8 @@ namespace IT.Repository.WebServices
     public class WebServices
     {
         HttpClient httpClient;
-        //string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
-        string baseURL = "http://itmolen-001-site8.htempurl.com/api/"; 
+        string baseURL = "http://localhost:64299/api/"; //ConfigurationManager.AppSettings["BaseURL"].ToString();
+        //string baseURL = "http://itmolen-001-site8.htempurl.com/api/"; 
 
         ServiceResponseModel serviceResponseModel;
         public WebServices()
@@ -26,13 +26,30 @@ namespace IT.Repository.WebServices
             }
             serviceResponseModel = new ServiceResponseModel();
         }
-        public ServiceResponseModel Post(object input, string service)
+
+        public ServiceResponseModel Post(object input, string service, bool IsMultiPart = false)
         {
             string inputJson = (new JavaScriptSerializer()).Serialize(input);
 
 
             HttpContent inputContent = new StringContent(inputJson, Encoding.UTF8, "application/json");
             HttpResponseMessage response = httpClient.PostAsync(baseURL + service, inputContent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                serviceResponseModel = (new JavaScriptSerializer()).Deserialize<ServiceResponseModel>(result);
+            }
+            return serviceResponseModel;
+        }
+
+        public ServiceResponseModel PostMultiPart(MultipartFormDataContent input, string service, bool IsMultiPart = false)
+        {
+            string inputJson = (new JavaScriptSerializer()).Serialize(input);
+
+            MultipartFormDataContent multipartFormDataContent = new MultipartFormDataContent();
+            multipartFormDataContent = input;
+            //HttpResponseMessage response = httpClient.PostAsync(baseURL + service, input).Result;
+            HttpResponseMessage response = httpClient.PostAsync("http://localhost:64299/api/Company/Add", multipartFormDataContent).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;

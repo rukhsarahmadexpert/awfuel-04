@@ -18,7 +18,7 @@ namespace IT.Web.Controllers
         public ActionResult Index()
         {
             //var result = webServices.Post(new UserViewModel(), "User/GetAll");
-          //  userViewModelList = (new JavaScriptSerializer()).Deserialize<List<UserViewModel>>(result.Data.ToString());
+            //userViewModelList = (new JavaScriptSerializer()).Deserialize<List<UserViewModel>>(result.Data.ToString());
             return View();
         }
         public ActionResult Add()
@@ -45,7 +45,7 @@ namespace IT.Web.Controllers
             {
                 if(ModelState.IsValid)
                 { 
-                var result = webServices.Post(loginViewModel, "User/Login");
+                var result = webServices.Post(loginViewModel, "User/Login",false);
 
                     if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
@@ -95,7 +95,7 @@ namespace IT.Web.Controllers
 
             try
             {
-                var result = webServices.Post(userViewModel, "User/Register");
+                var result = webServices.Post(userViewModel, "User/Register",false);
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
