@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{171275A0-C4F2-4CBB-8FFF-070F4A6E52DB}</ProjectGuid>
+    <ProjectGuid>{ACADA34D-5B37-470A-8A37-EC0E92BBEA03}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -202,7 +202,6 @@
     <Compile Include="Controllers\AwfVehicleController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
-    <Compile Include="Controllers\CustomerSitesController.cs" />
     <Compile Include="Controllers\AWDepartmentController.cs" />
     <Compile Include="Controllers\QuotationController.cs" />
     <Compile Include="Controllers\FuelTransferController.cs" />
@@ -568,9 +567,7 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Shared\PartialView\CustomerOrder\CustomerOrderList.cshtml" />
     <Content Include="Views\AwfDriver\Create.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Company\Creates.cshtml" />
-=======
     <None Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -699,17 +696,12 @@
     <Content Include="Views\Quotation\Index.cshtml" />
     <Content Include="Views\FuelTransfer\Index.cshtml" />
     <Content Include="Views\FuelTransfer\OrderTransferRequestsAll.cshtml" />
->>>>>>> 18cc395... Rizwan changes
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Site\" />
-    <Folder Include="Views\CustomerSites\" />
-    <Folder Include="Views\Quotation\" />
-    <Folder Include="Views\FuelTransfer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
