@@ -26,7 +26,7 @@ namespace IT.Web.MISC
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 

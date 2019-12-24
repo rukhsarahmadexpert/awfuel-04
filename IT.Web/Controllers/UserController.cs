@@ -11,8 +11,8 @@ namespace IT.Web.Controllers
 {
     public class UserController : Controller
     {
-        UserViewModel userViewModel = new UserViewModel();
-        List<UserViewModel> userViewModelList = new List<UserViewModel>();
+        readonly UserViewModel userViewModel = new UserViewModel();
+        readonly List<UserViewModel> userViewModelList = new List<UserViewModel>();
         UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
         WebServices webServices = new WebServices();
         public ActionResult Index()
@@ -78,7 +78,7 @@ namespace IT.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }            
         }
 
@@ -116,7 +116,7 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
             return View();
