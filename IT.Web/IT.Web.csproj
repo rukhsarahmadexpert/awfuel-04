@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AWDepartmentController.cs" />
     <Compile Include="Controllers\QuotationController.cs" />
     <Compile Include="Controllers\FuelTransferController.cs" />
+    <Compile Include="Controllers\CustomerSitesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\staticImages\logo-aw.png" />
