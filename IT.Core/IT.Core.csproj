@@ -72,6 +72,7 @@
     <Compile Include="ViewModels\LPOInvoiceDetails.cs" />
     <Compile Include="ViewModels\FuelTransferViewModel.cs" />
     <Compile Include="ViewModels\OrderTransferRequestsViewModel.cs" />
+    <Compile Include="ViewModels\AppVersionViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
