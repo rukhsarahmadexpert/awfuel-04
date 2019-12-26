@@ -107,7 +107,6 @@ namespace IT.Web.Controllers
                 }
                 else
                 {
-                    
 
                     return Json(orderTransferRequestsViewModel, JsonRequestBehavior.AllowGet);
                 }

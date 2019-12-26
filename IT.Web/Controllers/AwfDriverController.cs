@@ -166,6 +166,66 @@ namespace IT.Web.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult DriverAllOnline()
+        {
+
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/"+CompanyId);
+                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
+                    return Json(OnlineDriverList, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json("failed", JsonRequestBehavior.AllowGet);
+                
+
+            }
+            catch (Exception)
+            {
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
+            }  
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DriverAllOnlineByDriverId(int Id)
+        {
+
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
+                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
+
+                    var SingleDriver = OnlineDriverList.Where(x => x.Id == Id).FirstOrDefault();
+                   
+                        return Json(SingleDriver, JsonRequestBehavior.AllowGet);
+                    
+                    
+                }
+
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch (Exception)
+            {
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+
     }
     
 }
