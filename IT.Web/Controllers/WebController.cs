@@ -43,13 +43,21 @@ namespace IT.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostAppVersion(AppVersionViewModel appVersionViewModel)
+        public ActionResult AppVersionAdd(AppVersionViewModel appVersionViewModel)
         {
 
             try
             {
+                var result = new ServiceResponseModel();
 
-                var result = webServices.Post(appVersionViewModel, "AppVersion/AppVersionAdd");
+                if (appVersionViewModel.Id > 0)
+                {
+                     result = webServices.Post(appVersionViewModel, "AppVersion/AppVersionUpdate");
+                }
+                else
+                {
+                     result = webServices.Post(appVersionViewModel, "AppVersion/AppVersionAdd");
+                }
 
                 if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {

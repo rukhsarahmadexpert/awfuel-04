@@ -697,15 +697,14 @@
     <Content Include="Views\Quotation\Index.cshtml" />
     <Content Include="Views\FuelTransfer\Index.cshtml" />
     <Content Include="Views\FuelTransfer\OrderTransferRequestsAll.cshtml" />
-    <Content Include="Views\Web\AppVersionAdd.cshtml" />
     <Content Include="Views\Web\Index.cshtml" />
+    <Content Include="Views\Web\AppVersionAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Web\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
