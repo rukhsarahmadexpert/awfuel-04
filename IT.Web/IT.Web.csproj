@@ -697,7 +697,6 @@
     <Content Include="Views\Quotation\Index.cshtml" />
     <Content Include="Views\FuelTransfer\Index.cshtml" />
     <Content Include="Views\FuelTransfer\OrderTransferRequestsAll.cshtml" />
-    <Content Include="Views\Web\AppVersionAdd.cshtml" />
     <Content Include="Views\Web\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
