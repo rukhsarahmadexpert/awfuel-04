@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\FuelTransferViewModel.cs" />
     <Compile Include="ViewModels\OrderTransferRequestsViewModel.cs" />
     <Compile Include="ViewModels\AppVersionViewModel.cs" />
+    <Compile Include="ViewModels\TransferFromDriverViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

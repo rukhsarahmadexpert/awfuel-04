@@ -63,7 +63,7 @@
                                                                              </form>
                                                                         </div>
                                                                         <div class="col-12 mt-1">
-                                                                             <button type="button" onclick="OrderInfoForModel('@item.CreatedDate','@item.DriverName','@item.RequestTypeName', '@item.IsFullOrPartial','@item.PartialQuantity.ToString()');"  id="BtnTransf4erOrder" class="btn btn-primary btn-xs btn-block waves-effect waves-themed">
+                                                                             <button type="button" onclick="OrderInfoForModel('@item.CreatedDate', '@item.DriverName', '@item.RequestTypeName', '@item.IsFullOrPartial', '@item.PartialQuantity.ToString()', @item.OrderId, '@item.Description' ,@item.DriverId,@item.Id);"  id="BtnTransf4erOrder" class="btn btn-primary btn-xs btn-block waves-effect waves-themed">
                                                                              <i> Transfer Order</i>  
                                                                              </button>
                                                                             
@@ -135,6 +135,7 @@
                                                                 </select>
                                                                 </div>    
                                                               </div>
+                                                             
                                                               <div class="row">
                                                                     <div class="col-md-12">
                                                                         <table class="table table-bordered table-hover m-0">
@@ -169,9 +170,17 @@
                                                                                                 <th scope="row">Created Date</th>
                                                                                                 <td id="Created_Date">td</td> 
                                                                                             </tr>
+                                                                                           
                                                                                             <tr>
+                                                                                               
                                                                                                 <th scope="row">From Driver</th>
-                                                                                                <td id="DriverName">td</td>
+                                                                                                <td id="DriverName">
+                                                                                                
+                                                                                                </td>
+                                                                                                <input type="hidden" id="OrderId" />
+                                                                                                <input type="hidden" id="From" />
+                                                                                                <input type="hidden" id="OrderTransferRequestedId" />
+                                                                                                <input type="hidden" id="description" />
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <th scope="row">Request Type Name</th>
@@ -187,6 +196,13 @@
                                                                                                 <td id="partialQuantity1">td</td>
                                                                                             </tr>
 
+                                                                                             <tr>
+                                                                                               
+                                                                                                <td colspan="2" id="partialQuantity1">
+                                                                                                 <textarea id="InputDescription" rows="1" cols="5" class="form-control" placeholder="Short Description"></textarea>
+                                                                                                </td>
+                                                                                            </tr>
+
                                                                                            
                                                                                             
                                                                                         </tbody>
@@ -198,7 +214,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Accept</button>
+                                                            <button type="button" id="OrderTransferToDriver" class="btn btn-primary">Order Transfer</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -209,6 +225,31 @@
     $(document).ready(function () {
 
         LoadOnlineDriver();
+
+        $('#OrderTransferToDriver').click(function () {
+
+            var Data = JSON.stringify({
+
+               
+                OrderId: $('#OrderId').val(),
+                IsFullOrder : $('#IsFullPartial12').val(),
+                From: $('#From').val(),
+                OrderTransferRequestId: $('#OrderTransferRequestedId').val(),
+                Descriptions: $('#InputDescription').val(),
+                To: $('#OnlineDriverSelectList').val(),
+         })
+            ajaxRequest("POST", "/FuelTransfer/CustomerOrderGroupTransferFromDriverAdd", Data, "json").then(function (resultAdd) {
+
+                if (resultAdd != "failed") {
+                    //console.log(result);
+                    window.location.reload();
+                }
+                else {
+                        alert('there is some problem');
+                    }
+
+            })
+        });
 
         $('#OnlineDriverSelectList').on('change', function () {
             
@@ -222,7 +263,7 @@
             else {
 
 
-                ajaxRequest("POST", "/AWFDriver/DriverAllOnlineByDriverId/" + Id, "", "json").then(function (result) {
+                ajaxRequest("POST", "/FuelTransfer/DriverAllOnlineByDriverId/" + Id, "", "json").then(function (result) {
 
                     if (result != "failed") {
                         //console.log(result);
@@ -282,7 +323,7 @@
         })
     }
 
-    function OrderInfoForModel(CreatedDate, DriverName, RequestType, IsfullPartial, partialQuantity) {
+    function OrderInfoForModel(CreatedDate, DriverName, RequestType, IsfullPartial, partialQuantity, OrderId, Description, from,orderRequestedId) {
 
        
         $('#Created_Date').text(CreatedDate);
@@ -290,6 +331,10 @@
         $('#RequestType').text(RequestType);
         $('#IsFullPartial12').text(IsfullPartial);
         $('#partialQuantity1').text(partialQuantity);
+        $('#OrderId').val(OrderId);
+        $('#description').val(Description);
+        $('#From').val(from);
+        $('#OrderTransferRequestedId').val(orderRequestedId);
         $('#acceptModel').modal('show');
     }
 

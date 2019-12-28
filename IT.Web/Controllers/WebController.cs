@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 
 namespace IT.Web.Controllers
 {
+    [Autintication]
     public class WebController : Controller
     {
         WebServices webServices = new WebServices();

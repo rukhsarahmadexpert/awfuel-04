@@ -70,6 +70,39 @@ namespace IT.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult DriverAllOnlineByDriverId(int Id)
+        {
+
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
+                if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
+
+                    var SingleDriver = OnlineDriverList.Where(x => x.Id == Id).FirstOrDefault();
+
+                    return Json(SingleDriver, JsonRequestBehavior.AllowGet);
+
+
+                }
+
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch (Exception)
+            {
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
+            }
+
+        }
+
+
+        [HttpPost]
         public ActionResult OrderTransferRequestsAllByDriverId(OrderTransferRequestsViewModel orderTransferRequestsViewModel)
         {
             orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
@@ -110,6 +143,32 @@ namespace IT.Web.Controllers
 
                     return Json(orderTransferRequestsViewModel, JsonRequestBehavior.AllowGet);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult CustomerOrderGroupTransferFromDriverAdd(TransferFromDriverViewModel transferFromDriverViewModel)
+        {
+
+            
+            try
+            {
+                transferFromDriverViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                transferFromDriverViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var TransferFromDriverList = webServices.Post(transferFromDriverViewModel, "FuelTransfer/CustomerOrderGroupTransferFromDriverAdd");
+                if (TransferFromDriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    transferFromDriverViewModel = (new JavaScriptSerializer().Deserialize<TransferFromDriverViewModel>(TransferFromDriverList.Data.ToString()));
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+
+                return Json("failed", JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
