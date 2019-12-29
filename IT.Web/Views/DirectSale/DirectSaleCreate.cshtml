@@ -17,7 +17,6 @@
                     <h2>
                         Direct sale Order <span class="fw-300"></span>
                     </h2>
-                    
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
@@ -27,35 +26,29 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-12">
-                                      <div class="form-group">
-                                                <label class="form-label" for="single-label">
-                                                    Plate Number
-                                                </label>
-                                                <select class="select2 form-control" name="VehicleTypeName" id="VehiclePlateNumber">
-                                                    
-                                             
-                                                </select>
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Vehicle Plate Number:</label>
+                                        <input type="text" id="PlateNumber" name="PlateNumber" class="form-control" placeholder="Traffic Plate Number Search here...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="single-label">
+                                            Existing in companies:
+                                        </label>
+                                        <ol id="OrderList">
+                                            
+                                        </ol>
+                                    </div>
+
                                 </div>
-
-
-
-
                                 <div class="col-md-12">
-                                   
-
-
-
                                     <div class="row py-5">
                                         <div class="col-md-12">
-                                           <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">Submit
-                                            <span>Vehicle</span>
-                                             </button>
+                                            <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                                Submit
+                                                <span>Vehicle</span>
+                                            </button>
                                         </div>
                                     </div>
-                                    
-                                    
-
                                 </div>
                             </div>
                         </form>
@@ -71,32 +64,43 @@
 
     <script>
 
-        $(document).ready(function () {
-            $('.select2-container .select2-dropdown .select2-search .select2-search__field').keyup(function () {
-                alert('helllo');
-            var number = $(this).val();
+        function SearchAllByPlateNumber(Number) {
+
             var Data = JSON.stringify({
 
-                TraficPlateNumber: number
-
+                TraficPlateNumber: Number
             })
-            
             ajaxRequest("POST", "/DirectSale/VehicleByTrafficPlateNumber/", Data, "json").then(function (result) {
 
                 if (result != "failed") {
-                    $('#VehiclePlateNumber').empty();
-                    $('#VehiclePlateNumber').append('<option value="' + 0 + '">' + "select Plate Number" + '</option>');
+                    $('#OrderList').empty();
                     $.each(result, function (item, value) {
-                        $('#VehiclePlateNumber').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                        if (value.Id == 0)
+                        {
+                            $('#OrderList').append('<a href="/DirectSale/Create"><li value="' + value.Id + '">' + value.Name + '</li></a>');
+                        }
+                        else {
+                            $('#OrderList').append('<li value="' + value.Id + '">' + value.Name + '</li>');
+                        }
                     });
                 }
-            })
+            });
+        }
 
-            })
+        //$(document).on('keyup', '.select2-search__field', function (e) {
+        //    var Id = $('.select2-search__field').val();
+        //    SearchAllByPlateNumber(Id);
+        //    // alert(Id);
+        //})
 
+        $(document).on('keyup', '#PlateNumber', function (e) {
+            var Id = $(this).val();
+            SearchAllByPlateNumber(Id);
+            // alert(Id);
         });
+        
 
-       
+
 
 
 

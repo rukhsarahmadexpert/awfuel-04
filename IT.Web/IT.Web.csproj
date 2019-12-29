@@ -703,13 +703,13 @@
     <Content Include="Views\DirectSale\DirectSaleCreate.cshtml" />
     <Content Include="Views\DirectSale\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\DirectSale\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\DirectSale\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

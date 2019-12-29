@@ -45,5 +45,12 @@ namespace IT.Web.Controllers
                 return Json("failed", JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
