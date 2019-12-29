@@ -59,6 +59,8 @@
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PagingParameterModel.cs" />
+    <Compile Include="ViewModels\ProductUnitViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ServiceResponseModel.cs" />
     <Compile Include="ViewModels\StateViewModel.cs" />
     <Compile Include="ViewModels\UserCompanyViewModel.cs" />

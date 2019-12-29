@@ -699,6 +699,7 @@
     <Content Include="Views\FuelTransfer\OrderTransferRequestsAll.cshtml" />
     <Content Include="Views\Web\Index.cshtml" />
     <Content Include="Views\Web\AppVersionAdd.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
