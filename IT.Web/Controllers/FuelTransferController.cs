@@ -14,6 +14,7 @@ namespace IT.Web.Controllers
         WebServices webServices = new WebServices();
         List<FuelTransferViewModel> fuelTransferViewModels = new List<FuelTransferViewModel>();
         List<OrderTransferRequestsViewModel> orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
+        List<TransferFromDriverViewModel> transferFromDriverViewModels = new List<TransferFromDriverViewModel>();
         List<SearchViewModel> searchViewModels = new List<SearchViewModel>();
         int CompanyId;
         public ActionResult Index()
@@ -174,6 +175,27 @@ namespace IT.Web.Controllers
             {
                 throw ex;
             }
+        }
+
+        public ActionResult CustomerOrderGroupTransferFromDriverAll()
+        {
+            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 1;
+            pagingParameterModel.CompanyId = CompanyId;
+            pagingParameterModel.pageSize = 100;
+
+            var CustomerOrderGroupFromDriverList = webServices.Post(pagingParameterModel, "FuelTransfer/CustomerOrderGroupTransferFromDriverAll");
+            if (CustomerOrderGroupFromDriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                transferFromDriverViewModels = (new JavaScriptSerializer().Deserialize<List<TransferFromDriverViewModel>>(CustomerOrderGroupFromDriverList.Data.ToString()));
+            }
+
+            return View(transferFromDriverViewModels);
+
+
         }
 
     }
