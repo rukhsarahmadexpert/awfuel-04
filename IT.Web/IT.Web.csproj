@@ -206,6 +206,7 @@
     <Compile Include="Controllers\FuelTransferController.cs" />
     <Compile Include="Controllers\CustomerSitesController.cs" />
     <Compile Include="Controllers\WebController.cs" />
+    <Compile Include="Controllers\DirectSaleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\staticImages\logo-aw.png" />
@@ -546,7 +547,6 @@
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Driver\Show.cshtml" />
     <Content Include="Views\Driver\Details.cshtml" />
-    <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
     <Content Include="Views\CustomerOrder\Index.cshtml" />
     <Content Include="Views\CustomerOrder\Details.cshtml" />
@@ -699,6 +699,9 @@
     <Content Include="Views\FuelTransfer\OrderTransferRequestsAll.cshtml" />
     <Content Include="Views\Web\Index.cshtml" />
     <Content Include="Views\Web\AppVersionAdd.cshtml" />
+    <Content Include="Views\FuelTransfer\CustomerOrderGroupTransferFromDriverAll.cshtml" />
+    <Content Include="Views\DirectSale\DirectSaleCreate.cshtml" />
+    <Content Include="Views\DirectSale\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -706,6 +709,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DirectSale\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -29,5 +29,10 @@ namespace IT.Core.ViewModels
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
+
+        public static implicit operator PagingParameterModel(List<PagingParameterModel> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

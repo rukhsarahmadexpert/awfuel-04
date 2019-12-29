@@ -834,7 +834,8 @@
     <!-- END Page Wrapper -->
     <!-- BEGIN Quick Menu -->
     <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
-    <nav class="shortcut-menu d-none d-sm-block">
+
+    <nav class="shortcut-menu">
         <input type="checkbox" class="menu-open" name="menu-open" id="menu_open" />
         <label for="menu_open" class="menu-open-button ">
             <span class="app-shortcut-icon d-block"></span>
@@ -854,7 +855,73 @@
         <a href="#" class="menu-item btn" data-action="app-voice" data-toggle="tooltip" data-placement="left" title="Voice command">
             <i class="fal fa-microphone"></i>
         </a>
+
+        <!-- <div style="margin-right:100px;color:white;padding:2px 10px 3px 10px; border-radius:5px; ">
+        <a class="btn btn-sm btn-danger"> 
+           <h2 style="margin-top:5px">make order</h2>
+            </a>
+       </div>-->
+
+
+                 <div class="demo" style="margin-bottom:0px; margin-right:60px" >
+
+                    
+        <a href="/DirectSale/DirectOrderCreate"><button class="btn btn-outline-primary"> 
+           DIRECT SALE
+            </button></a>
+       </div>
+                    <!-- <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="top" title="<h4 class='fw-500 width-sm'><i class='fal fa-file-check mr-2'></i>File permissions</h4>" data-html="true" data-content='
+
+                            
+                             <div class="form-group">
+                                                <label class="form-label" for="single-default">
+                                                    Basic Select
+                                                </label>
+                                                <select class="select2 form-control w-100" id="single-default">
+                                                    <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                        <option value="AK">Alaska</option>
+                                                        <option value="HI">Hawaii</option>
+                                                    </optgroup>
+                                                   
+                                                    
+                                                </select>
+                                                <div class="help-block">Use <code>.select2</code> class for basic select2 control.</div>
+                                            </div>
+                            <div class="mb-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkmeout1">
+                                    <label class="custom-control-label" for="checkmeout1">Write</label>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkmeout2">
+                                        <label class="custom-control-label" for="checkmeout2">Execute</label>
+                                    </div>
+                                </div>
+                            <hr>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-primary text-white ml-auto">Save</a>
+                                <a href="javascript:void(0);" class="btn btn-success ml-2 text-white">Reset</a></div>'>
+
+                     Direct Order
+                     </button>-->
+                                               
+                 </div>
+
+
     </nav>
+
+
+
+
+    
+ 
+
+
+
+
+
     <!-- END Quick Menu -->
     <!-- BEGIN Messenger -->
     <div class="modal fade js-modal-messenger modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
@@ -1451,7 +1518,7 @@
                         },*/
                         {
                             extend: 'pdfHtml5',
-                            text: 'PDF',
+                            text: 'PDFs',
                             titleAttr: 'Generate PDF',
                             className: 'btn-outline-danger btn-sm mr-1'
                         },
@@ -1627,12 +1694,8 @@
     <script src="~/assets/js/statistics/flot/flot.bundle.js"></script>
     <script src="~/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
-<<<<<<< HEAD
     <script src="~/Scripts/CustomScript/common-script.js"></script>
-=======
     <script src="~/assets/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>
-
->>>>>>> 18cc395... Rizwan changes
     <script>
         /* defined datas */
         var dataTargetProfit = [
