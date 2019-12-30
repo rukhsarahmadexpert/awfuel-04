@@ -25,5 +25,7 @@ namespace IT.Core.ViewModels
         public string TRN { get; set; }
         public string Remarks { get; set; }
         public string OwnerRepresentaive { get; set; }
+        public bool IsCashCompany { get; set; }
     }
 }
+

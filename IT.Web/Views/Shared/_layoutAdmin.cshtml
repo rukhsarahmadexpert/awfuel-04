@@ -270,6 +270,12 @@
                                                 <span class="nav-link-text" data-i18n="">App Versions</span><span class="">List</span>
                                             </a>
                                         </li>
+
+                                         <li>
+                                            <a href="/Company/CashCompany" title="Build Notes" class=" " data-filter-tags="">
+                                                <span class="nav-link-text" data-i18n="">CashCompany</span><span class="">Create</span>
+                                            </a>
+                                        </li>
                             </ul>
                         </li>
                     
@@ -866,7 +872,7 @@
                  <div class="demo" style="margin-bottom:0px; margin-right:60px" >
 
                     
-        <a href="/DirectSale/DirectOrderCreate"><button class="btn btn-outline-primary"> 
+        <a href="/DirectSale/DirectSaleCreate"><button class="btn btn-outline-primary"> 
            DIRECT SALE
             </button></a>
        </div>
@@ -2087,11 +2093,30 @@
                     });
          }); // ... and by passing a parameter, you can execute something else for "Cancel".
 
-        dropdownParent: $(".modal-body")
+       
 
+
+
+//for cash compnay image ///////////
     </script>
+      
+                <script>
+                    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    $('.blah_cashCompany')
+                        .attr('src', e.target.result)
+                        .width(100)
+                        .height(100);
+                };
 
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+     </script>
+ 
 
 </body>
 

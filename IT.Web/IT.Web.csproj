@@ -704,6 +704,7 @@
     <Content Include="Views\DirectSale\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\DirectSale\Create.cshtml" />
+    <Content Include="Views\Company\CashCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
