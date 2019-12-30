@@ -170,6 +170,7 @@
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductUnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -704,6 +705,8 @@
     <Content Include="Views\DirectSale\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\DirectSale\Create.cshtml" />
+    <Content Include="Views\ProductUnit\Index.cshtml" />
+    <Content Include="Views\ProductUnit\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
