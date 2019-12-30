@@ -141,6 +141,59 @@ namespace IT.Web.Controllers
                 return View();
             }
         }
+
+        public ActionResult CashCompany()
+        {
+            return View(new CompnayModel());
+        }
+
+        [HttpPost]
+        public ActionResult CashCompanyCreate(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
+        {
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    var file = LogoUrl;
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (var content = new MultipartFormDataContent())
+                        {
+                            byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                            file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                            var fileContent = new ByteArrayContent(fileBytes);
+                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("LogoUrl") { FileName = file.FileName };
+                            content.Add(fileContent);
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                            content.Add(new StringContent("Name"), "Name");
+                            content.Add(new StringContent("street Data"), "Street");
+                            content.Add(new StringContent(compnayModel.Postcode == null ? "" : compnayModel.Postcode), "Postcode");
+                            content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
+                            content.Add(new StringContent(compnayModel.Street == null ? "" : compnayModel.Street), "State");
+                            content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
+                            content.Add(new StringContent("true"), "IsCashCompany");
+                            //  var result1 = client.PostAsync("http://itmolen-001-site8.htempurl.com/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content, "Company/Add", true);
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                ViewBag.Message = "Created";
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Failed";
+                            }
+                        }
+                    }
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
 

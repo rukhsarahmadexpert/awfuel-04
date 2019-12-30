@@ -52,5 +52,25 @@ namespace IT.Web.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult Create(DriverModel driverModel)
+        {
+            try
+            {
+                var DriverViewModelList = webServices.Post(driverModel, "Vehicle/DirectSaleVehicleAndDriverAdd");
+                if (DriverViewModelList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    driverModel = (new JavaScriptSerializer().Deserialize<DriverModel>(DriverViewModelList.Data.ToString()));
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                return Json("failed", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

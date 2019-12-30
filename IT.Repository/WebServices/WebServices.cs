@@ -49,7 +49,7 @@ namespace IT.Repository.WebServices
             MultipartFormDataContent multipartFormDataContent = new MultipartFormDataContent();
             multipartFormDataContent = input;
             //HttpResponseMessage response = httpClient.PostAsync(baseURL + service, input).Result;
-            HttpResponseMessage response = httpClient.PostAsync("http://localhost:64299/api/Company/Add", multipartFormDataContent).Result;
+            HttpResponseMessage response = httpClient.PostAsync(baseURL + service, multipartFormDataContent).Result;
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
