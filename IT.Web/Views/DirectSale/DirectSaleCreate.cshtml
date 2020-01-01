@@ -80,7 +80,7 @@
                             $('#OrderList').append('<a href="/DirectSale/Create"><li class="btn btn-outline-primary" value="' + value.Id + '">' + value.Name + '</li></a>');
                         }
                         else {
-                            $('#OrderList').append('<a href=""  ><li style="margin-top:2px" class="btn btn-outline-primary" value="' + value.Id + '">' + value.Name + '</li></a><br/>');
+                            $('#OrderList').append('<a href="/DirectSale/Details/' + value.VehicleId + '" ><li style="margin-top:2px" class="btn btn-outline-primary" value="' + value.Id + '">' + value.Name + '</li></a><br/>');
                         }
                     });
                 }

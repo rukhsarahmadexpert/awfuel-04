@@ -24,7 +24,7 @@
                         <div class="panel-tag">
                             Please Create new plate number here .....
                         </div>
-                        <form >
+                        <form action="/DirectSale/Create" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
@@ -48,7 +48,7 @@
                                 <div class="col-md-12 mb-3">
                                     <div class="row py-5">
                                         <div class="col-md-12">
-                                            <button type="button" id="TrafficPlateNumberSubmit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                            <button type="submit" id="TrafficPlateNumberSubmit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
                                                 Submit
                                                 <span>Vehicle</span>
                                             </button>
@@ -68,29 +68,33 @@
 @section scripts{
 <script>
 
-    $(document).ready(function () {
+    //$(document).ready(function () {
 
-        $('#TrafficPlateNumberSubmit').click(function ()
-        {
-            var Data = JSON.stringify({
-                DriverName: $('#DriverName').val(),
-                TraficPlateNumber : $('#TraficPlateNumber').val(),
-                ContactNumber: $('#ContactNumber').val(),
-         })
-            ajaxRequest("POST", "/DirectSale/Create", Data, "json").then(function (result) {
+    //    $('#TrafficPlateNumberSubmit').click(function () {
 
-                if (result != "failed") {
-                    //console.log(result);
-                    window.location.href = "/DirectSale/VehicleAll";
-                }
-                else
-                {
-                        alert('there is some problem');
-                }
-            })
-        });
 
-    })
+
+    //        var Data = JSON.stringify({
+
+               
+    //            DriverName: $('#DriverName').val(),
+    //            TraficPlateNumber : $('#TraficPlateNumber').val(),
+    //            ContactNumber: $('#ContactNumber').val(),
+    //     })
+    //        ajaxRequest("POST", "/DirectSale/Create", Data, "json").then(function (result) {
+
+    //            if (result != "failed") {
+    //                //console.log(result);
+    //                window.location.reload();
+    //            }
+    //            else {
+    //                    alert('there is some problem');
+    //                }
+
+    //        })
+    //    });
+
+    //})
 
 </script>
  }

@@ -1,0 +1,154 @@
+﻿@model IT.Core.ViewModels.DriverModel
+@{
+    ViewBag.Title = "DirectsaleOrderAdd";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Direct Sale Order
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Direct sale Order <span class="fw-300"></span>
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                       
+                       
+                            <div class="row">
+                               
+
+                                 <input type="hidden" name="vehicleId" id="vehicleId" value="@Model.VehicleId" />
+                                 <input type="hidden" name="driverId" id="driverId" value="@Model.DriverId" />
+                                 
+
+                                    
+                                <div class="col-md-12 mb-3 mt-2">
+                                    <div class="form-group">
+                                        <label>Name: @Model.Name</label>
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Plate Number: @Model.TraficPlateNumber</label>
+                                    </div>
+                                      <div class="form-group">
+                                        <label>Contact Number: @Model.ContactNumber</label>
+                                    </div>
+                                    <div class="form-group">
+                                        Quantity:
+                                       <input type="text" class="form-control" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
+                                      </div>
+                                    <div class="form-group">
+                                        <select class="select2" id="productId" name="productId">
+                                            @foreach(var item in ViewBag.productViewModels)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        </select>
+                                     </div>
+                                    </div>
+                                 <div class="col-md-12">
+                                    <div class="row py-5">
+                                        <div class="col-md-12">
+                                            <button type="button" id="SubmitDirectSaleOrderCreate"  class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                                Submit
+                                                <span>Order</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts{
+
+<script>
+     $(document).ready(function () {
+         $("#SubmitDirectSaleOrderCreate").click(function () {
+
+             $("#SubmitDirectSaleOrderCreate").text('please wait...');
+             $("#SubmitDirectSaleOrderCreate").attr("disabled", true);
+             CreateGroupOrder('/DirectSale/DirectsaleOrderAdd');
+         })
+    })
+
+
+    function CreateGroupOrder(Url) {
+
+            var list = [], orderItem, CurrentRow;
+            var formData = new FormData();
+
+            var TotalQuantity = 0;
+
+                    orderItem = {
+                        orderQuantity: $('#orderQuantity').val(),
+                        vehicleId: $('#vehicleId').val(),
+                        driverId: $('#driverId').val(),
+                        productId: $('#productId').val(),
+                    }
+                    list.push(orderItem);
+       
+            var empObj = {
+                deliverdQuantity: $('#orderQuantity').val(),
+                CustomerNote: $('#CustomerNote').val(),
+            };
+
+            for (var key in empObj) {
+                formData.append(key, empObj[key]);
+            }
+
+            for (var i = 0; i < list.length; i++) {
+                formData.append('customerOrderViewModels[' + i + '][orderQuantity]', list[i].orderQuantity),
+                    formData.append('customerOrderViewModels[' + i + '][vehicleId]', list[i].vehicleId),
+                    formData.append('customerOrderViewModels[' + i + '][driverId]', list[i].driverId),
+                    formData.append('customerOrderViewModels[' + i + '][productId]', list[i].productId)
+            }
+            if (list.length > 0) {
+
+                $.ajax({
+                    url: Url,
+                    type: "POST",
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (result) {
+                        if (result != "Failed") {
+
+                            list = [];
+                            //swal("Good job!", "You clicked the button!", "success").dela;
+                            $("#SubmitDirectSaleOrderCreate").text('Submit');
+                          $("#SubmitDirectSaleOrderCreate").attr("disabled", false);
+                            alert("success");
+                              
+
+                        }
+                        else {
+                            alert(result);
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage);
+                    }
+                });
+            }
+            else {
+                alert('Please Add item to list');
+            }
+        }
+</script>
+
+}
