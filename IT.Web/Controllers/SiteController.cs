@@ -46,6 +46,12 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
+
+        public ActionResult Create()
+        {
+           return View();
+        }
+
     }
 
 

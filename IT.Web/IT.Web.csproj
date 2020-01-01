@@ -712,6 +712,7 @@
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\DirectSale\DirectsaleOrderAdd.cshtml" />
     <Content Include="Views\DirectSale\Details.cshtml" />
+    <Content Include="Views\Site\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

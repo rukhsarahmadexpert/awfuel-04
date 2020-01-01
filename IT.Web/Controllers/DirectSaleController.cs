@@ -131,7 +131,6 @@ namespace IT.Web.Controllers
                     //return View("DirectsaleOrderAdd", driverModel);
                     //return RedirectToAction(nameof(DirectSaleCreate));
                     return Json("success", JsonRequestBehavior.AllowGet);
-
                 }
                 else
                 {
@@ -185,8 +184,27 @@ namespace IT.Web.Controllers
                 if (DetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     directSaleViewModels = (new JavaScriptSerializer().Deserialize<List<DirectSaleViewModel>>(DetailsList.Data.ToString()));
+
+                    DriverModel driverModel1 = new DriverModel();
+
+                    driverModel1.VehicleId = directSaleViewModels[0].VehicleId;
+                    driverModel1.TraficPlateNumber = directSaleViewModels[0].TraficPlateNumber;
+                    driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;
+                    driverModel1.DriverId = directSaleViewModels[0].DriverId;
+                    driverModel1.Name = directSaleViewModels[0].Name;
+
+
+                    TempData["driverModel"] = driverModel1;
+
+                    TempData.Keep();
+
+                    //return View("DirectsaleOrderAdd", driverModel);
+                    //return RedirectToAction(nameof(DirectsaleOrderAdd));
+
                     return View(directSaleViewModels);
                 }
+
+
 
                 return View(directSaleViewModels);
             }
@@ -196,9 +214,12 @@ namespace IT.Web.Controllers
             }
         }
 
-        public ActionResult GetLocation()
-        {
-            return View();
         }
-    }
+            public ActionResult GetLocation()
+            {
+                return View();
+            }
+
+        }
+    
 }
