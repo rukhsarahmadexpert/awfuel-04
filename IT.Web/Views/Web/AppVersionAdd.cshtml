@@ -30,7 +30,7 @@
                         Please add your App version from here...
                     </div>
                     <form action="/Web/AppVersionAdd" method="post" enctype="application/x-www-form-urlencoded">
-                        <input type="text" value="@Model.Id" name="Id" />
+                        <input type="hidden" value="@Model.Id" name="Id" />
                         <div class="row">
                             <div class="col-md-12 mb-4">
                                 <div class="form-group">

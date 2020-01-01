@@ -28,25 +28,23 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Driver Name</label>
-                                        <input type="text" id="Name" name="Name" class="form-control" placeholder="Driver Name">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Contact Number</label>
-                                        <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" placeholder="Contact Number">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Trafic Plate Number (Required)</label>
+                                        <label class="form-label" for="simpleinput">Trafic Plate Number <small>(Required)</small></label>
                                         <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
                                 </div>
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Driver Name <small>(Optional)</small></label>
+                                        <input type="text" id="DriverName" name="DriverName" class="form-control" placeholder="Driver Name">
+                                    </div>
+                                </div>
 
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Contact Number <small>(Optional)</small></label>
+                                        <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" placeholder="Contact Number">
+                                    </div>
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="row py-5">
                                         <div class="col-md-12">
@@ -72,13 +70,9 @@
 
     $(document).ready(function () {
 
-        $('#TrafficPlateNumberSubmit').click(function () {
-
-
-
+        $('#TrafficPlateNumberSubmit').click(function ()
+        {
             var Data = JSON.stringify({
-
-               
                 DriverName: $('#DriverName').val(),
                 TraficPlateNumber : $('#TraficPlateNumber').val(),
                 ContactNumber: $('#ContactNumber').val(),
@@ -87,12 +81,12 @@
 
                 if (result != "failed") {
                     //console.log(result);
-                    window.location.reload();
+                    window.location.href = "/DirectSale/VehicleAll";
                 }
-                else {
+                else
+                {
                         alert('there is some problem');
-                    }
-
+                }
             })
         });
 

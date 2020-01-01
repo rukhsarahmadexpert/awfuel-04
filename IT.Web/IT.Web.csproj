@@ -210,6 +210,7 @@
     <Compile Include="Controllers\DirectSaleController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\staticImages\logo-1.png" />
     <Content Include="assets\staticImages\logo-aw.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -217,6 +218,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CustomScript\common-script.js" />
     <Content Include="Scripts\CustomScript\FileUploadPreview.js" />
@@ -708,6 +710,7 @@
     <Content Include="Views\ProductUnit\Index.cshtml" />
     <Content Include="Views\ProductUnit\Create.cshtml" />
     <Content Include="Views\Company\CashCompany.cshtml" />
+    <Content Include="Views\DirectSale\GetLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

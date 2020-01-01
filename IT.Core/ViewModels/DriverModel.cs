@@ -7,6 +7,7 @@ namespace IT.Core.ViewModels
     {
         public int DriverId { get; set; }
         public int Id { get; set; }
+        public int createdBy { get; set; }
         public string Name { get; set; }
         public string DriverName { get; set; }
         public string TraficPlateNumber { get; set; }

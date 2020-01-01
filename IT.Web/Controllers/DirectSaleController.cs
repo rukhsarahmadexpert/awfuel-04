@@ -13,6 +13,8 @@ namespace IT.Web.Controllers
     {
         WebServices webServices = new WebServices();
         List<DriverModel> driverModels = new List<DriverModel>();
+        List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
+
         public ActionResult Index()
         {
             return View ();
@@ -45,19 +47,19 @@ namespace IT.Web.Controllers
                 return Json("failed", JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         public ActionResult Create()
         {
             return View();
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(DriverModel driverModel)
         {
             try
             {
+                  driverModel.createdBy = Convert.ToInt32(Session["UserId"]);
+
                 var DriverViewModelList = webServices.Post(driverModel, "Vehicle/DirectSaleVehicleAndDriverAdd");
                 if (DriverViewModelList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -70,6 +72,32 @@ namespace IT.Web.Controllers
             {
                 throw ex;
             }
+        }
+        
+        public ActionResult AllCashCompanyVehicle()
+        {
+            try
+            {
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                var DriverViewList = webServices.Post(pagingParameterModel, "Vehicle/AllCashCompanyVehicle");
+                if (DriverViewList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    vehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(DriverViewList.Data.ToString()));
+                }
+                return View(vehicleViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public ActionResult GetLocation()
+        {
+            return View();
         }
 
     }
