@@ -11,6 +11,7 @@ namespace IT.Core.ViewModels
         public string DriverName { get; set; }
         public string TraficPlateNumber { get; set; }
         public string ContactNumber { get; set; }
+        public int VehicleId { get; set; }
 
         public static implicit operator DriverModel(List<DriverModel> v)
         {

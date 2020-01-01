@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using IT.Core.ViewModels;
 using IT.Repository.WebServices;
 using IT.Web.MISC;
@@ -17,10 +18,30 @@ namespace IT.Web.Controllers
     {
 
         WebServices webServices = new WebServices();
+        List<CompnayModel> compnayModels = new List<CompnayModel>();
+
         // GET: Company
         public ActionResult Index()
         {
-            return View();
+
+            try
+            {
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.pageSize = 100;
+                var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
+                if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    compnayModels = (new JavaScriptSerializer().Deserialize<List<CompnayModel>>(CompanyList.Data.ToString()));
+                }
+                return View(compnayModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         // GET: Company/Details/5

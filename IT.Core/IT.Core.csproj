@@ -77,6 +77,8 @@
     <Compile Include="ViewModels\AppVersionViewModel.cs" />
     <Compile Include="ViewModels\TransferFromDriverViewModel.cs" />
     <Compile Include="ViewModels\DriverModel.cs" />
+    <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
+    <Compile Include="ViewModels\DirectSaleViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
