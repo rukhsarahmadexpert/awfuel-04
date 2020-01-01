@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sites</a></li>
+                            
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Create Site
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Driver <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please add your Site from here...
+                        </div>
+                        <form action="Site/Create" method="post" enctype="application/x-www-form-urlencoded">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Name</label>
+                                        <input type="text" id="SiteName" name="SiteName" class="form-control" placeholder="Enter Site Name">
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Contact Person Name</label>
+                                        <input type="text" id="ContactPersonName" name="ContactPersonName" class="form-control" placeholder="Enter Contact PersonName">
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Contact Phone</label>
+                                        <input type="text" id="ContactPersonName" name="ContactPersonName" class="form-control" placeholder="Enter Contact Phone">
+                                    </div>                                    
+
+                                </div>
+
+                                
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Cell</label>
+                                        <input type="text" id="SiteCell" name="SiteCell" class="form-control" placeholder="Enter Site Cell">
+                                    </div>                                    
+
+                                </div>
+
+                                
+                                
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">FaceBook</label>
+                                        <input type="text" id="FaceBook" name="FaceBook" class="form-control" placeholder="Enter FaceBook">
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Site Email</label>
+                                        <input type="text" id="SiteEmail" name="SiteEmail" class="form-control" placeholder="Enter Site Email">
+                                    </div>                                    
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group mb-2">
+                                        <label class="form-label" for="simpleinput">Address</label>
+                                        <input type="text" id="Address" name="Address" class="form-control" placeholder="Enter Address">
+
+                                         <input type="hidden" id="latitude" name="latitude">
+                                         <input type="hidden" id="longitude" name="longitude">
+                                         <input type="hidden" id="PickingPoint" name="PickingPoint">
+                                         <input type="hidden" id="locationFullUrl" name="locationFullUrl">
+                                    </div>                                    
+
+                                </div>
+
+                                 <div class="col-md-12">
+                                           <button type="submit" id="Save"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Driver
+
+                                            <span>submit</span>
+                                             </button>
+                                 </div>
+
+                            
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
