@@ -49,18 +49,18 @@ namespace IT.Web.Controllers
                 return Json("failed", JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult Create()
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult Create(DriverModel driverModel)
         {
             try
             {
-                  driverModel.createdBy = Convert.ToInt32(Session["UserId"]);
+                driverModel.createdBy = Convert.ToInt32(Session["UserId"]);
 
                 var DriverViewModelList = webServices.Post(driverModel, "Vehicle/DirectSaleVehicleAndDriverAdd");
                 if (DriverViewModelList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -115,6 +115,8 @@ namespace IT.Web.Controllers
         public ActionResult DirectsaleOrderAdd(CustomerOrderListViewModel customerOrderListViewModel)
         {
 
+            //return Json("success", JsonRequestBehavior.AllowGet);
+
             try
             {
 
@@ -150,7 +152,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-        
+
         public ActionResult AllCashCompanyVehicle()
         {
             try
@@ -172,7 +174,7 @@ namespace IT.Web.Controllers
 
         }
 
-        
+
         public ActionResult Details(int Id)
         {
             try
@@ -192,12 +194,11 @@ namespace IT.Web.Controllers
             {
                 throw ex;
             }
-
+        }
 
         public ActionResult GetLocation()
         {
             return View();
         }
-
     }
 }

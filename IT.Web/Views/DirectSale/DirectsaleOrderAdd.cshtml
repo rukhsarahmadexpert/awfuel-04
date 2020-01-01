@@ -3,7 +3,21 @@
     ViewBag.Title = "DirectsaleOrderAdd";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
+<style type="text/css">
+    html {
+        height: 100%;
+    }
 
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #MyMapLOC {
+        height: 100%;
+    }
+</style>
 <main id="js-page-content" role="main" class="page-content">
 
     <div class="subheader">
@@ -21,51 +35,53 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                       
-                       
-                            <div class="row">
-                               
 
-                                 <input type="hidden" name="vehicleId" id="vehicleId" value="@Model.VehicleId" />
-                                 <input type="hidden" name="driverId" id="driverId" value="@Model.DriverId" />
-                                 
 
-                                    
-                                <div class="col-md-12 mb-3 mt-2">
-                                    <div class="form-group">
-                                        <label>Name: @Model.Name</label>
-                                    </div>
-                                     <div class="form-group">
-                                        <label>Plate Number: @Model.TraficPlateNumber</label>
-                                    </div>
-                                      <div class="form-group">
-                                        <label>Contact Number: @Model.ContactNumber</label>
-                                    </div>
-                                    <div class="form-group">
-                                        Quantity:
-                                       <input type="text" class="form-control" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
-                                      </div>
-                                    <div class="form-group">
-                                        <select class="select2" id="productId" name="productId">
-                                            @foreach(var item in ViewBag.productViewModels)
-                                            {
-                                                <option value="@item.Id">@item.Name</option>
-                                            }
-                                        </select>
-                                     </div>
-                                    </div>
-                                 <div class="col-md-12">
-                                    <div class="row py-5">
-                                        <div class="col-md-12">
-                                            <button type="button" id="SubmitDirectSaleOrderCreate"  class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
-                                                Submit
-                                                <span>Order</span>
-                                            </button>
-                                        </div>
+                        <div class="row">
+
+
+                            <input type="hidden" name="vehicleId" id="vehicleId" value="@Model.VehicleId" />
+                            <input type="hidden" name="driverId" id="driverId" value="@Model.DriverId" />
+
+
+
+                            <div class="col-md-12 mb-3 mt-2">
+                                <div class="form-group">
+                                    <label>Name: @Model.Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Plate Number: @Model.TraficPlateNumber</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Number: @Model.ContactNumber</label>
+                                </div>
+                                <div class="form-group">
+                                    Quantity:
+                                    <input type="text" class="form-control" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
+                                </div>
+                                <div class="form-group">
+                                    <select class="select2" id="productId" name="productId">
+                                        @foreach (var item in ViewBag.productViewModels)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <input type="hidden" id="Lattitue" />
+                                <input type="hidden" id="Longitude" />
+                                <input type="text" id="LocationFullUrl" />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row py-5">
+                                    <div class="col-md-12">
+                                        <button type="button" id="SubmitDirectSaleOrderCreate" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                            Submit
+                                            <span>Order</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                       
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,36 +90,85 @@
 </main>
 
 @section scripts{
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false">
 
-<script>
-     $(document).ready(function () {
-         $("#SubmitDirectSaleOrderCreate").click(function () {
+    </script>
 
-             $("#SubmitDirectSaleOrderCreate").text('please wait...');
-             $("#SubmitDirectSaleOrderCreate").attr("disabled", true);
-             CreateGroupOrder('/DirectSale/DirectsaleOrderAdd');
-         })
-    })
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places">
+
+    </script>   
+    <script>
+
+        $(document).ready(function () {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success);
+            } else {
+                alert("There is Some Problem on your current browser to get Geo Location!");
+            }
+
+            function success(position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var city = position.coords.locality;
+                var Address = position.coords.url;
+                $('#Lattitue').val(lat);
+                $('#Longitude').val(long);
+                $('#LocationFullUrl').val(Address);
+              
+                var LatLng = new google.maps.LatLng(lat, long);
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("MyMapLOC"), mapOptions);
+                var marker = new google.maps.Marker({
+                    position: LatLng,
+                    title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: "
+                        + lat + +"<br />Longitude: " + long
+                });
+
+                marker.setMap(map);
+                var getInfoWindow = new google.maps.InfoWindow({
+                    content: "<b>Your Current Location</b><br/> Latitude:" +
+                        lat + "<br /> Longitude:" + long + ""
+                });
+                getInfoWindow.open(map, marker);
+            }
 
 
-    function CreateGroupOrder(Url) {
+            $("#SubmitDirectSaleOrderCreate").click(function () {
+
+                $("#SubmitDirectSaleOrderCreate").text('please wait...');
+                $("#SubmitDirectSaleOrderCreate").attr("disabled", true);
+                CreateGroupOrder('/DirectSale/DirectsaleOrderAdd');
+            })
+        })
+
+
+        function CreateGroupOrder(Url) {
 
             var list = [], orderItem, CurrentRow;
             var formData = new FormData();
 
             var TotalQuantity = 0;
 
-                    orderItem = {
-                        orderQuantity: $('#orderQuantity').val(),
-                        vehicleId: $('#vehicleId').val(),
-                        driverId: $('#driverId').val(),
-                        productId: $('#productId').val(),
-                    }
-                    list.push(orderItem);
-       
+            orderItem = {
+                orderQuantity: $('#orderQuantity').val(),
+                vehicleId: $('#vehicleId').val(),
+                driverId: $('#driverId').val(),
+                productId: $('#productId').val(),                
+            }
+            list.push(orderItem);
+
             var empObj = {
                 deliverdQuantity: $('#orderQuantity').val(),
                 CustomerNote: $('#CustomerNote').val(),
+                latitude: $('#Lattitue').val(),
+                longitude: $('#Longitude').val(),
+                LocationFullUrl: $('#LocationFullUrl').val(),
             };
 
             for (var key in empObj) {
@@ -131,9 +196,9 @@
                             list = [];
                             //swal("Good job!", "You clicked the button!", "success").dela;
                             $("#SubmitDirectSaleOrderCreate").text('Submit');
-                          $("#SubmitDirectSaleOrderCreate").attr("disabled", false);
+                            $("#SubmitDirectSaleOrderCreate").attr("disabled", false);
                             alert("success");
-                              
+
 
                         }
                         else {
@@ -149,6 +214,6 @@
                 alert('Please Add item to list');
             }
         }
-</script>
+    </script>
 
 }
