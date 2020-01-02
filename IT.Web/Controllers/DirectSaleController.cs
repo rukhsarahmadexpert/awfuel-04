@@ -214,7 +214,7 @@ namespace IT.Web.Controllers
             }
         }
 
-        }
+        
             public ActionResult GetLocation()
             {
                 return View();

@@ -19,6 +19,8 @@ namespace IT.Web.Controllers
         DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId;
 
+        public SiteViewModel SiteViewModel { get; private set; }
+
         public ActionResult Index()
         {
             try
@@ -50,6 +52,60 @@ namespace IT.Web.Controllers
         public ActionResult Create()
         {
            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(SiteViewModel siteViewModel)
+        {
+            try
+            {
+                var SiteResult = new ServiceResponseModel();
+                if (siteViewModel.Id < 1)
+                {
+                    siteViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    SiteResult = webServices.Post(siteViewModel, "Site/Add");
+                }
+                else
+                {
+                    siteViewModel.UpdateBy = Convert.ToInt32(Session["UserId"]);
+                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    SiteResult = webServices.Post(siteViewModel, "Site/Update");
+                }
+
+                if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(SiteResult.Data));
+
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(siteViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int Id)
+        {
+            try
+            {
+                var SiteResult = webServices.Post(new SiteViewModel(), "Site/Edit/" + Id);
+
+                if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    SiteViewModel = (new JavaScriptSerializer().Deserialize<SiteViewModel>(SiteResult.Data.ToString()));
+                }
+                return View("Create", SiteViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }

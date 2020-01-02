@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IT.Core.ViewModels.SiteViewModel
+@{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
@@ -28,13 +29,14 @@
                         <div class="panel-tag">
                             Please add your Site from here...
                         </div>
-                        <form action="Site/Create" method="post" enctype="application/x-www-form-urlencoded">
+                        <form action="/Site/Create" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">
                                 <div class="col-md-6">
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Site Name</label>
-                                        <input type="text" id="SiteName" name="SiteName" class="form-control" placeholder="Enter Site Name">
+                                        <input type="text" id="SiteName" name="SiteName" value="@Model.SiteName" class="form-control" placeholder="Enter Site Name" />
+                                        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
                                     </div>                                    
 
                                 </div>
@@ -43,7 +45,7 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Contact Person Name</label>
-                                        <input type="text" id="ContactPersonName" name="ContactPersonName" class="form-control" placeholder="Enter Contact PersonName">
+                                        <input type="text" id="ContactPersonName" name="ContactPersonName" value="@Model.ContactPersonName" class="form-control" placeholder="Enter Contact PersonName">
                                     </div>                                    
 
                                 </div>
@@ -52,7 +54,7 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Contact Phone</label>
-                                        <input type="text" id="ContactPersonName" name="ContactPersonName" class="form-control" placeholder="Enter Contact Phone">
+                                        <input type="text" id="ContactPhone" name="ContactPhone" value="@Model.ContactPhone" class="form-control" placeholder="Enter Contact Phone">
                                     </div>                                    
 
                                 </div>
@@ -62,7 +64,7 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Site Cell</label>
-                                        <input type="text" id="SiteCell" name="SiteCell" class="form-control" placeholder="Enter Site Cell">
+                                        <input type="text" id="SiteCell" name="SiteCell" value="@Model.SiteCell" class="form-control" placeholder="Enter Site Cell">
                                     </div>                                    
 
                                 </div>
@@ -73,7 +75,7 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">FaceBook</label>
-                                        <input type="text" id="FaceBook" name="FaceBook" class="form-control" placeholder="Enter FaceBook">
+                                        <input type="text" id="FaceBook" name="FaceBook" value="@Model.FaceBook" class="form-control" placeholder="Enter FaceBook">
                                     </div>                                    
 
                                 </div>
@@ -82,7 +84,7 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Site Email</label>
-                                        <input type="text" id="SiteEmail" name="SiteEmail" class="form-control" placeholder="Enter Site Email">
+                                        <input type="text" id="SiteEmail" name="SiteEmail" value="@Model.SiteEmail" class="form-control" placeholder="Enter Site Email">
                                     </div>                                    
 
                                 </div>
@@ -91,12 +93,12 @@
 
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Address</label>
-                                        <input type="text" id="Address" name="Address" class="form-control" placeholder="Enter Address">
+                                        <input type="text" id="Address" name="Address" value="@Model.Address" class="form-control" placeholder="Enter Address">
 
-                                         <input type="hidden" id="latitude" name="latitude">
-                                         <input type="hidden" id="longitude" name="longitude">
+                                         <input type="hidden" id="Lattitue" name="Lattitue">
+                                         <input type="hidden" id="Longitude" name="longitude">
                                          <input type="hidden" id="PickingPoint" name="PickingPoint">
-                                         <input type="hidden" id="locationFullUrl" name="locationFullUrl">
+                                         <input type="hidden" id="LocationFullUrl" name="LocationFullUrl">
                                     </div>                                    
 
                                 </div>
@@ -116,4 +118,58 @@
             </div>
         </div>
     </div>
+@section scripts{
 
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&sensor=false">
+
+    </script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places">
+
+    </script>   
+    <script>
+
+        $(document).ready(function () {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success);
+            } else {
+                alert("There is Some Problem on your current browser to get Geo Location!");
+            }
+
+            function success(position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var city = position.coords.locality;
+                var Address = position.coords.url;
+                $('#Lattitue').val(lat);
+                $('#Longitude').val(long);
+                $('#LocationFullUrl').val(Address);
+              
+                var LatLng = new google.maps.LatLng(lat, long);
+                var mapOptions = {
+                    center: LatLng,
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("MyMapLOC"), mapOptions);
+                var marker = new google.maps.Marker({
+                    position: LatLng,
+                    title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: "
+                        + lat + +"<br />Longitude: " + long
+                });
+
+                marker.setMap(map);
+                var getInfoWindow = new google.maps.InfoWindow({
+                    content: "<b>Your Current Location</b><br/> Latitude:" +
+                        lat + "<br /> Longitude:" + long + ""
+                });
+                getInfoWindow.open(map, marker);
+            }
+
+        })
+
+    </script>
+}
