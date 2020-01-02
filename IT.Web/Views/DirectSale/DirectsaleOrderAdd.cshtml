@@ -38,29 +38,26 @@
 
 
                         <div class="row">
-
-
                             <input type="hidden" name="vehicleId" id="vehicleId" value="@Model.VehicleId" />
                             <input type="hidden" name="driverId" id="driverId" value="@Model.DriverId" />
-
-
-
                             <div class="col-md-12 mb-3 mt-2">
+                               
                                 <div class="form-group">
-                                    <label>Name: @Model.Name</label>
+                                    Name: <input type="text" name="DriverName" id="DriverName" class="form-control" value="@Model.Name" />
                                 </div>
+                                
                                 <div class="form-group">
                                     <label>Plate Number: @Model.TraficPlateNumber</label>
                                 </div>
                                 <div class="form-group">
-                                    <label>Contact Number: @Model.ContactNumber</label>
+                                    Contact: <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" value="@Model.ContactNumber" />
                                 </div>
                                 <div class="form-group">
                                     Quantity:
                                     <input type="text" class="form-control" name="orderQuantity" id="orderQuantity" placeholder="please provide Quantity" />
                                 </div>
                                 <div class="form-group">
-                                    <select class="select2" id="productId" name="productId">
+                                    <select class="select2" id="ProductId" name="ProductId">
                                         @foreach (var item in ViewBag.productViewModels)
                                         {
                                             <option value="@item.Id">@item.Name</option>
@@ -157,9 +154,9 @@
 
             orderItem = {
                 orderQuantity: $('#orderQuantity').val(),
-                vehicleId: $('#vehicleId').val(),
-                driverId: $('#driverId').val(),
-                productId: $('#productId').val(),                
+                VehicleId: $('#vehicleId').val(),
+                DriverId: $('#driverId').val(),
+                ProductId: $('#ProductId').val(),                
             }
             list.push(orderItem);
 
@@ -169,6 +166,8 @@
                 latitude: $('#Lattitue').val(),
                 longitude: $('#Longitude').val(),
                 LocationFullUrl: $('#LocationFullUrl').val(),
+                DriverName: $('#DriverName').val(),
+                ContactNumber: $('#ContactNumber').val(),
             };
 
             for (var key in empObj) {
@@ -177,9 +176,9 @@
 
             for (var i = 0; i < list.length; i++) {
                 formData.append('customerOrderViewModels[' + i + '][orderQuantity]', list[i].orderQuantity),
-                    formData.append('customerOrderViewModels[' + i + '][vehicleId]', list[i].vehicleId),
-                    formData.append('customerOrderViewModels[' + i + '][driverId]', list[i].driverId),
-                    formData.append('customerOrderViewModels[' + i + '][productId]', list[i].productId)
+                    formData.append('customerOrderViewModels[' + i + '][VehicleId]', list[i].VehicleId),
+                    formData.append('customerOrderViewModels[' + i + '][DriverId]', list[i].DriverId),
+                    formData.append('customerOrderViewModels[' + i + '][ProductId]', list[i].ProductId)
             }
             if (list.length > 0) {
 

@@ -10,8 +10,8 @@ namespace IT.Core.ViewModels
         public int createdBy { get; set; }
         public string Name { get; set; }
         public string DriverName { get; set; }
-        public string TraficPlateNumber { get; set; }
         public string ContactNumber { get; set; }
+        public string TraficPlateNumber { get; set; }       
         public int VehicleId { get; set; }
 
         public static implicit operator DriverModel(List<DriverModel> v)

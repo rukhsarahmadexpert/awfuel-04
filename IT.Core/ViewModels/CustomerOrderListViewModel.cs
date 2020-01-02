@@ -32,6 +32,8 @@ namespace IT.Core.ViewModels
         public string LocationFullUrl { get; set; }
         public string PickingPoint { get; set; }
         public int SiteId { get; set; }
+        public string DriverName { get; set; }
+        public string ContactNumber { get; set; }
         public List<CustomerOrderViewModel> customerOrderViewModels { get; set; }
     
 

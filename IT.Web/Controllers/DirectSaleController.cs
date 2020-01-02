@@ -130,7 +130,7 @@ namespace IT.Web.Controllers
 
                     //return View("DirectsaleOrderAdd", driverModel);
                     //return RedirectToAction(nameof(DirectSaleCreate));
-                    return Json("success", JsonRequestBehavior.AllowGet);
+                    return Json(customerOrderListViewModel, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -172,8 +172,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         public ActionResult Details(int Id)
         {
             try
@@ -183,17 +182,20 @@ namespace IT.Web.Controllers
                 var DetailsList = webServices.Post(driverModel, "Vehicle/DirectSaleDetailsByVehicleId");
                 if (DetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    directSaleViewModels = (new JavaScriptSerializer().Deserialize<List<DirectSaleViewModel>>(DetailsList.Data.ToString()));
-
+                    if (DetailsList.Data != "[]")
+                    {
+                        directSaleViewModels = (new JavaScriptSerializer().Deserialize<List<DirectSaleViewModel>>(DetailsList.Data.ToString()));
+                    }
                     DriverModel driverModel1 = new DriverModel();
 
                     driverModel1.VehicleId = directSaleViewModels[0].VehicleId;
                     driverModel1.TraficPlateNumber = directSaleViewModels[0].TraficPlateNumber;
-                    driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;
-                    driverModel1.DriverId = directSaleViewModels[0].DriverId;
-                    driverModel1.Name = directSaleViewModels[0].Name;
-
-
+                    if (directSaleViewModels[0].ContactNumber != null)
+                    {
+                        driverModel1.ContactNumber = directSaleViewModels[0].ContactNumber;
+                        driverModel1.DriverId = directSaleViewModels[0].DriverId;
+                        driverModel1.Name = directSaleViewModels[0].Name;
+                    }
                     TempData["driverModel"] = driverModel1;
 
                     TempData.Keep();
@@ -213,13 +215,12 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
+        
+        public ActionResult GetLocation()
+        {
+            return View();
         }
-            public ActionResult GetLocation()
-            {
-                return View();
-            }
 
-        }
-    
+    }
+
 }

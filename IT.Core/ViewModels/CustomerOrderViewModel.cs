@@ -8,7 +8,6 @@ namespace IT.Core.ViewModels
 {
     public class CustomerOrderViewModel
     {
-        public int Id { get; set; }
         public int OrderQuantity { get; set; }
         public int VehicleId { get; set; }
         public int DriverId { get; set; }
@@ -31,6 +30,9 @@ namespace IT.Core.ViewModels
         public string AcceptDate { get; set; }
         public string OrderDate { get; set; }
         public string Name { get; set; }
-       
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal UPrice { get; set; }
+
     }
 }
