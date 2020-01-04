@@ -34,6 +34,8 @@ namespace IT.Core.ViewModels
         public int SiteId { get; set; }
         public string DriverName { get; set; }
         public string ContactNumber { get; set; }
+        public string UserName { get; set; }
+        public string CompanyName { get; set; }
         public List<CustomerOrderViewModel> customerOrderViewModels { get; set; }
     
 

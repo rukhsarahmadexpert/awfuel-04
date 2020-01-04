@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IT.Core.ViewModels;
 using IT.Repository.WebServices;
+using IT.Web.MISC;
 
 namespace IT.Web.Controllers
 {
+    [Autintication]
     public class DirectSaleController : Controller
     {
         WebServices webServices = new WebServices();
@@ -114,7 +116,6 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult DirectsaleOrderAdd(CustomerOrderListViewModel customerOrderListViewModel)
         {
-
             //return Json("success", JsonRequestBehavior.AllowGet);
 
             try
@@ -127,7 +128,9 @@ namespace IT.Web.Controllers
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerOrderListViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderListViewModel>(CustomerOrderList.Data.ToString()));
-
+                    
+                    TempData["customerOrderListViewModel"] = customerOrderListViewModel;
+                    TempData.Keep("customerOrderListViewModel");
                     //return View("DirectsaleOrderAdd", driverModel);
                     //return RedirectToAction(nameof(DirectSaleCreate));
                     return Json(customerOrderListViewModel, JsonRequestBehavior.AllowGet);
@@ -219,6 +222,24 @@ namespace IT.Web.Controllers
         public ActionResult GetLocation()
         {
             return View();
+        }
+
+
+        public ActionResult OrderDetails()
+        {
+            try
+            {
+                CustomerOrderListViewModel customerOrderListViewModel = new CustomerOrderListViewModel();
+
+                customerOrderListViewModel = TempData["customerOrderListViewModel"] as CustomerOrderListViewModel;
+                TempData.Keep("customerOrderListViewModel");
+
+                return View(customerOrderListViewModel);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }

@@ -11,13 +11,18 @@ namespace IT.Core.ViewModels
         public int Id { get; set; }
         public double StockIn { get; set; }
         public double StockOut { get; set; }
-        public int From { get; set; }
+        public int VehicleId { get; set; }
         public int SiteId { get; set; }
         public int CreatedBy { get; set; }
-        public int CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
+        public int ClientVehicleId { get; set; }
+        public int LPOId { get; set; }
         public string Source { get; set; }
         public string UserName { get; set; }
         public string SiteName { get; set; }
-        public bool Opration { get; set; }
+        public string Decription { get; set; }
+        public string TrafficPlateNumber { get; set; }
+        public string PONumber { get; set; }
+        public bool Action { get; set; }
     }
 }
