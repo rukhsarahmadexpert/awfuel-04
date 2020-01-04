@@ -713,6 +713,7 @@
     <Content Include="Views\DirectSale\DirectsaleOrderAdd.cshtml" />
     <Content Include="Views\DirectSale\Details.cshtml" />
     <Content Include="Views\Site\Create.cshtml" />
+    <Content Include="Views\Shared\PartialView\StorageGraph\StorgeGraphPartialView.cshtml" />
     <Content Include="Views\DirectSale\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -720,6 +721,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\PartialView\StorageGraph\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

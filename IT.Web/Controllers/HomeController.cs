@@ -41,5 +41,10 @@ namespace IT.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult StorgeGraphPartialView()
+        {
+            return PartialView("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml");
+        }
     }
 }

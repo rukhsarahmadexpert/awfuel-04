@@ -26,6 +26,7 @@
 
     <!-- Optional: page related CSS -->
     <!-- PHP docs -->
+    <link rel="stylesheet" media="screen, print" href="~assets/css/statistics/chartjs/chartjs.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/markdown.css">
     <link rel="stylesheet" media="screen, print" href="~/assets/css/datagrid/datatables/datatables.bundle.css">
 
@@ -1679,6 +1680,115 @@
     <script src="~/Scripts/CustomScript/common-script.js"></script>
     <script src="~/assets/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>
 
+
+     <script src="~/assets/js/statistics/chartjs/chartjs.bundle.js"></script>
+        <script>
+            /* line chart */
+            var lineChart = function()
+            {
+                var config = {
+                    type: 'line',
+                    data:
+                    {
+                        labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Actober","November","December"],
+                        datasets: [
+                        {
+                            label: "Remaining",
+                            borderColor: myapp_get_color.success_500,
+                            pointBackgroundColor: myapp_get_color.success_700,
+                            pointBorderColor: 'rgba(0, 0, 0, 0)',
+                            pointBorderWidth: 1,
+                            borderWidth: 1,
+                            pointRadius: 3,
+                            pointHoverRadius: 4,
+                            data: [
+                                23,
+                                75,
+                                60, -48, -9,
+                                26,
+                                45,
+                                5,
+                                54,
+                                34,
+                                14
+                            ],
+                            fill: false
+                        }]
+                    },
+                    options:
+                    {
+                        responsive: true,
+                        title:
+                        {
+                            display: false,
+                            text: 'Line Chart'
+                        },
+                        tooltips:
+                        {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover:
+                        {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales:
+                        {
+                            xAxes: [
+                            {
+                                display: true,
+                                scaleLabel:
+                                {
+                                    display: false,
+                                    labelString: '6 months forecast'
+                                },
+                                gridLines:
+                                {
+                                    display: true,
+                                    color: "#f2f2f2"
+                                },
+                                ticks:
+                                {
+                                    beginAtZero: true,
+                                    fontSize: 11
+                                }
+                            }],
+                            yAxes: [
+                            {
+                                display: true,
+                                scaleLabel:
+                                {
+                                    display: false,
+                                    labelString: 'Profit margin (approx)'
+                                },
+                                gridLines:
+                                {
+                                    display: true,
+                                    color: "#f2f2f2"
+                                },
+                                ticks:
+                                {
+                                    beginAtZero: true,
+                                    fontSize: 11
+                                }
+                            }]
+                        }
+                    }
+                };
+                new Chart($("#lineChart > canvas").get(0).getContext("2d"), config);
+            }
+            /* line chart -- end */
+    
+
+            /* initialize all charts */
+            $(document).ready(function()
+            {
+                lineChart();
+               
+            });
+
+        </script>
  
 
 </body>
