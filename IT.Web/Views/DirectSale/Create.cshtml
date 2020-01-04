@@ -26,26 +26,22 @@
                         </div>
                         <form action="/DirectSale/Create" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number <small>(Required)</small></label>
                                         <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
+                                
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Driver Name <small>(Optional)</small></label>
                                         <input type="text" id="DriverName" name="DriverName" class="form-control" placeholder="Driver Name">
                                     </div>
-                                </div>
-
-                                <div class="col-md-12 mb-3">
+                                
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Contact Number <small>(Optional)</small></label>
                                         <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" placeholder="Contact Number">
                                     </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
+                                
                                     <div class="row py-5">
                                         <div class="col-md-12">
                                             <button type="submit" id="TrafficPlateNumberSubmit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
@@ -54,6 +50,10 @@
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="col-md-8 mb-3">
+                                    @Html.Partial("~/Views/Shared/PartialView/StorageGraph/StorgeGraphPartialView.cshtml")
                                 </div>
                             </div>
                         </form>
