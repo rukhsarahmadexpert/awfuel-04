@@ -21,22 +21,22 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-
-
                         <div class="row">
                             <input type="hidden" name="vehicleId" id="vehicleId" value="@Model.VehicleId" />
                             <input type="hidden" name="driverId" id="driverId" value="@Model.DriverId" />
                             <div class="col-md-12 mb-3 mt-2">
-                               
-                                <div class="form-group">
-                                    Name: <input type="text" name="DriverName" id="DriverName" class="form-control" value="@Model.Name" />
+                                Driver Name:
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="DriverName" id="DriverName" placeholder="Driver Name" value="@Model.Name">
+                                    <div class="input-group-append">
+                                        <input type="button" class="btn-primary" id="ChangeDriver" value="Change Driver" />
+                                    </div>
                                 </div>
-                                
                                 <div class="form-group">
                                     <label>Plate Number: @Model.TraficPlateNumber</label>
                                 </div>
                                 <div class="form-group">
-                                    Contact: <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" value="@Model.ContactNumber" />
+                                    Contact: <input type="text" name="ContactNumber" id="ContactNumber" class="form-control" value="@Model.ContactNumber" placeholder="Driver Contact Number"/>
                                 </div>
                                 <div class="form-group">
                                     Quantity:
@@ -80,10 +80,55 @@
 
              $("#SubmitDirectSaleOrderCreate").text('please wait...');
              $("#SubmitDirectSaleOrderCreate").attr("disabled", true);
-             CreateGroupOrder('/DirectSale/DirectsaleOrderAdd');
+
+             if (ValidateDirectOrder()) {                
+                 CreateGroupOrder('/DirectSale/DirectsaleOrderAdd');
+             }
+             else {
+                 $("#SubmitDirectSaleOrderCreate").text('submit');
+                 $("#SubmitDirectSaleOrderCreate").attr("disabled", false);
+             }
          })
+         
+         $('#ChangeDriver').click(function () {                
+                 $('#DriverName').val('');
+                 $('#ContactNumber').val('');
+             $('#driverId').val(0);
+         });
     })
 
+    function ValidateDirectOrder()
+    {
+
+        var IsValid = true;
+
+        if ($('#DriverName').val().trim() == '') {
+            IsValid = false;
+            $('#DriverName').css('border-color', 'red');
+            return IsValid;
+        }
+        else
+        {
+            $('#DriverName').css('border-color', 'green');
+        }
+        if ($('#ContactNumber').val().trim() == '') {
+            IsValid = false;
+            $('#ContactNumber').css('border-color', 'red');
+            return IsValid;
+        }
+        else {
+            $('#ContactNumber').css('border-color', 'green');
+        }
+        if (parseFloat($('#orderQuantity').val()) < 1 || $('#orderQuantity').val().trim() == '') {
+            IsValid = false;
+            $('#orderQuantity').css('border-color', 'red');
+            return IsValid;
+        }
+        else {
+            $('#orderQuantity').css('border-color', 'green');
+        }
+        return IsValid;
+    }
 
     function CreateGroupOrder(Url) {
 
@@ -152,6 +197,7 @@
                 alert('Please Add item to list');
             }
         }
+
 </script>
 
 }

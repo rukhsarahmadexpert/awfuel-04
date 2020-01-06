@@ -32,27 +32,45 @@
                 <div class="panel-content">
                     <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
                         <ul class="nav nav-tabs nav-tabs-clean" id="tabs" role="tablist">
-                            <li class="nav-item all">
-                                <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
+                            <li class="nav-item all bg-primary text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="All" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="All" />
+                                </form>
                             </li>
-                            <li class="nav-item created">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
-                            </li>
-
-                            <li class="nav-item accepted">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
-                            </li>
-
-                            <li class="nav-item rejected">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
+                            <li class="nav-item created bg-success text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="Order Created" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400"  value="Created Order" />
+                                </form>
                             </li>
 
-                            <li class="nav-item running">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
-                            </li>
+                            <li class="nav-item accepted bg-info text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="Order Accepted" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Accepted Order" />
+                                </form>
+                             </li>
 
-                            <li class="nav-item delivered">
-                                <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
+                            <li class="nav-item rejected bg-danger text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="Order Rejected" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Rejected Order" />
+                                </form>
+                             </li>
+
+                            <li class="nav-item running bg-secondary text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="Order Running" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Running Order" />
+                                </form>
+                              </li>
+
+                            <li class="nav-item delivered bg-dark text-white">
+                                <form action="/CustomerOrder/Admin" method="post">
+                                    <input type="hidden" value="Order Deliverd" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Delivered Order" />
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -81,9 +99,10 @@
                                 <td>@item.OrderProgress</td>
                                 <td>@item.UserName</td>
                                 <td>
-                                    <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                    <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                    <i class="fal fa-trash-alt">
+                                    <form action="/CustomerOrder/OrderDetails" method="post">
+                                        <input type="hidden" name="Id" value="@item.Id" />
+                                        <button type="submit" title="view Order Details"><i class="fal fa-eye"></i></button>&nbsp; &nbsp;
+                                    </form>
                                 </td>
                             </tr>
                         }
@@ -197,7 +216,7 @@
 @*</div>*@
 
 
-@section Scripts{
+@*@section Scripts{
 
     <script>
         $(document).ready(function () {
@@ -235,7 +254,7 @@
                 OrderProgress: OrderStatus
             }
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: '/CustomerOrder/Admin',
                 data: data,
                 dataType: 'json',
@@ -250,7 +269,7 @@
         }
 
     </script>
-}
+}*@
 
 
 

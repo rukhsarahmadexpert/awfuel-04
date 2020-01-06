@@ -119,7 +119,7 @@ namespace IT.Web.Controllers
         }
 
 
-
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Admin(string OrderProgress)
         {
             List<CustomerNoteOrderViewModel> customerNoteOrderViewModels = new List<CustomerNoteOrderViewModel>();
@@ -183,6 +183,54 @@ namespace IT.Web.Controllers
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult OrderDetails(int Id)
+        {
+            try
+            {
+                CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
+
+                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/ " + Id, false);
+
+                if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
+                }
+
+                return View(customerOrderGroupViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AcceptOrder(CustomerOrderViewModel customerOrderViewModel)
+        {
+            try
+            {
+                
+                var Result = webServices.Post(customerOrderViewModel, "CustomerOrder/CustomerOrderRejectAcceptByAdmin", false);
+
+                if(Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if(Result.Data != "[]")
+                    {
+                        int Res = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+                    }
+                }
+
+                return Json("suceess",JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
 
