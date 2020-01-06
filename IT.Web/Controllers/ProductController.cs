@@ -30,7 +30,10 @@ namespace IT.Web.Controllers
                 {
                     productViewModels = (new JavaScriptSerializer().Deserialize<List<ProductViewModel>>(productList.Data.ToString()));
                 }
-
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(productViewModels, JsonRequestBehavior.AllowGet);
+                }
                 return View(productViewModels);
             }
             catch (Exception ex)

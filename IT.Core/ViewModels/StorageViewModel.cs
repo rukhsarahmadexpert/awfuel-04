@@ -24,5 +24,6 @@ namespace IT.Core.ViewModels
         public string TrafficPlateNumber { get; set; }
         public string PONumber { get; set; }
         public bool Action { get; set; }
+        public int ProductId { get; set; }
     }
 }

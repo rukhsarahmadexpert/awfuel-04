@@ -5,7 +5,6 @@
 
 <ol class="breadcrumb page-breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
-                            
                             <li class="breadcrumb-item active">Create</li>
                             <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
  </ol>
@@ -36,11 +35,12 @@
            <div class="table-responsive-lg">
                 <table class="table m-0 data-table" id="SiteTarget">
                     <thead>
-                     <tr>                                    
+                     <tr>
+                       <th>Product</th>
                        <th>Source</th>
                        <th>Site / Vehicle</th>
-                       <th>Description</th>
-                       <th>Quantity</th>
+                       <th style="width:140px">Description</th>
+                       <th style="width:90px">Quantity</th>
                        <th>Site Action</th>
                      </tr>
                      </thead>
@@ -49,13 +49,21 @@
                         <tr>
                             <td>
                                  <div class="form-group mb-2">
+                                      <select id="ProductRow1" name="ProductRow1" class="select3 ProductRow1" required>
+                                           <option value="0" selected>Products</option>
+                                      </select>
+                                 </div>  
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
                                       <select id="SourceRow1" name="Source" class="select3 Source" required>
-                                            <option value="0" selected >Source</option>
+                                            <option value="0" selected >Select Source</option>
                                            <option value="sights">Site Name</option>
                                            <option value="ClientVehicle">Client Vehicle</option>
                                            <option value="AdminVehicle">Admin Vehicle</option>
                                       </select>
-                                    </div>   
+                                 </div>   
                             </td>
 
                             <td>
@@ -63,29 +71,27 @@
                                       <select id="SiteVehicleRow1" name="Site" class="select2 Site" required>
                                             <option value="">Select Option</option> 
                                       </select>
-                                    </div>
+                                 </div>
                             </td>
 
-                            <td>
-                                <div class="form-group mb-2">
+                            <td style="width:140px">
+                                <div class="form-group mb-2" >
                                        <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Enter Description" />
-                                      
+                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
                                 </div> 
                             </td>
 
-                            <td>
+                            <td style="width:90px"  >
                                 <div class="form-group mb-2">
                                        <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                        <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="Enter Quantity" />
-                                      
+                                        <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="" />  
                                 </div> 
                             </td>
 
                             <td>
                                  <div class="form-group mb-2">
                                       <select id="Action" name="Action" class="select3 Action" required>
-                                                        <option value="" selected disabled>Select stocks</option>
+                                                        <option value="" selected disabled>Stocks</option>
                                                         <option value="1">Stock In</option>
                                                         <option value="0">Stock Out</option>
                                       </select>
@@ -94,6 +100,13 @@
                         </tr>
 
                          <tr>
+                             <td>
+                                 <div class="form-group mb-2">
+                                      <select id="ProductRow2" name="ProductRow2" class="select3 ProductRow1" required>
+                                           <option value="0" selected>Products</option>
+                                      </select>
+                                 </div>  
+                            </td>
                             <td>
                                  <div class="form-group mb-2">
                                       <select id="SourceRow2" name="Source" class="select3 Source" required>
@@ -102,64 +115,50 @@
                                            <option value="ClientVehicle">Client Vehicle</option>
                                            <option value="AdminVehicle">Admin Vehicle</option>
                                       </select>
-                                    </div>   
+                                 </div>   
                             </td>
-
                             <td>
                                  <div class="form-group mb-2">
                                       <select id="SiteVehicleRow2" name="Site" class="select2 Site" required>
                                             <option value="">Select Option</option> 
                                       </select>
-                                    </div>
+                                 </div>
                             </td>
-
-                            <td>
+                            <td style="width:140px">
                                 <div class="form-group mb-2">
                                        <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Enter Description" />
-                                      
+                                        <input type="text" id="Description" name="Description" class="form-control Description" placeholder="Description" />
                                 </div> 
                             </td>
-
-                            <td>
+                            <td style="width:90px">
                                 <div class="form-group mb-2">
                                        <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
-                                        <input type="text" id="Quantity" name="Quantity" class="form-control Quantity" placeholder="Enter Quantity" />
-                                      
+                                        <input  type="text" id="Quantity" name="Quantity" class="form-control Quantity"  />   
                                 </div> 
                             </td>
-
                             <td>
                                  <div class="form-group mb-2">
                                       <select id="Action1" name="Action1" class="select2 Action" required>
-                                                        <option value="" selected disabled>Select stocks</option>
+                                                        <option value="" selected disabled>Stocks</option>
                                                         <option value="1">Stock In</option>
                                                         <option value="0">Stock Out</option>
                                       </select>
                                  </div>  
                             </td>
-                        </tr>
-                                                     
+                        </tr>                                                     
                      </tbody>
                 </table>
            </div>
                 <div class="row mt-3">
                   <div class="col-md-12">
-                                           <button type="button" id="SaveRecord"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Storage
-
-                                            <span>submit</span>
-                                             </button>
-                                 </div>
+                    <button type="button" id="SaveRecord"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Storage
+                       <span>submit</span>
+                    </button>
                   </div>
-
+                </div>
             </div>
         </div>
-
-        <br/>
-
-
-
-
+ 
     </div>
 
 
@@ -169,38 +168,49 @@
 
 
     $(document).ready(function () {
+        loadOptionProduct("/Product/Index");
         $('#SourceRow1').change(function () {
+           
             var val = $(this).val();
-            if (val == 0) {
+            if (val == 0)
+            {
                 return true
             }
-            else if (val == "sights") {
-                loadOptionSelect("/Site/Index","#SiteVehicleRow1","#SourceRow1")
+            else if (val == "sights")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }
-            if (val == "ClientVehicle") {
-                loadOptionSelect("/Vehicle/Index","#SiteVehicleRow1","#SourceRow1")
+            if (val == "ClientVehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }
-            if (val == "AdminVehicle") {
-                loadOptionSelect("/AWFVehicle/Index","#SiteVehicleRow1","#SourceRow1")
+            if (val == "AdminVehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }   
         });
 
         $('#SourceRow2').change(function () {
             var val = $(this).val();
-            if (val == 0) {
+            if (val == 0)
+            {
                 return true
             }
-            else if (val == "sights") {
-                loadOptionSelect("/Site/Index","#SiteVehicleRow2","#SourceRow2")
+            else if (val == "sights")
+            {
+                loadOptionSelect("/Site/Index", "#SiteVehicleRow2", "#SourceRow2");
             }
-            if (val == "ClientVehicle") {
-                loadOptionSelect("/Vehicle/Index","#SiteVehicleRow2","#SourceRow2")
+            if (val == "ClientVehicle")
+            {
+                loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
             }
-            if (val == "AdminVehicle") {
-                loadOptionSelect("/AWFVehicle/Index","#SiteVehicleRow2","#SourceRow2")
+            if (val == "AdminVehicle")
+            {
+                loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
             }   
         });
-        $('#SaveRecord').click(function () {
+        $('#SaveRecord').click(function ()
+        {
             //alert("hello");
             InsertStorge("/Storage/Create/");
         });
@@ -208,10 +218,12 @@
 
 
     //insert data
-    function InsertStorge(Url) {
+    function InsertStorge(Url)
+    {
         var list = [], orderItem, CurrentRow;
         var formData = new FormData();
-        $('#SiteTarget tbody tr').each(function () {
+        $('#SiteTarget tbody tr').each(function ()
+        {
 
             CurrentRow = $(this).closest("tr");
 
@@ -219,19 +231,22 @@
             var SiteId = "";
             var VehicleId = "";
             var ClientVehicleId = "";
-            if ($(this).find('.Source').val() == "sights") {
+            if ($(this).find('.Source').val() == "sights")
+            {
 
                 SiteId = $(this).find('.Site').val();
                 VehicleId = 0;
                 ClientVehicleId = 0;
             }
-            else if ($(this).find('.Source').val() == "AdminVehicle") {
+            else if ($(this).find('.Source').val() == "AdminVehicle")
+            {
                 VehicleId = $(this).find('.Site').val();
                 SiteId = 0;
                 ClientVehicleId = 0;
                 
             }
-            else {
+            else
+            {
                 VehicleId = 0;
                 SiteId = 0;
                 ClientVehicleId = $(this).find('.Site').val();
@@ -240,20 +255,24 @@
             var StockIn = 0.0;
             var StockOut = 0.0;
             var ActionVal = false;
-            if ($(this).find('.Action').val() == true) {
+            if ($(this).find('.Action').val() == true)
+            {
                 StockIn = parseFloat($(this).find('#Quantity').val());
                 StockOut = 0.0;
                 ActionVal = true;
             }
-            else {
+            else
+            {
                 StockOut = parseFloat($(this).find('#Quantity').val());
                 StockIn = 0.0;
                 ActionVal = false;
             }
             //if (validateRow(CurrentRow)) {
             //if (IsDateSelected(CurrentRow)) {
-            if (1 == 1) {
-                orderItem = {
+            if (1 == 1)
+            {
+                orderItem =
+                {
                     Source: $(this).find('.Source').val(),
                     SiteId: SiteId,
                     VehicleId: VehicleId,
@@ -262,6 +281,7 @@
                     StockIn: StockIn,
                     StockOut: StockOut,
                     Action: ActionVal,
+                    ProductId:$(this).find('.ProductRow1').val(),
 
                    
                 }
@@ -275,7 +295,8 @@
 
 
 
-        for (var i = 0; i < list.length; i++) {
+        for (var i = 0; i < list.length; i++)
+        {
             formData.append('storageViewModels[' + i + '][Id]', list[i].Id)
             formData.append('storageViewModels[' + i + '][Source]', list[i].Source)
             formData.append('storageViewModels[' + i + '][SiteId]', list[i].SiteId)
@@ -284,10 +305,12 @@
             formData.append('storageViewModels[' + i + '][Decription]', list[i].Decription)
             formData.append('storageViewModels[' + i + '][StockIn]', list[i].StockIn)
             formData.append('storageViewModels[' + i + '][StockOut]', list[i].StockOut)
+            formData.append('storageViewModels[' + i + '][ProductId]', list[i].ProductId)
             formData.append('storageViewModels[' + i + '][Action]', list[i].Action)
         }
 
-        if (list.length > 0) {
+        if (list.length > 0)
+        {
 
             $.ajax({
                 url: Url,
@@ -296,8 +319,10 @@
                 dataType: 'json',
                 contentType: false,
                 processData: false,
-                success: function (result) {
-                    if (result != "Failed") {
+                success: function (result)
+                {
+                    if (result != "Failed")
+                    {
                         list = [];
 
                         alert("success");
@@ -326,33 +351,54 @@
 
 
 
-    function loadOptionSelect(url,targetId, sourceId) {
-
-        ajaxRequest("POST", url, "", "json").then(function (result) {
+    function loadOptionSelect(url, targetId, sourceId)
+    {
+        ajaxRequest("POST", url, "", "json").then(function (result)
+        {
             //debugger;
-             if (result != "failed") {
-                  $.each(result, function (value, item) {
-                      if (item.Id != 0) {
-                          if ($(sourceId).val() == "sights") {
-                              $(targetId).html('<option value="' + item.Id + '">' + item.SiteName + '</option>');
-                          } else if ($(sourceId).val() == "AdminVehicle") {
+            if (result != "failed")
+            {
+                $(targetId).empty();
+                $.each(result, function (value, item)
+                {
+                    if ($(sourceId).val() == "sights")
+                    {
+                        $(targetId).append('<option value="' + item.Id + '">' + item.SiteName + '</option>');
+                    } else if ($(sourceId).val() == "AdminVehicle")
+                    {
                               $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
-                          }
-                          else {
-                              $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
-                          }
-                        }
-                        else {
-                             $(targetId).html('<option value="">Select Option</option>');
-                        }
-                    });
-                    //console.log(result);
-                    //window.location.reload();  
-                }
-                else {
-                        $('.Site').html('<option value="">Select Option</option>');
-                     }
-            })
+                    }
+                    else
+                    {
+                              $(targetId).append('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
+                    }
+                });
+            }
+            else
+            {
+                 $('.Site').append('<option value="">Select Option</option>');
+            }
+        })
+    }
+
+    function loadOptionProduct(productUrl)
+    {
+        ajaxRequest("POST", productUrl, "", "json").then(function (result1)
+        {
+            //debugger;
+            if (result1 != "failed")
+            {
+                $.each(result1, function (value, item)
+                {
+                    console.log(item)
+                              $(".ProductRow1").append('<option value="' + item.Id + '">' + item.Name + '</option>');
+                });
+            }
+            else
+            {
+                 $('.ProductRow1').append('<option value="">Select Product</option>');
+            }
+        })
     }
 
 
