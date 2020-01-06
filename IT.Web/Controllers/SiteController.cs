@@ -40,6 +40,10 @@ namespace IT.Web.Controllers
                 {
                     siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
                 }
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(siteViewModels,JsonRequestBehavior.AllowGet);
+                }
                 return View(siteViewModels);
 
             }

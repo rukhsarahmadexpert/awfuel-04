@@ -43,6 +43,12 @@ namespace IT.Web.Controllers
                     VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
                 }
 
+                if (Request.IsAjaxRequest())
+                {
+                    VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0,TraficPlateNumber= "Select Vehicle" });
+                    return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
+                }
+
                 return View(VehicleViewModels);
             }
             catch(Exception ex)
@@ -57,7 +63,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-            CompanyId = Convert.ToInt32(Session["CompanyId"]); ;
+            CompanyId = Convert.ToInt32(Session["CompanyId"]); 
             var result = webServices.Post(new VehicleViewModel(), "Vehicle/All/" + CompanyId);
             if (result.Data != null)
             {

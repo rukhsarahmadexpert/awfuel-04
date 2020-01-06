@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CustomerSitesController.cs" />
     <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Controllers\DirectSaleController.cs" />
+    <Compile Include="Controllers\StorageController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\staticImages\logo-1.png" />
@@ -715,6 +716,8 @@
     <Content Include="Views\Site\Create.cshtml" />
     <Content Include="Views\Shared\PartialView\StorageGraph\StorgeGraphPartialView.cshtml" />
     <Content Include="Views\DirectSale\OrderDetails.cshtml" />
+    <Content Include="Views\Storage\Index.cshtml" />
+    <Content Include="Views\Storage\Create.cshtml" />
     <Content Include="Views\CustomerOrder\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -722,6 +725,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\PartialView\StorageGraph\" />
+    <Folder Include="Views\Storage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

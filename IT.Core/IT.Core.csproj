@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\DriverModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DirectSaleViewModel.cs" />
+    <Compile Include="ViewModels\StorageViewListModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
