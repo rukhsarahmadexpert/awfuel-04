@@ -213,12 +213,12 @@ namespace IT.Web.Controllers
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+               
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = 1055;
+                pagingParameterModel.CompanyId = 0;
                 pagingParameterModel.pageSize = 100;
                 pagingParameterModel.CompanyId = CompanyId;
 

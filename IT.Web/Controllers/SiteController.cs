@@ -113,17 +113,16 @@ namespace IT.Web.Controllers
         }
 
         [NonAction]
-        public List<SiteViewModel> Sites()
+        public List<SiteViewModel> SitesList(int Id)
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.CompanyId = Id;
                 pagingParameterModel.pageSize = 100;
 
                 var SiteList = webServices.Post(pagingParameterModel, "Site/All");

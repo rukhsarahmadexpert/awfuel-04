@@ -114,7 +114,7 @@ namespace IT.Web.Controllers
 
                 ViewBag.AdminVehicles = awfVehicleController.AdminVehicles();
                 ViewBag.Vehicles = vehicleController.Vehicles();
-                ViewBag.Sites = siteController.Sites();
+                ViewBag.Sites = siteController.SitesList(CompanyId);
                 ViewBag.Products = productController.Products();
                 return View(storageViewModels);
             }
