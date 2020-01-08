@@ -719,6 +719,7 @@
     <Content Include="Views\Storage\Index.cshtml" />
     <Content Include="Views\Storage\Create.cshtml" />
     <Content Include="Views\CustomerOrder\OrderDetails.cshtml" />
+    <Content Include="Views\Storage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

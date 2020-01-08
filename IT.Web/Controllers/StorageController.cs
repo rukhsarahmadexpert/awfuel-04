@@ -13,17 +13,18 @@ namespace IT.Web.Controllers
     {
         WebServices webServices = new WebServices();
         List<StorageViewModel>storageViewModels = new List<StorageViewModel>();
-        int CompanyId;
+        StorageViewModel StorageViewModel = new StorageViewModel();
+       
 
         public ActionResult Index()
         {
             try
             {
-                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
-                pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.Id = 0;
                 pagingParameterModel.pageSize = 100;
 
                 var StorageList = webServices.Post(pagingParameterModel, "Storage/All");
@@ -54,12 +55,16 @@ namespace IT.Web.Controllers
 
             try
             {
+                var value = DateTime.Now.ToFileTime().ToString();
+
 
                 List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
                 storageViewModels1 = storageViewListModel.storageViewModels;
 
                 storageViewModels1[0].CreatedBy = Convert.ToInt32(Session["UserId"]);
                 storageViewModels1[1].CreatedBy = Convert.ToInt32(Session["UserId"]);
+                storageViewModels1[0].uniques = value;
+                storageViewModels1[1].uniques = value;
                 var result = webServices.Post(storageViewModels1, "Storage/StorageAdd");
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -80,6 +85,43 @@ namespace IT.Web.Controllers
             }
 
            
+        }
+
+        public ActionResult Edit(int Id)
+        {
+           
+            try
+            {
+
+                StorageViewModel.Id = Id;
+                
+
+                var result = webServices.Post(StorageViewModel, "Storage/Edit");
+
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(result.Data.ToString()));
+                    }
+                }
+                ProductController productController = new ProductController();
+                SiteController siteController = new SiteController();
+                VehicleController vehicleController = new VehicleController();
+                AwfVehicleController awfVehicleController = new AwfVehicleController();
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+
+                ViewBag.AdminVehicles = awfVehicleController.AdminVehicles();
+                ViewBag.Vehicles = vehicleController.Vehicles();
+                ViewBag.Sites = siteController.Sites();
+                ViewBag.Products = productController.Products();
+                return View(storageViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

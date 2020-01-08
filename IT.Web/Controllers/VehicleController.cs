@@ -206,5 +206,36 @@ namespace IT.Web.Controllers
                 return View();
             }
         }
+
+
+        [NonAction]
+        public List<VehicleViewModel> Vehicles()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = 1055;
+                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.CompanyId = CompanyId;
+
+                var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                }
+
+               
+                return VehicleViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

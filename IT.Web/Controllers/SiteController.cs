@@ -112,6 +112,36 @@ namespace IT.Web.Controllers
             }
         }
 
+        [NonAction]
+        public List<SiteViewModel> Sites()
+        {
+            try
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.pageSize = 100;
+
+                var SiteList = webServices.Post(pagingParameterModel, "Site/All");
+
+                if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
+                    return siteViewModels;
+                }
+               
+                return siteViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 
 

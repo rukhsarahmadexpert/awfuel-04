@@ -25,5 +25,6 @@ namespace IT.Core.ViewModels
         public string PONumber { get; set; }
         public bool Action { get; set; }
         public int ProductId { get; set; }
+        public string uniques { get; set; }
     }
 }

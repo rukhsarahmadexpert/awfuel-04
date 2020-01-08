@@ -76,6 +76,7 @@ namespace IT.Web.Controllers
 
             try
             {
+                
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);

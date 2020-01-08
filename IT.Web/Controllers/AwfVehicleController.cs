@@ -80,5 +80,34 @@ namespace IT.Web.Controllers
 
             return View(vehicleViewModel);
         }
+
+        [NonAction]
+        public List<VehicleViewModel> AdminVehicles()
+        {
+            try
+            {
+                //CompanyId = 2;
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+
+                pagingParameterModel.pageNumber = 1;
+                pagingParameterModel._pageSize = 1;
+                pagingParameterModel.CompanyId = 2;
+                pagingParameterModel.pageSize = 100;
+
+                var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
+
+                if (VehicleList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
+                }
+               
+                return VehicleViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

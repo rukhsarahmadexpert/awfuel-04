@@ -125,5 +125,27 @@ namespace IT.Web.Controllers
             }
         }
 
+
+        [NonAction]
+        public List<ProductViewModel> Products()
+        {
+            try
+            {
+                var productList = webServices.Post(new ProductViewModel(), "Product/All");
+
+                if (productList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    productViewModels = (new JavaScriptSerializer().Deserialize<List<ProductViewModel>>(productList.Data.ToString()));
+                }
+
+
+                return productViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

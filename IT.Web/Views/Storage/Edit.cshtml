@@ -1,0 +1,150 @@
+﻿@model List<IT.Core.ViewModels.StorageViewModel>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
+
+    List<IT.Core.ViewModels.StorageViewModel> storageViewModels = new List<IT.Core.ViewModels.StorageViewModel>();
+    storageViewModels = Model as List<IT.Core.ViewModels.StorageViewModel>;
+}
+
+<ol class="breadcrumb page-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Storage</a></li>
+                            <li class="breadcrumb-item active">Create</li>
+                            <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+ </ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-edit'></i> Edit Storage
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Storage <span class="fw-300"></span>
+                    </h2>                    
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="panel-tag">
+                            Please Edit your Site from here...
+                        </div>
+                        <form action="/Storage/Update" method="post" enctype="application/x-www-form-urlencoded">
+                    
+                        </form>
+                    </div>
+                </div>
+           <div class="table-responsive-lg">
+                <table class="table m-0 data-table" id="SiteTarget">
+                    <thead>
+                     <tr>
+                       <th>Product</th>
+                       <th>Source</th>
+                       <th>Site / Vehicle</th>
+                       <th style="width:140px">Description</th>
+                       <th style="width:90px">Quantity</th>
+                       <th>Site Action</th>
+                     </tr>
+                     </thead>
+
+                     <tbody>
+
+                        
+                          <tr>
+                            <td>
+                                 <div class="form-group mb-2">
+                                       <select id="ProductRow1" name="Product" class="select3 Product" required>
+                                          @foreach (var item in ViewBag.Products)
+                                          {
+                                                <option value="@item.Id" @(storageViewModels[0].Id == storageViewModels[0].ProductId ? "selected='selected'" : "")>@item.Name</option>
+                                          }
+                                      </select>
+                                 </div>  
+                            </td>
+
+                            <td>
+                                <p>@storageViewModels[0].Source</p>
+                                 <div class="form-group mb-2">
+                                      <select id="SourceRow1" name="Source" class="select3 Source" required>
+                                           <option value="0" selected >Select Source</option>
+                                           <option value="site" @(storageViewModels[0].Source == "site" ? "selected='selected'" : "")>Site Name</option>
+                                           <option value="ClientVehicle" @(storageViewModels[0].Source == "ClientVehicle" ? "selected='selected'" : "")>Client Vehicle</option>
+                                           <option value="AdminVehicle" @(storageViewModels[0].Source == "AdminVehicle" ? "selected='selected'" : "")>Admin Vehicle</option>
+                                      </select>
+                                 </div>   
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="SiteVehicleRow1" name="Site" class="select2 Site" required>
+
+                                          @if (storageViewModels[0].Source == "site")
+                                          {
+                                            foreach (var item in ViewBag.Sites)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].SiteId ? "selected='selected'" : "")>@item.SiteName </option>
+                                            }
+                                          }
+                                          else if(storageViewModels[0].Source == "ClientVehicle")
+                                          {
+                                              foreach (var item in ViewBag.Vehicle)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].ClientVehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                            }
+                                          }
+                                          else
+                                          {
+
+                                               foreach (var item in ViewBag.AdminVehicle)
+                                            {
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].VehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                            }
+
+                                          }
+                                      </select>
+                                 </div>
+                            </td>
+
+                            <td style="width:140px">
+                                <div class="form-group mb-2" >
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Description" value="@storageViewModels[0].Decription" name="Description" class="form-control Description" placeholder="Description" />
+                                </div> 
+                            </td>
+
+                            <td style="width:90px"  >
+                                <div class="form-group mb-2">
+                                       <!-- <label class="form-label" for="simpleinput">Traffic Plate Number</label>-->
+                                        <input type="text" id="Quantity" name="Quantity" value="@storageViewModels[0].StockIn"  class="form-control Quantity" placeholder="" />  
+                                </div> 
+                            </td>
+
+                            <td>
+                                 <div class="form-group mb-2">
+                                      <select id="Action" name="Action" class="select3 Action" required>
+                                                        <option value="" selected disabled>Stocks</option>
+                                                        <option value="1">Stock In</option>
+                                                        <option value="0">Stock Out</option>
+                                      </select>
+                                 </div>  
+                            </td>
+                        </tr>
+
+                        
+                                                                        
+                     </tbody>
+                </table>
+           </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <button type="button" id="SaveRecord"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Storage
+                       <span>submit</span>
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
