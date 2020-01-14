@@ -26,5 +26,7 @@ namespace IT.Core.ViewModels
         public bool Action { get; set; }
         public int ProductId { get; set; }
         public string uniques { get; set; }
+        public int UpdateBy { get; set; }
     }
 }
+

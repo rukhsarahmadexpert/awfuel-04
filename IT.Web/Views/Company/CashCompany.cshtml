@@ -109,7 +109,7 @@
                                                  <div class="row ">
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaFront1Preview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" width="100px" >
+                                                        <img id="logoPreview" class="blah_cashCompany" src="/assets/staticImages/icon1.png" width="100px" >
                                                         <input id="LogoUrl" name="LogoUrl" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -132,3 +132,32 @@
 
 
 
+@section Scripts{
+<script src="~/Scripts/CustomScript/FileUploadPreview.js"></script>
+<script>
+
+    $("#LogoUrl").change(function () {
+               readURL(this,"logoPreview");
+    });
+
+</script>
+}
+
+<style>
+
+
+.pic{
+     display: none;
+       }
+       
+ .newbtn{
+         cursor: pointer;
+      }
+      .blah{
+  max-width:100%;
+  width:300px;
+  height:auto;
+  margin-top:20px;
+}
+
+</style>

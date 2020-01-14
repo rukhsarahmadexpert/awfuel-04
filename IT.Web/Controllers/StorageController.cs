@@ -51,12 +51,10 @@ namespace IT.Web.Controllers
 
         [HttpPost]
         public ActionResult Create(StorageViewListModel storageViewListModel)
-        {
-
+            {
             try
             {
                 var value = DateTime.Now.ToFileTime().ToString();
-
 
                 List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
                 storageViewModels1 = storageViewListModel.storageViewModels;
@@ -64,11 +62,10 @@ namespace IT.Web.Controllers
                 storageViewModels1[0].CreatedBy = Convert.ToInt32(Session["UserId"]);
                 storageViewModels1[1].CreatedBy = Convert.ToInt32(Session["UserId"]);
                 storageViewModels1[0].uniques = value;
-                storageViewModels1[1].uniques = value;
+                 storageViewModels1[1].uniques = value;
                 var result = webServices.Post(storageViewModels1, "Storage/StorageAdd");
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                   
+                {                 
                     int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
                     return Json("success", JsonRequestBehavior.AllowGet);
                 }
@@ -76,28 +73,19 @@ namespace IT.Web.Controllers
                 {
                     return Json("Failed", JsonRequestBehavior.AllowGet);
                 }
-
-
             }
             catch (Exception)
             {
                 return Json("Failed", JsonRequestBehavior.AllowGet);
-            }
-
-           
+            }     
         }
 
         public ActionResult Edit(int Id)
-        {
-           
+        {   
             try
             {
-
                 StorageViewModel.Id = Id;
-                
-
                 var result = webServices.Post(StorageViewModel, "Storage/Edit");
-
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     if (result.Data != "[]")
@@ -121,6 +109,36 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Update(StorageViewListModel storageViewListModel)
+        {
+            try
+            {
+               // var value = DateTime.Now.ToFileTime().ToString();
+
+                List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
+                storageViewModels1 = storageViewListModel.storageViewModels;
+
+                storageViewModels1[0].UpdateBy = Convert.ToInt32(Session["UserId"]);
+                storageViewModels1[1].UpdateBy = Convert.ToInt32(Session["UserId"]);
+
+                var result = webServices.Post(storageViewModels1, "Storage/StorageUpdate");
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
     }

@@ -66,9 +66,9 @@
                                  <div class="form-group mb-2">
                                       <select id="SourceRow1" name="Source" class="select3 Source" required>
                                             <option value="0" selected >Select Source</option>
-                                           <option value="sights">Site Name</option>
-                                           <option value="ClientVehicle">Client Vehicle</option>
-                                           <option value="AdminVehicle">Admin Vehicle</option>
+                                           <option value="site">Site Name</option>
+                                           <option value="client vehicle">Client Vehicle</option>
+                                           <option value="admin vehicle">Admin Vehicle</option>
                                       </select>
                                  </div>   
                             </td>
@@ -97,10 +97,10 @@
 
                             <td>
                                  <div class="form-group mb-2">
-                                      <select id="Action" name="Action" class="select3 Action" required>
-                                                        <option value="" selected disabled>Stocks</option>
+                                      <select id="Action" name="Action" class="form-control Action" required>
+                                                      
                                                         <option value="1">Stock In</option>
-                                                        <option value="0">Stock Out</option>
+                                                     
                                       </select>
                                  </div>  
                             </td>
@@ -118,9 +118,9 @@
                                  <div class="form-group mb-2">
                                       <select id="SourceRow2" name="Source" class="select3 Source" required>
                                             <option value="0" selected >Source</option>
-                                           <option value="sights">Site Name</option>
-                                           <option value="ClientVehicle">Client Vehicle</option>
-                                           <option value="AdminVehicle">Admin Vehicle</option>
+                                           <option value="site">Site Name</option>
+                                           <option value="client vehicle">Client Vehicle</option>
+                                           <option value="admin vehicle">Admin Vehicle</option>
                                       </select>
                                  </div>   
                             </td>
@@ -145,9 +145,8 @@
                             </td>
                             <td>
                                  <div class="form-group mb-2">
-                                      <select id="Action1" name="Action1" class="select2 Action" required>
-                                                        <option value="" selected disabled>Stocks</option>
-                                                        <option value="1">Stock In</option>
+                                      <select id="Action1" name="Action1" class="form-control Action" required>
+                                                      
                                                         <option value="0">Stock Out</option>
                                       </select>
                                  </div>  
@@ -159,7 +158,7 @@
                 <div class="row mt-3">
                   <div class="col-md-12">
                     <button type="button" id="SaveRecord"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Storage
-                       <span>submit</span>
+                       <span>Save</span>
                     </button>
                   </div>
                 </div>
@@ -183,15 +182,15 @@
             {
                 return true
             }
-            else if (val == "sights")
+            else if (val == "site")
             {
                 loadOptionSelect("/Site/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }
-            if (val == "ClientVehicle")
+            if (val == "client vehicle")
             {
                 loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }
-            if (val == "AdminVehicle")
+            if (val == "admin vehicle")
             {
                 loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow1", "#SourceRow1");               
             }   
@@ -203,15 +202,15 @@
             {
                 return true
             }
-            else if (val == "sights")
+            else if (val == "site")
             {
                 loadOptionSelect("/Site/Index", "#SiteVehicleRow2", "#SourceRow2");
             }
-            if (val == "ClientVehicle")
+            if (val == "client vehicle")
             {
                 loadOptionSelect("/Vehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
             }
-            if (val == "AdminVehicle")
+            if (val == "admin vehicle")
             {
                 loadOptionSelect("/AWFVehicle/Index", "#SiteVehicleRow2", "#SourceRow2");
             }   
@@ -239,14 +238,14 @@
             var SiteId = "";
             var VehicleId = "";
             var ClientVehicleId = "";
-            if ($(this).find('.Source').val() == "sights")
+            if ($(this).find('.Source').val() == "site")
             {
 
                 SiteId = $(this).find('.Site').val();
                 VehicleId = 0;
                 ClientVehicleId = 0;
             }
-            else if ($(this).find('.Source').val() == "AdminVehicle")
+            else if ($(this).find('.Source').val() == "admin vehicle")
             {
                 VehicleId = $(this).find('.Site').val();
                 SiteId = 0;
@@ -369,10 +368,10 @@
                 $(targetId).empty();
                 $.each(result, function (value, item)
                 {
-                    if ($(sourceId).val() == "sights")
+                    if ($(sourceId).val() == "site")
                     {
                         $(targetId).append('<option value="' + item.Id + '">' + item.SiteName + '</option>');
-                    } else if ($(sourceId).val() == "AdminVehicle")
+                    } else if ($(sourceId).val() == "admin vehicle")
                     {
                               $(targetId).html('<option value="' + item.Id + '">' + item.TraficPlateNumber + '</option>');
                     }

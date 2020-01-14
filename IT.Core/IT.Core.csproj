@@ -81,6 +81,7 @@
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DirectSaleViewModel.cs" />
     <Compile Include="ViewModels\StorageViewListModel.cs" />
+    <Compile Include="ViewModels\CustomerNotificationViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

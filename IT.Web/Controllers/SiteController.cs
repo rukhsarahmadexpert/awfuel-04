@@ -117,7 +117,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-
+                List<SiteViewModel> siteViewModels1 = new List<SiteViewModel>();
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
@@ -129,11 +129,11 @@ namespace IT.Web.Controllers
 
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
-                    return siteViewModels;
+                    siteViewModels1 = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
+                    
                 }
                
-                return siteViewModels;
+                return siteViewModels1;
             }
             catch (Exception ex)
             {
