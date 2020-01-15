@@ -27,6 +27,9 @@ namespace IT.Core.ViewModels
         public int ProductId { get; set; }
         public string uniques { get; set; }
         public int UpdateBy { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string ToSource { get; set; }
     }
 }
 

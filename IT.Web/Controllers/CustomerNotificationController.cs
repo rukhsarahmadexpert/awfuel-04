@@ -42,8 +42,7 @@ namespace IT.Web.Controllers
         {
            return View(new CustomerNotificationViewModel());
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(CustomerNotificationViewModel customerNotificationViewModel, HttpPostedFileBase ImageUrl)
         {
@@ -92,8 +91,6 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
 
         [HttpGet]
         public ActionResult Edit(int Id)

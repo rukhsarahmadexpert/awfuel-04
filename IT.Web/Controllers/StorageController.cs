@@ -20,7 +20,8 @@ namespace IT.Web.Controllers
         {
             try
             {
-                
+                List<StorageViewModel> storageViewModels2 = new List<StorageViewModel>();
+
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
@@ -32,7 +33,35 @@ namespace IT.Web.Controllers
                 if (StorageList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
-                    return View(storageViewModels);
+
+                    if(storageViewModels.Count > 0)
+                    {
+                        StorageViewModel storageViewModelObj = new StorageViewModel();
+
+                        foreach(var item in storageViewModels)
+                        {
+                            if (item.Action == true)
+                            {   
+                                storageViewModelObj.Id = item.Id;
+                                storageViewModelObj.StockIn = item.StockIn;
+                                storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                storageViewModelObj.Source = item.Source;
+                                storageViewModelObj.UserName = item.UserName;
+
+                            } 
+                            else
+                            {
+                                storageViewModelObj.StockOut = item.StockOut;
+                                storageViewModelObj.To = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
+                                storageViewModelObj.ToSource = item.Source;
+
+                                storageViewModels2.Add(storageViewModelObj);
+                                storageViewModelObj = new StorageViewModel();
+                            }
+                        }
+                    }
+
+                    return View(storageViewModels2);
                 }
                 return View(storageViewModels);
 
