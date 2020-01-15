@@ -55,7 +55,7 @@ namespace IT.Web.Controllers
 
         public ActionResult Create()
         {
-           return View();
+           return View(new SiteViewModel());
         }
 
         [HttpPost]
