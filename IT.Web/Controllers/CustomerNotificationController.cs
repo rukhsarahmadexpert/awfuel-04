@@ -61,27 +61,38 @@ namespace IT.Web.Controllers
                             file.InputStream.Read(fileBytes, 0, fileBytes.Length);
                             var fileContent = new ByteArrayContent(fileBytes);
                             fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("ImageUrl") { FileName = file.FileName };
-                            content.Add(fileContent);
-                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
-
                             string UserId = Session["UserId"].ToString();
-                            
-                            content.Add(new StringContent(UserId),"CreatedBy");
-                            content.Add(new StringContent(customerNotificationViewModel.MessageTitle == null ? "" : customerNotificationViewModel.MessageTitle), "MessageTitle");
-                            content.Add(new StringContent(customerNotificationViewModel.MessageDescription == null ? "" : customerNotificationViewModel.MessageDescription), "MessageDescription");
-                           
-
-                            var result = webServices.PostMultiPart(content, "Advertisement/Add", true);
-
-                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            if (customerNotificationViewModel.Id < 1)
                             {
-                                return Redirect(nameof(Index));
-                                //ViewBag.Message = "Created";
+                                content.Add(fileContent);
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");          
+                                content.Add(new StringContent(UserId), "CreatedBy");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle == null ? "" : customerNotificationViewModel.MessageTitle), "MessageTitle");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription == null ? "" : customerNotificationViewModel.MessageDescription), "MessageDescription");
+
+                                var result = webServices.PostMultiPart(content, "Advertisement/Add", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    return Redirect(nameof(Index));
+                                }
                             }
                             else
                             {
-                                return Redirect(nameof(Index));
+                                content.Add(fileContent);
+                                content.Add(new StringContent("ClientDocs"), "ClientDocs");
+                                content.Add(new StringContent(UserId), "UpdatBy");
+                                content.Add(new StringContent(customerNotificationViewModel.Id.ToString()), "Id");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageTitle == null ? "" : customerNotificationViewModel.MessageTitle), "MessageTitle");
+                                content.Add(new StringContent(customerNotificationViewModel.MessageDescription == null ? "" : customerNotificationViewModel.MessageDescription), "MessageDescription");
+
+                                var result = webServices.PostMultiPart(content, "Advertisement/Update", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    return Redirect(nameof(Index));
+                                }
                             }
+                            
+                           
                         }
                     }
                 }

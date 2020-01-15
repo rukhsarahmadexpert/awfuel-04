@@ -234,5 +234,30 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult RejectOrder(CustomerOrderViewModel customerOrderViewModel)
+        {
+            try
+            {
+                customerOrderViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+
+                var Result = webServices.Post(customerOrderViewModel, "CustomerOrder/CustomerOrderRejectAcceptByAdmin", false);
+
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (Result.Data != "[]")
+                    {
+                        int Res = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+                    }
+                }
+
+                return Json("suceess", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

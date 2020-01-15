@@ -73,9 +73,13 @@
                                     <input type="hidden" id="Id" value="@Model.Id" />
                                 @if (Model.OrderProgress == "Order Created")
                                 {
-                                    <button type="button" class="btn btn-primary mt-1" id="btnAccept" style="float:right" value="Accept Order">Accept Order</button>
+                                    <button type="button" class="btn btn-danger mt-1 m-1"  style="float:right" data-toggle="modal" data-target=".rejectOrderButton">Reject Order</button>
+                                    <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"> <i class="fal fa-check"></i> Accept Order</button>
                                 }
                             </div>
+                            <div class="col-md-12 mt-1">
+                             <button type="button" class="btn btn-primary mt-1 m-1" id="btnAccept" style="float:right" value="Accept Order"><i class="fal fa-map"></i> Map</button>
+                                </div>
                             <div class="col-lg-12 py-2" style="overflow-x:auto;">
                                 <!--Table small-->
                                 <div id="panel-7" class="panel">
@@ -136,6 +140,37 @@
     </div>
 </div>
 
+                                    <div class="panel-container show">
+                                        <div class="panel-content">
+                                            <div class="modal fade rejectOrderButton" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-transparent" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title text-white">
+                                                               Reject Order
+                                                                 <small class="m-0 text-white opacity-70">
+                                                                    Give brief description of reject order
+                                                                </small>
+                                                            </h4>
+                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <textarea id="Description" name="Description" class="form-control" rows="5"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" id="btnReject" class="btn btn-danger">Reject</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                           
+
 <style>
     .pic {
         display: none;
@@ -161,23 +196,56 @@
 
             $('#btnAccept').click(function () {
 
+                 $("#btnAccept").text('please wait...');
+                 $("#btnAccept").attr("disabled", true);
+
                 var Data = JSON.stringify({
                     Id: $('#Id').val(),
                     Status: true
                 })
 
-                ajaxRequest("POST", "/CustomerOrder/AcceptOrder", data, "json").then(function (result) {
+                ajaxRequest("POST", "/CustomerOrder/AcceptOrder", Data, "json").then(function (result) {
 
                     if (result != "failed") {
-                        alert('Order Accepted');
+                        @*alert('Order Accepted');*@
+                        window.location.href = "/CustomerOrder/Admin"
                     }
                     else {
                         alert('some error to accept order');
                     }
                 })
             })
+
+            $('#btnReject').click(function () {
+
+                $("#btnReject").text('please wait...');
+                $("#btnReject").attr("disabled", true);
+
+                 var Data = JSON.stringify({
+                     Id: $('#Id').val(),
+                     Description: $('#Description').val(),
+                    Status: false
+                    })
+
+                 ajaxRequest("POST", "/CustomerOrder/RejectOrder", Data, "json").then(function (resultReject) {
+
+                     if (resultReject != "failed") {
+                       
+                        //alert('Order Rejected');
+                        //window.location.reload();
+                         window.location.href = "/CustomerOrder/Admin"
+                    }
+                    else {
+                        alert('some error to reject order');
+                        window.location.reload();
+                    }
+                 })
+            })
         })
 
     </script>
     
-    }
+    }  
+
+
+       
