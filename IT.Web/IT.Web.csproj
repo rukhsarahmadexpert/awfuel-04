@@ -723,15 +723,13 @@
     <Content Include="Views\Storage\Edit.cshtml" />
     <Content Include="Views\CustomerNotification\Index.cshtml" />
     <Content Include="Views\CustomerNotification\Create.cshtml" />
+    <Content Include="Views\CustomerOrder\TestMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\PartialView\StorageGraph\" />
-    <Folder Include="Views\Storage\" />
-    <Folder Include="Views\CustomerNotification\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

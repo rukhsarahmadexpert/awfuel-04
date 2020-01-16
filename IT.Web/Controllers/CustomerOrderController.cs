@@ -86,8 +86,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         public ActionResult Details(int Id)
         {
             try
@@ -117,8 +116,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Admin(string OrderProgress)
         {
@@ -157,8 +155,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         public ActionResult AdminDetails(int Id)
         {
             try
@@ -185,8 +182,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult OrderDetails(int Id)
         {
@@ -194,12 +190,17 @@ namespace IT.Web.Controllers
             {
                 CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
 
-                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/ " + Id, false);
+                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id, false);
 
                 if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
                 }
+
+                //if(customerOrderGroupViewModel.OrderProgress == "Order Accepted")
+                //{
+                //    return View("AssignToDriver",customerOrderGroupViewModel);
+                //}
 
                 return View(customerOrderGroupViewModel);
             }
@@ -259,5 +260,10 @@ namespace IT.Web.Controllers
             }
         }
 
+
+        public ActionResult TestMap()
+        {
+            return View();
+        }
     }
 }

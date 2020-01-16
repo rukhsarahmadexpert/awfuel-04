@@ -22,8 +22,7 @@ namespace IT.Web.Controllers
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
         int CompanyId;
-
-
+                
         public ActionResult Index()
         {
             try
