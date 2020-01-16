@@ -148,13 +148,24 @@ namespace IT.Web.Controllers
                                         fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportCopy") { FileName = file.FileName };
                                     }
                                     content.Add(fileContent);
+
+
                                 }
                             }
                             string UserId = Session["UserId"].ToString();
-                         
-                              
-                              
-                                var result = webServices.PostMultiPart(content, "", true);
+                            content.Add(new StringContent(UserId), "CreatedBy");
+                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "Name");
+                            content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
+                            content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
+                            content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+
+
+                            content.Add(new StringContent(driverViewModel.LicenseTypes.ToString()), "LicenseTypes");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
+                            content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
+                            content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Name), "Comments");
+
+                            var result = webServices.PostMultiPart(content, "AWFDriver/Add", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                                 {
                                     return Redirect(nameof(Index));
