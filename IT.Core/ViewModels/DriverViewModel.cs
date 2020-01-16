@@ -44,6 +44,15 @@ namespace IT.Core.ViewModels
 
         public HttpPostedFile HttpPostedFile { get; set; }
 
+        public HttpPostedFileBase PassportBackFile { get; set; }
+        public HttpPostedFileBase DriverImageUrlFile { get; set; }
+        public HttpPostedFileBase DrivingLicenseBackFile { get; set; }
+        public HttpPostedFileBase DrivingLicenseFrontFile { get; set; }
+        public HttpPostedFileBase IDUAECopyBackFile { get; set; }
+        public HttpPostedFileBase IDUAECopyFrontFile { get; set; }
+        public HttpPostedFileBase VisaCopyFile { get; set; }
+        public HttpPostedFileBase PassportCopyFile { get; set; }
+
         public string[] LicienceList { get; set; }
 
         public List<int> LicenseTypes { get; set; }
