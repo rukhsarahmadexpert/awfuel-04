@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -75,6 +76,99 @@ namespace IT.Web.Controllers
         public ActionResult Create()
         {
             return View(new DriverViewModel());
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(DriverViewModel driverViewModel)
+        {
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[7];
+                     
+                    httpPostedFileBase[0] = driverViewModel.PassportBackFile;
+                    httpPostedFileBase[1] = driverViewModel.DriverImageUrlFile;
+                    httpPostedFileBase[2] = driverViewModel.DrivingLicenseBackFile;
+                    httpPostedFileBase[3] = driverViewModel.DrivingLicenseFrontFile;
+                    httpPostedFileBase[4] = driverViewModel.IDUAECopyBackFile;
+                    httpPostedFileBase[5] = driverViewModel.IDUAECopyFrontFile;
+                    httpPostedFileBase[6] = driverViewModel.VisaCopyFile;
+                    httpPostedFileBase[7] = driverViewModel.PassportCopyFile;
+
+                    var file = driverViewModel.PassportBackFile;
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (var content = new MultipartFormDataContent())
+                        {
+
+                            if (httpPostedFileBase.ToList().Count > 0)
+                            {
+
+                                for(int i =0; i< 8; i++)
+                                {
+                                    file = httpPostedFileBase[i];
+
+                                    byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                    file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                    var fileContent = new ByteArrayContent(fileBytes);
+
+                                    if (i == 0)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportBack") { FileName = file.FileName };
+                                    }
+                                    else if (i == 1)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DriverImageUrl") { FileName = file.FileName };
+                                    }
+                                    else if (i == 2)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseBackFil") { FileName = file.FileName };
+                                    }
+                                    else if (i == 3)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseFront") { FileName = file.FileName };
+                                    }
+                                    else if (i == 4)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyBack") { FileName = file.FileName };
+                                    }
+                                    else if (i == 5)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyFront") { FileName = file.FileName };
+                                    }
+                                    else if (i == 6)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("VisaCopy") { FileName = file.FileName };
+                                    }
+                                    else if (i == 7)
+                                    {
+                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportCopy") { FileName = file.FileName };
+                                    }
+                                    content.Add(fileContent);
+                                }
+                            }
+                            string UserId = Session["UserId"].ToString();
+                         
+                              
+                              
+                                var result = webServices.PostMultiPart(content, "", true);
+                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                                {
+                                    return Redirect(nameof(Index));
+                                }
+                        
+                        }
+                    }
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public ActionResult DriverLoginHistoryWithAsignVehicle()
