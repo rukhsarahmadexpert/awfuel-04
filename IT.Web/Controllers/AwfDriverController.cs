@@ -86,7 +86,7 @@ namespace IT.Web.Controllers
             {
                 if (Request.Files.Count > 0)
                 {
-                    HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[7];
+                    HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[8];
                      
                     httpPostedFileBase[0] = driverViewModel.PassportBackFile;
                     httpPostedFileBase[1] = driverViewModel.DriverImageUrlFile;
