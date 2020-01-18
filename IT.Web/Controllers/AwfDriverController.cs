@@ -79,8 +79,7 @@ namespace IT.Web.Controllers
         {
             return View(new DriverViewModel());
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(DriverViewModel driverViewModel)
         {
@@ -333,8 +332,7 @@ namespace IT.Web.Controllers
             }  
 
         }
-
-
+        
         [HttpPost]
         public ActionResult DriverAllOnlineByDriverId(int Id)
         {
