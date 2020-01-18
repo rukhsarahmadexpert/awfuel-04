@@ -54,6 +54,8 @@ namespace IT.Web.Controllers
         {
             try
             {
+                DriverViewModel driverViewModel = new DriverViewModel();
+
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 driverViewModel.CompanyId = CompanyId;
                 driverViewModel.Id = id;
@@ -61,16 +63,16 @@ namespace IT.Web.Controllers
                 var result = webServices.Post(driverViewModel, "AWFDriver/Edit");
                 if (result.Data != null)
                 {
-                    driverViewModel = (new JavaScriptSerializer()).Deserialize<List<DriverViewModel>>(result.Data.ToString()).FirstOrDefault();
+                    driverViewModel = (new JavaScriptSerializer()).Deserialize<DriverViewModel>(result.Data.ToString());
                 }
-            }
 
+                return View(driverViewModel);
+
+            }            
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return View(driverViewModel);
         }
 
         public ActionResult Create()
@@ -84,18 +86,38 @@ namespace IT.Web.Controllers
         {
             try
             {
+                
                 if (Request.Files.Count > 0)
                 {
                     HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[8];
-                     
-                    httpPostedFileBase[0] = driverViewModel.PassportBackFile;
-                    httpPostedFileBase[1] = driverViewModel.DriverImageUrlFile;
-                    httpPostedFileBase[2] = driverViewModel.DrivingLicenseBackFile;
-                    httpPostedFileBase[3] = driverViewModel.DrivingLicenseFrontFile;
-                    httpPostedFileBase[4] = driverViewModel.IDUAECopyBackFile;
-                    httpPostedFileBase[5] = driverViewModel.IDUAECopyFrontFile;
-                    httpPostedFileBase[6] = driverViewModel.VisaCopyFile;
-                    httpPostedFileBase[7] = driverViewModel.PassportCopyFile;
+                    if (driverViewModel.PassportBackFile != null)
+                    {
+                        httpPostedFileBase[0] = driverViewModel.PassportBackFile;
+                    }
+                    if (driverViewModel.DriverImageUrlFile != null)
+                    {
+                        httpPostedFileBase[1] = driverViewModel.DriverImageUrlFile;
+                    }
+                    if (driverViewModel.DrivingLicenseBackFile != null)
+                    {
+                        httpPostedFileBase[3] = driverViewModel.DrivingLicenseFrontFile;
+                    }
+                    if (driverViewModel.IDUAECopyBackFile != null)
+                    {
+                        httpPostedFileBase[4] = driverViewModel.IDUAECopyBackFile;
+                    }
+                    if (driverViewModel.IDUAECopyFrontFile != null)
+                    {
+                        httpPostedFileBase[5] = driverViewModel.IDUAECopyFrontFile;
+                    }
+                    if (driverViewModel.VisaCopyFile != null)
+                    {
+                        httpPostedFileBase[6] = driverViewModel.VisaCopyFile;
+                    }
+                    if (driverViewModel.PassportCopyFile != null)
+                    {
+                        httpPostedFileBase[7] = driverViewModel.PassportCopyFile;
+                    }
 
                     var file = driverViewModel.PassportBackFile;
 
@@ -109,73 +131,86 @@ namespace IT.Web.Controllers
 
                                 for(int i =0; i< 8; i++)
                                 {
-                                    file = httpPostedFileBase[i];
+                                    if (httpPostedFileBase[i] != null)
+                                    {
+                                        file = httpPostedFileBase[i];
 
-                                    byte[] fileBytes = new byte[file.InputStream.Length + 1];
-                                    file.InputStream.Read(fileBytes, 0, fileBytes.Length);
-                                    var fileContent = new ByteArrayContent(fileBytes);
+                                        byte[] fileBytes = new byte[file.InputStream.Length + 1];
+                                        file.InputStream.Read(fileBytes, 0, fileBytes.Length);
+                                        var fileContent = new ByteArrayContent(fileBytes);
 
-                                    if (i == 0)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportBack") { FileName = file.FileName };
+                                        if (i == 0)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportBack") { FileName = file.FileName };
+                                        }
+                                        else if (i == 1)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DriverImageUrl") { FileName = file.FileName };
+                                        }
+                                        else if (i == 2)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseBack") { FileName = file.FileName };
+                                        }
+                                        else if (i == 3)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseFront") { FileName = file.FileName };
+                                        }
+                                        else if (i == 4)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyBack") { FileName = file.FileName };
+                                        }
+                                        else if (i == 5)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyFront") { FileName = file.FileName };
+                                        }
+                                        else if (i == 6)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("VisaCopy") { FileName = file.FileName };
+                                        }
+                                        else if (i == 7)
+                                        {
+                                            fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportCopy") { FileName = file.FileName };
+                                        }
+                                        content.Add(fileContent);
                                     }
-                                    else if (i == 1)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DriverImageUrl") { FileName = file.FileName };
-                                    }
-                                    else if (i == 2)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseBackFil") { FileName = file.FileName };
-                                    }
-                                    else if (i == 3)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("DrivingLicenseFront") { FileName = file.FileName };
-                                    }
-                                    else if (i == 4)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyBack") { FileName = file.FileName };
-                                    }
-                                    else if (i == 5)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("IDUAECopyFront") { FileName = file.FileName };
-                                    }
-                                    else if (i == 6)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("VisaCopy") { FileName = file.FileName };
-                                    }
-                                    else if (i == 7)
-                                    {
-                                        fileContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("PassportCopy") { FileName = file.FileName };
-                                    }
-                                    content.Add(fileContent);
-
-
                                 }
                             }
 
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "CreatedBy");
-                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "Name");
+                            content.Add(new StringContent("2"), "CompanyId");
+                            content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
                             content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
                             content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
                             content.Add(new StringContent(driverViewModel.Facebook == null ? "" : driverViewModel.Facebook), "Facebook");
+                            content.Add(new StringContent("ClientDocs"), "ClientDocs");
 
-
-                            content.Add(new StringContent(driverViewModel.LicenseTypes.ToString()), "LicenseTypes");
+                            if (driverViewModel.LicienceList.ToList().Count == 1)
+                            {
+                                content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "]"), "LicenseTypes");
+                            }
+                            else if(driverViewModel.LicienceList.ToList().Count == 2)
+                            {
+                                content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() +"," +driverViewModel.LicienceList[1].ToString() + "]"), "LicenseTypes");
+                            }
+                            else
+                            {
+                                content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
+                            }
                             content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
                             content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
                             content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Name), "Comments");
 
                             var result = webServices.PostMultiPart(content, "AWFDriver/Add", true);
-                                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                                {
-                                    return Redirect(nameof(Index));
-                                }
+                            if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                            {
+                                return Redirect(nameof(Index));
+                            }
                         
                         }
                     }
                 }
-                return View();
+                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id});
             }
             catch (Exception ex)
             {

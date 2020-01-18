@@ -52,7 +52,6 @@ namespace IT.Core.ViewModels
         public HttpPostedFileBase IDUAECopyFrontFile { get; set; }
         public HttpPostedFileBase VisaCopyFile { get; set; }
         public HttpPostedFileBase PassportCopyFile { get; set; }
-
         public string[] LicienceList { get; set; }
 
         public List<int> LicenseTypes { get; set; }
