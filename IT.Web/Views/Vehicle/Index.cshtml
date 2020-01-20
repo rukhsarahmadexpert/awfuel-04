@@ -21,7 +21,7 @@
                                 <div id="panel-1" class="panel">
                                     <div class="panel-hdr">
                                         <h2>
-                                           <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
+                                           <a href="/Vehicle/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
                                         </h2></a>
                                        
                                     </div>
@@ -63,7 +63,7 @@
                                                             <td>@item.IsActive</td>
                                                             <td>
                                                                 <a href="/Vehicle/Details/@item.Id"><i class="fal fa-eye"></i></a> &nbsp; &nbsp;
-                                                                <i class="fal fa-edit"></i>&nbsp; &nbsp;
+                                                                <a href="/Vehicle/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
                                                                 <i class="fal fa-trash-alt">
                                                             </td>
                                                         </tr>

@@ -210,6 +210,7 @@
     <Compile Include="Controllers\DirectSaleController.cs" />
     <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Controllers\CustomerNotificationController.cs" />
+    <Compile Include="Controllers\VehicleTypeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\staticImages\logo-1.png" />
@@ -550,7 +551,6 @@
     <Content Include="Views\Vehicle\Index.cshtml" />
     <Content Include="Views\CustomerOrder\Create.cshtml" />
     <Content Include="assets\staticImages\icon1.png" />
-    <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Driver\Show.cshtml" />
     <Content Include="Views\Driver\Details.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
@@ -725,6 +725,12 @@
     <Content Include="Views\CustomerNotification\Index.cshtml" />
     <Content Include="Views\CustomerNotification\Create.cshtml" />
     <Content Include="Views\CustomerOrder\TestMap.cshtml" />
+    <Content Include="Views\AwfDriver\Edit.cshtml" />
+    <Content Include="Views\AwfVehicle\Create.cshtml" />
+    <Content Include="Views\Vehicle\Edit.cshtml" />
+    <Content Include="Views\AwfVehicle\Edit.cshtml" />
+    <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\CustomerSites\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
