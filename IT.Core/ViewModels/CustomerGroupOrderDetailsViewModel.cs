@@ -21,5 +21,8 @@ namespace IT.Core.ViewModels
         public int OdrderDetailsId { get; set; }
         public bool IsAsigned { get; set; }
         public string CurrentStatus { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

@@ -136,9 +136,8 @@ namespace IT.Web.Controllers
                 if (productList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     productViewModels = (new JavaScriptSerializer().Deserialize<List<ProductViewModel>>(productList.Data.ToString()));
+                    productViewModels.Insert(0, new ProductViewModel() { Id=0, Name="select Product"});
                 }
-
-
                 return productViewModels;
             }
             catch (Exception ex)

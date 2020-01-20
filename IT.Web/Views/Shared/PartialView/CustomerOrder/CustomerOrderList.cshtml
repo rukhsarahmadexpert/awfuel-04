@@ -12,8 +12,8 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <a href="/Driver/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Order</i></span>
-                </h2></a>
+                    <a href="/CustomerOrder/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Order</i></span></a>
+                </h2>
 
             </div>
             <div class="panel-container show">
@@ -49,15 +49,14 @@
                                     <td>@item.UserName</td>
 
                                     <td>
-                                        <a href="/CustomerOrder/Details/@item.Id"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                        <a href="/CustomerOrder/Edit/@item.Id"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
+                                        <a href="/CustomerOrder/Details/@item.OrderId"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
+                                        <a href="/CustomerOrder/Edit/@item.OrderId"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
                                         <i class="fal fa-trash-alt">
                                     </td>
                                 </tr>
                             }
 
                         </tbody>
-
                     </table>
                     <!-- datatable end -->
                 </div>

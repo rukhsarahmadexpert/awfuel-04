@@ -72,6 +72,7 @@ namespace IT.Web.Controllers
                                 var result = webServices.PostMultiPart(content, "Advertisement/Add", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                                 {
+                                    HttpContext.Cache.Remove("customerNotificationViewModels");
                                     return Redirect(nameof(Index));
                                 }
                             }
@@ -87,6 +88,7 @@ namespace IT.Web.Controllers
                                 var result = webServices.PostMultiPart(content, "Advertisement/Update", true);
                                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                                 {
+                                    HttpContext.Cache.Remove("customerNotificationViewModels");
                                     return Redirect(nameof(Index));
                                 }
                             }

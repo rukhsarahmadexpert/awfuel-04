@@ -29,81 +29,62 @@
 </div>
 <ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" id="tabs" role="tablist">
     <li class="nav-item all">
-        <a class="nav-link active bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-All" role="tab">All Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="All" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="All Order" />
+        </form>
     </li>
     <li class="nav-item created">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-created" role="tab">Created Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Created" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Created Order" />
+        </form>
     </li>
 
     <li class="nav-item accepted">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-accepted" role="tab">Accepted Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Accepted" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Accepted Order" />
+        </form>
     </li>
 
     <li class="nav-item rejected">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-rejected" role="tab">Rejected Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Rejected" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Rejected" />
+        </form>
     </li>
 
     <li class="nav-item running">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-running" role="tab">Running Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Running" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Running" />
+        </form>
     </li>
 
     <li class="nav-item delivered">
-        <a class="nav-link bg-transparent fs-lg fw-400" data-toggle="tab" href="#tab-delivered" role="tab">Delivered Order</a>
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Deliverd" name="OrderProgress" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Deliverd" />
+        </form>
+    </li>
+
+    <li class="nav-item delivered">
+        <form action="/CustomerOrder/Index" method="post">
+            <input type="hidden" value="Order Created" name="OrderProgress" />
+            <input type="hidden" value="False" name="IsSend" />
+            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Drafts Order" />
+        </form>
     </li>
 </ul>
 
-
 <div class="px-3 px-sm-5 pb-4">
     <div class="tab-content">
-
         <!-- All tab stated -->
         <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
 
             @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
         </div>
-
-        <!-- All tab End -->
-        <!-- Created tab stated -->
-        <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
-
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-
-        </div>
-
-        <!-- Created tab End -->
-        <!-- Rejected tab stated -->
-        <div class="tab-pane" id="tab-accepted" role="tabpanel" aria-labelledby="tab-accepted">
-
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-
-        </div>
-
-        <!-- Rejected tab End -->
-        <!-- rejected tab stated -->
-        <div class="tab-pane" id="tab-rejected" role="tabpanel" aria-labelledby="tab-rejected">
-
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-
-        </div>
-
-        <!-- rejected tab End -->
-        <!-- running tab stated -->
-        <div class="tab-pane" id="tab-running" role="tabpanel" aria-labelledby="tab-running">
-
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-
-        </div>
-
-        <!-- running tab End -->
-        <!-- running tab stated -->
-        <div class="tab-pane" id="tab-delivered" role="tabpanel" aria-labelledby="tab-delivered">
-
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
-
-        </div>
-
-        <!-- running tab End -->
-
     </div>
 </div>
 

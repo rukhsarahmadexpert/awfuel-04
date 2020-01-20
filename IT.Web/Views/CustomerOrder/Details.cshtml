@@ -3,10 +3,10 @@
 
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Customer Order Details";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 }
@@ -21,6 +21,7 @@
         <i class='subheader-icon fal fa-edit'></i>customer order Details
     </h1>
 </div>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
@@ -32,12 +33,10 @@
             <div class="panel-container show">
                 <div class="panel-content">
 
-                    <form id="form1" method="post" enctype="application/x-www-form-urlencoded">
+                    <div>
                         <div class="row">
                             <div class="col-md-6">
-
                                 <table class="table table-bordered table-hover m-0">
-
                                     <tbody>
                                         <tr>
                                             <th scope="row">Order Id</th>
@@ -76,38 +75,41 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="col-md-6">
+                                @if (Model.OrderProgress == "Order Created" && Model.IsSend == false)
+                                {
+                                    <form action="/CustomerOrder/CustomerOrderSend" method="post">
+                                        <input type="hidden" name="Id" value="@Model.Id" />
+                                        <div class="float-lg-right"><a class="btn btn-info" href="/CustomerOrder/Edit/@Model.Id">Edit</a> | <button type="submit" class="btn btn-primary">Send Order <span><i class="fal fa-arrow-alt-from-left"></i></span></button></div>
+
+                                    </form>
+                                }
+
+                            </div>
                             <div class="col-lg-12 py-2" style="overflow-x:auto;">
                                 <!--Table small-->
                                 <div id="panel-7" class="panel">
                                     <div class="frame-wrap">
+                                        <h4>Orderd Request Details Info:</h4>
                                         <table class="table table-sm m-0" border="1">
                                             <thead class="bg-primary-500">
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Order Id</th>
+                                                    <th>Driver Name</th>
                                                     <th>Requested Quantity</th>
-                                                    <th>Deliverd Quantity</th>
                                                     <th>Order Progress</th>
-                                                    <th>UserName</th>
-                                                    <th>Created Date</th>
-                                                    <th>Trafic Plate Number</th>
-                                                    <th>VehicleNumber</th>
+                                                    <th>Vehicle Number</th>
+                                                    <th>Comments</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.customerGroupOrderDetailsViewModels)
                                                 {
-
                                                     <tr>
-                                                        <td>@Model.Name</td>
-                                                        <td>@Model.CustomerOrderId</td>
-                                                        <td>@Model.RequestedQuantity</td>
-                                                        <td>@Model.DeliverdQuantity</td>
-                                                        <td>@Model.OrderProgress</td>
-                                                        <td>@Model.UserName</td>
-                                                        <td>@Model.CreatedDate</td>
-                                                        <td>@Model.TraficPlateNumber</td>
-                                                        <td>@Model.VehicleNumber</td>
+                                                        <td>@item.Name</td>
+                                                        <td>@item.TraficPlateNumber</td>
+                                                        <td>@item.RequestedQuantity</td>
+                                                        <td>@item.CurrentStatus</td>
+                                                        <td>@item.Comments</td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -116,8 +118,8 @@
                                 </div>
                             </div>
                         </div>
-                     </form>
-                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

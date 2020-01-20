@@ -223,6 +223,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\CustomScript\common-script.js" />
+    <Content Include="Scripts\CustomScript\CustomerOrder.js" />
     <Content Include="Scripts\CustomScript\FileUploadPreview.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
@@ -547,7 +548,7 @@
     <Content Include="assets\staticImages\company.png" />
     <Content Include="Views\Vehicle\Create.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
-    <Content Include="Views\CustomerOrder\create.cshtml" />
+    <Content Include="Views\CustomerOrder\Create.cshtml" />
     <Content Include="assets\staticImages\icon1.png" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Driver\Show.cshtml" />
@@ -724,6 +725,7 @@
     <Content Include="Views\CustomerNotification\Index.cshtml" />
     <Content Include="Views\CustomerNotification\Create.cshtml" />
     <Content Include="Views\CustomerOrder\TestMap.cshtml" />
+    <Content Include="Views\CustomerSites\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
