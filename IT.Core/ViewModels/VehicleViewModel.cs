@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace IT.Core.ViewModels
 {
@@ -38,5 +39,11 @@ namespace IT.Core.ViewModels
         public string Oprater { get; set; }
         public bool IsActive { get; set; }
         public string OrderProgress { get; set; }
+
+
+        public HttpPostedFileBase MulkiaFront1File { get; set; }
+        public HttpPostedFileBase MulkiaBack1File { get; set; }
+        public HttpPostedFileBase MulkiaFront2File { get; set; }
+        public HttpPostedFileBase MulkiaBack2File { get; set; }
     }
 }

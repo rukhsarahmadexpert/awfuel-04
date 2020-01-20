@@ -1,9 +1,7 @@
-﻿
+﻿@model IT.Core.ViewModels.VehicleViewModel
 @{
-                /**/
-
-                ViewBag.Title = "Create";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 <main id="js-page-content" role="main" class="page-content">
@@ -13,7 +11,7 @@
             <i class='subheader-icon fal fa-edit'></i> Create Vehicle
         </h1>
     </div>
-    <div class="row">
+    <div class="row"> 
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
@@ -27,7 +25,7 @@
                         <div class="panel-tag">
                             Please add your vehicle from here...
                         </div>
-                        <form action="/Vehicle/Create" method="post" enctype="multipart/form-data">
+                        <form action="/Vehicle/Update" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -40,47 +38,49 @@
                                          <select class="select2 form-control" name="VehicleType" id="VehicleType">
                                           @foreach (var item in ViewBag.VehicleTypes)
                                           {
-                                                <option value="@item.Id">@item.VehicleType</option>
+                                              
+                                                <option value="@item.Id" @(item.Id == @Model.VehicleType ? "selected='selected'" : "")>@item.VehicleType</option>
                                           }
                                          </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Trafic Plate Number</label>
-                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
+                                        <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                                        <input type="text" id="TraficPlateNumber" name="TraficPlateNumber" value="@Model.TraficPlateNumber" class="form-control" placeholder="Trafic Plate Number">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Tc Number</label>
-                                        <input type="text" id="TCNumber" name="TCNumber" class="form-control" placeholder="Enter Tc Number">
+                                        <input type="text" id="TCNumber" name="TCNumber" value="@Model.TCNumber" class="form-control" placeholder="Enter Tc Number">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Model</label>
-                                        <input type="text" id="Model" name="Model" class="form-control" placeholder="Enter Model">
+                                        <input type="text" id="Model" name="Model" class="form-control" value="@Model.Model" placeholder="Enter Model">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Brand</label>
-                                        <input type="text" id="Brand" name="Brand" class="form-control" placeholder="Enter Brand">
+                                        <input type="text" id="Brand" name="Brand" class="form-control" value="@Model.Brand"  placeholder="Enter Brand">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Color</label>
-                                        <input type="text" id="Color" name="Color" class="form-control" placeholder="Enter Color">
+                                        <input type="text" id="Color" name="Color" class="form-control" value="@Model.Color" placeholder="Enter Color">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Mulkia Expiry</label>
-                                        <input type="date" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" placeholder="Enter Mulkia Expiry">
+                                        <input type="text" id="MulkiaExpiry" name="MulkiaExpiry" class="form-control" value="@Model.MulkiaExpiry" placeholder="Enter Mulkia Expiry">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Insurance Expiry</label>
-                                        <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" placeholder="Enter Insurance Expiry">
+                                        <input type="date" id="InsuranceExpiry" name="InsuranceExpiry" class="form-control" value="@Model.InsuranceExpiry" placeholder="Enter Insurance Expiry">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Region</label>
-                                        <input type="text" id="RegisteredRegion" name="RegisteredRegion" class="form-control" placeholder="Enter Region">
+                                        <input type="text" id="RegisteredRegion" name="RegisteredRegion" value="@Model.RegisteredRegion" class="form-control" placeholder="Enter Region">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Notes</label>
-                                        <textarea name="Comments" id="Comments" class="form-control"></textarea>
+                                        <textarea name="Comments" id="Comments" class="form-control">@Model.Comments</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -92,7 +92,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaFront1Preview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <img id="MulkiaFront1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                         <input id="MulkiaFront1File" name="MulkiaFront1File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -105,8 +105,8 @@
                                                     <label class="form-label" style="margin-top:20px"><b>Upload Mulkia 1</b> back side</label>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label class=newbtn>
-                                                        <img id="MulkiaBack1Preview" class="blah" src="/assets/staticImages/icon1.png">
+                                                    <label>
+                                                        <img id="MulkiaBack1Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack1" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
                                                         <input id="MulkiaBack1File" name="MulkiaBack1File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -121,7 +121,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaFront2Preview" class="blah" src="/assets/staticImages/icon1.png">
+                                                         <img id="MulkiaFront2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaFront2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                       
                                                         <input id="MulkiaFront2File" name="MulkiaFront2File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -134,7 +135,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class=newbtn>
-                                                        <img id="MulkiaBack2Preview" class="blah" src="/assets/staticImages/icon1.png">
+                                                        <img id="MulkiaBack2Preview" class="blah" src="http://itmolen-001-site8.htempurl.com/ClientDocument/@Model.MulkiaBack2" onerror="this.src='/assets/staticImages/icon1.png';" alt="Mulkia Image">
+                                                        
                                                         <input id="MulkiaBack2File" name="MulkiaBack2File" class='pic' onchange="readURL(this);" type="file">
                                                     </label>
                                                 </div>
@@ -195,42 +197,6 @@
 
 
 
-
-
-
-
-
-    //function PostApiRequest() {
-    //    $.post("http://itmolen-001-site8.htempurl.com/api/Driver/Add", $("#form1").serialize(), function (msg) {
-    //        alert("success");
-    //    });
-    //}
-
-
-
-
-    @*function SaveStundent () {
-    var formData = new FormData();
-
-        var file = document.getElementById("studImg").files[0];
-        formData.append("studImg", file);
-
-        var Name= $('#txtName').val().trim()
-
-        formData.append("Name", Name);
-
-        $.ajax({
-        type: "POST",
-        url: "@(Url.Action("CreateStudent", "Student"))",
-        data: formData,
-        processData: false,
-        contentType: false,
-            success: function (response) {
-            }
-        });
-    }*@
-
-
     </script>
 }
 <style>
@@ -251,3 +217,7 @@
         margin-top: 20px;
     }
 </style>
+
+
+
+

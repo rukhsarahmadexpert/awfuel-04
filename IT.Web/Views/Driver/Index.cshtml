@@ -1,12 +1,9 @@
-﻿ 
-@using System.Web.Mvc.Html 
-
-@model List<IT.Core.ViewModels.DriverViewModel>
+﻿@model List<IT.Core.ViewModels.DriverViewModel>
 @{
-    ViewBag.Title = "Driver List";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
+     List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
     driverViewModels = Model as List<IT.Core.ViewModels.DriverViewModel>;
 
 }
@@ -76,3 +73,4 @@
                             </div>
                         </div>
                 
+
