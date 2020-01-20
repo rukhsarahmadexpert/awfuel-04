@@ -28,11 +28,11 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var FuelTransferList = webServices.Post(new FuelTransferViewModel(), "FuelTransfer/All");
 
-                if(FuelTransferList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (FuelTransferList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     fuelTransferViewModels = (new JavaScriptSerializer().Deserialize<List<FuelTransferViewModel>>(FuelTransferList.Data.ToString()));
                 }
@@ -45,7 +45,7 @@ namespace IT.Web.Controllers
                 throw ex;
 
             }
-            
+
         }
 
         public ActionResult OrderTransferRequestsAll()
@@ -76,7 +76,7 @@ namespace IT.Web.Controllers
 
             try
             {
-                
+
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
@@ -109,7 +109,7 @@ namespace IT.Web.Controllers
         {
             orderTransferRequestsViewModels = new List<OrderTransferRequestsViewModel>();
             try
-            { 
+            {
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.DriverId = orderTransferRequestsViewModel.DriverId;
                 var OrderTransferRquestViewList = webServices.Post(pagingParameterModel, "FuelTransfer/OrderTransferRequestsAllByDriverId");
@@ -127,7 +127,7 @@ namespace IT.Web.Controllers
 
         [HttpPost]
         public ActionResult OrderTransferRequestsAdminAcceptOrReject(OrderTransferRequestsViewModel orderTransferRequestsViewModel)
-        { 
+        {
             try
             {
                 orderTransferRequestsViewModel.AcceptBy = Convert.ToInt32(Session["UserId"]);
@@ -157,7 +157,7 @@ namespace IT.Web.Controllers
         public ActionResult CustomerOrderGroupTransferFromDriverAdd(TransferFromDriverViewModel transferFromDriverViewModel)
         {
 
-            
+
             try
             {
                 transferFromDriverViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
@@ -186,7 +186,7 @@ namespace IT.Web.Controllers
             pagingParameterModel.pageNumber = 1;
             pagingParameterModel._pageSize = 1;
             pagingParameterModel.CompanyId = CompanyId;
-            pagingParameterModel.pageSize = 100;
+            pagingParameterModel.PageSize = 100;
 
             var CustomerOrderGroupFromDriverList = webServices.Post(pagingParameterModel, "FuelTransfer/CustomerOrderGroupTransferFromDriverAll");
             if (CustomerOrderGroupFromDriverList.StatusCode == System.Net.HttpStatusCode.Accepted)

@@ -12,9 +12,9 @@ namespace IT.Web.Controllers
     public class StorageController : Controller
     {
         WebServices webServices = new WebServices();
-        List<StorageViewModel>storageViewModels = new List<StorageViewModel>();
+        List<StorageViewModel> storageViewModels = new List<StorageViewModel>();
         StorageViewModel StorageViewModel = new StorageViewModel();
-       
+
 
         public ActionResult Index()
         {
@@ -26,7 +26,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.Id = 0;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var StorageList = webServices.Post(pagingParameterModel, "Storage/All");
 
@@ -34,21 +34,21 @@ namespace IT.Web.Controllers
                 {
                     storageViewModels = (new JavaScriptSerializer().Deserialize<List<StorageViewModel>>(StorageList.Data.ToString()));
 
-                    if(storageViewModels.Count > 0)
+                    if (storageViewModels.Count > 0)
                     {
                         StorageViewModel storageViewModelObj = new StorageViewModel();
 
-                        foreach(var item in storageViewModels)
+                        foreach (var item in storageViewModels)
                         {
                             if (item.Action == true)
-                            {   
+                            {
                                 storageViewModelObj.Id = item.Id;
                                 storageViewModelObj.StockIn = item.StockIn;
                                 storageViewModelObj.From = item.Source.ToLower() == "site" ? item.SiteName : item.TrafficPlateNumber;
                                 storageViewModelObj.Source = item.Source;
                                 storageViewModelObj.UserName = item.UserName;
 
-                            } 
+                            }
                             else
                             {
                                 storageViewModelObj.StockOut = item.StockOut;
@@ -70,7 +70,7 @@ namespace IT.Web.Controllers
             {
                 throw ex;
             }
-           
+
         }
 
         public ActionResult Create()
@@ -80,7 +80,7 @@ namespace IT.Web.Controllers
 
         [HttpPost]
         public ActionResult Create(StorageViewListModel storageViewListModel)
-            {
+        {
             try
             {
                 var value = DateTime.Now.ToFileTime().ToString();
@@ -91,10 +91,10 @@ namespace IT.Web.Controllers
                 storageViewModels1[0].CreatedBy = Convert.ToInt32(Session["UserId"]);
                 storageViewModels1[1].CreatedBy = Convert.ToInt32(Session["UserId"]);
                 storageViewModels1[0].uniques = value;
-                 storageViewModels1[1].uniques = value;
+                storageViewModels1[1].uniques = value;
                 var result = webServices.Post(storageViewModels1, "Storage/StorageAdd");
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {                 
+                {
                     int k = (new JavaScriptSerializer()).Deserialize<int>(result.Data);
                     return Json("success", JsonRequestBehavior.AllowGet);
                 }
@@ -106,11 +106,11 @@ namespace IT.Web.Controllers
             catch (Exception)
             {
                 return Json("Failed", JsonRequestBehavior.AllowGet);
-            }     
+            }
         }
 
         public ActionResult Edit(int Id)
-        {   
+        {
             try
             {
                 StorageViewModel.Id = Id;
@@ -146,7 +146,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-               // var value = DateTime.Now.ToFileTime().ToString();
+                // var value = DateTime.Now.ToFileTime().ToString();
 
                 List<StorageViewModel> storageViewModels1 = new List<StorageViewModel>();
                 storageViewModels1 = storageViewListModel.storageViewModels;

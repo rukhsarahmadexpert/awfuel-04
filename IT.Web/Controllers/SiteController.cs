@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace IT.Web.Controllers
 {
-        
+
     public class SiteController : Controller
     {
         WebServices webServices = new WebServices();
@@ -32,17 +32,17 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var SiteList = webServices.Post(pagingParameterModel, "Site/All");
 
-                if(SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     siteViewModels = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
                 }
                 if (Request.IsAjaxRequest())
                 {
-                    return Json(siteViewModels,JsonRequestBehavior.AllowGet);
+                    return Json(siteViewModels, JsonRequestBehavior.AllowGet);
                 }
                 return View(siteViewModels);
 
@@ -55,7 +55,7 @@ namespace IT.Web.Controllers
 
         public ActionResult Create()
         {
-           return View(new SiteViewModel());
+            return View(new SiteViewModel());
         }
 
         [HttpPost]
@@ -123,16 +123,16 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = Id;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var SiteList = webServices.Post(pagingParameterModel, "Site/All");
 
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     siteViewModels1 = (new JavaScriptSerializer().Deserialize<List<SiteViewModel>>(SiteList.Data.ToString()));
-                    
+
                 }
-               
+
                 return siteViewModels1;
             }
             catch (Exception ex)

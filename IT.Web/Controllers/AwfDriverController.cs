@@ -31,10 +31,9 @@ namespace IT.Web.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
-                pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
-
+                pagingParameterModel.PageSize = 30;
+              
                 var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -181,7 +180,8 @@ namespace IT.Web.Controllers
 
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "CreatedBy");
-                            content.Add(new StringContent("2"), "CompanyId");
+                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
                             content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
                             content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
@@ -200,7 +200,8 @@ namespace IT.Web.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
+                            
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
                             content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
                             content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
 
@@ -346,7 +347,8 @@ namespace IT.Web.Controllers
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "UpdatBy");
                             content.Add(new StringContent(driverViewModel.Id.ToString()), "Id");
-                            content.Add(new StringContent("2"), "CompanyId");
+                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent(driverViewModel.Name == null ? "" : driverViewModel.Name), "FullName");
                             content.Add(new StringContent(driverViewModel.Contact == null ? "" : driverViewModel.Contact), "Contact");
                             content.Add(new StringContent(driverViewModel.Email == null ? "" : driverViewModel.Email), "Email");
@@ -365,7 +367,7 @@ namespace IT.Web.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
                             content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
                             content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
 
@@ -413,7 +415,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.Id = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var DriverLoginList = webServices.Post(pagingParameterModel, "AWFDriver/DriverLoginHistoryAllForAdmin");
                 if (DriverLoginList.StatusCode == System.Net.HttpStatusCode.Accepted)

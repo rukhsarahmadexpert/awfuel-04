@@ -34,7 +34,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = 1055;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
                 pagingParameterModel.CompanyId = CompanyId;
 
                 var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
@@ -46,17 +46,17 @@ namespace IT.Web.Controllers
 
                 if (Request.IsAjaxRequest())
                 {
-                    VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0,TraficPlateNumber= "Select Vehicle" });
+                    VehicleViewModels.Insert(0, new VehicleViewModel() { Id = 0, TraficPlateNumber = "Select Vehicle" });
                     return Json(VehicleViewModels, JsonRequestBehavior.AllowGet);
                 }
 
                 return View(VehicleViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
 
 
@@ -64,14 +64,14 @@ namespace IT.Web.Controllers
         {
             try
             {
-            CompanyId = Convert.ToInt32(Session["CompanyId"]); 
-            var result = webServices.Post(new VehicleViewModel(), "Vehicle/All/" + CompanyId);
-            if (result.Data != null)
-            {
-                vehicleViewModels = (new JavaScriptSerializer()).Deserialize<List<VehicleViewModel>>(result.Data.ToString());
-            }
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var result = webServices.Post(new VehicleViewModel(), "Vehicle/All/" + CompanyId);
+                if (result.Data != null)
+                {
+                    vehicleViewModels = (new JavaScriptSerializer()).Deserialize<List<VehicleViewModel>>(result.Data.ToString());
+                }
 
-            return Json(vehicleViewModels, JsonRequestBehavior.AllowGet);
+                return Json(vehicleViewModels, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -390,13 +390,13 @@ namespace IT.Web.Controllers
         {
             try
             {
-               
+
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = 0;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
                 pagingParameterModel.CompanyId = CompanyId;
 
                 var VehicleList = webServices.Post(pagingParameterModel, "Vehicle/All");
@@ -406,7 +406,7 @@ namespace IT.Web.Controllers
                     VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
                 }
 
-               
+
                 return VehicleViewModels;
             }
             catch (Exception ex)

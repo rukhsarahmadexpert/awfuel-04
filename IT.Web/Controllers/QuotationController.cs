@@ -31,7 +31,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var SiteList = webServices.Post(new LPOInvoiceViewModel(), "Quotation/All");
 

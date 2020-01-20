@@ -33,7 +33,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = 1055;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
                 pagingParameterModel.CompanyId = CompanyId;
 
                 var DriverList = webServices.Post(pagingParameterModel, "Driver/All");
@@ -179,7 +179,7 @@ namespace IT.Web.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "LicenseExpiry");
+                            content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
                             content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
                             content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
 

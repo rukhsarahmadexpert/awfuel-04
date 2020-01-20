@@ -27,7 +27,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var SiteList = webServices.Post(pagingParameterModel, "CustomerSites/SiteAllCustomer");
 
@@ -61,7 +61,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompId; 
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
                 var SiteList = webServices.Post(pagingParameterModel, "CustomerSites/SiteAllCustomer");
 
                 if (SiteList.StatusCode == System.Net.HttpStatusCode.Accepted)

@@ -28,7 +28,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-                
+
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
@@ -36,6 +36,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
+
                 pagingParameterModel.OrderProgress = OrderProgress;
                 if (IsSend == "False")
                 {
@@ -45,9 +46,10 @@ namespace IT.Web.Controllers
                 {
                     pagingParameterModel.IsSend = true;
                 }
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId",false);
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
+
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -56,7 +58,7 @@ namespace IT.Web.Controllers
 
                 return View(customerNoteOrderViewModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -78,17 +80,17 @@ namespace IT.Web.Controllers
                 //    pagingParameterModel.CompanyId = CompanyId;
                 //}                
                 pagingParameterModel.IsSend = true;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId",false);
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     customerNoteOrderViewModel = (new JavaScriptSerializer().Deserialize<List<CustomerNoteOrderViewModel>>(CustomerOrderList.Data.ToString()));
                 }
 
-                return Json(customerNoteOrderViewModel,JsonRequestBehavior.AllowGet);
+                return Json(customerNoteOrderViewModel, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -96,7 +98,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         public ActionResult Details(int Id)
         {
             try
@@ -106,6 +108,7 @@ namespace IT.Web.Controllers
                 var CustomerOrderList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id, false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
+
                 {
                     if (CustomerOrderList.Data != "[]" || CustomerOrderList.Data != "No Data Exist on This Id")
                     {
@@ -114,24 +117,24 @@ namespace IT.Web.Controllers
                 }
                 return View(customerOrderGroupViewModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
 
         }
-        
+
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Admin(string OrderProgress)
         {
             List<CustomerNoteOrderViewModel> customerNoteOrderViewModels = new List<CustomerNoteOrderViewModel>();
             try
             {
-                if(OrderProgress == null)
+                if (OrderProgress == null)
                 {
                     OrderProgress = "All";
                 }
-               
+
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
 
                 pagingParameterModel.pageNumber = 1;
@@ -139,10 +142,10 @@ namespace IT.Web.Controllers
                 pagingParameterModel.CompanyId = CompanyId;
                 pagingParameterModel.OrderProgress = OrderProgress;
                 pagingParameterModel.IsSend = true;
-                pagingParameterModel.pageSize = 10;
+                pagingParameterModel.PageSize = 10;
 
 
-                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin",false);
+                var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin", false);
 
                 if (CustomerOrderList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -154,17 +157,17 @@ namespace IT.Web.Controllers
 
                 return View(customerNoteOrderViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        
+
         public ActionResult AdminDetails(int Id)
         {
             try
             {
-                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/GetAllCustomerOrderGroupByAdmin/ " + Id,false);
+                var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/GetAllCustomerOrderGroupByAdmin/ " + Id, false);
 
                 if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -172,7 +175,7 @@ namespace IT.Web.Controllers
                 }
 
 
-                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id,false);
+                var CustomerOrderGroupDetailsList = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderDetailsByOrderId/" + Id, false);
 
                 if (CustomerOrderGroupDetailsList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -181,12 +184,12 @@ namespace IT.Web.Controllers
 
                 return View(customerOrderGroupViewModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        
+
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult OrderDetails(int Id)
         {
@@ -220,18 +223,18 @@ namespace IT.Web.Controllers
         {
             try
             {
-                
+
                 var Result = webServices.Post(customerOrderViewModel, "CustomerOrder/CustomerOrderRejectAcceptByAdmin", false);
 
-                if(Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    if(Result.Data != "[]")
+                    if (Result.Data != "[]")
                     {
                         int Res = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
                     }
                 }
 
-                return Json("suceess",JsonRequestBehavior.AllowGet);
+                return Json("suceess", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -271,12 +274,12 @@ namespace IT.Web.Controllers
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 driverVehicelViewModel = DriverVehicels();
 
-                 ProductController productController = new ProductController();
+                ProductController productController = new ProductController();
                 CustomerSitesController customerSites = new CustomerSitesController();
 
                 driverVehicelViewModel.driverModels.Insert(0, new DriverModel() { DriverId = 0, DriverName = "Select Driver" });
                 driverVehicelViewModel.vehicleModels.Insert(0, new VehicleModel() { VehicelId = 0, TraficPlateNumber = "Select Vehicle" });
-               
+
                 ViewBag.driverModels = driverVehicelViewModel.driverModels;
                 ViewBag.vehicleModels = driverVehicelViewModel.vehicleModels;
                 ViewBag.product = productController.Products();
@@ -318,29 +321,29 @@ namespace IT.Web.Controllers
                         return Json("Failed", JsonRequestBehavior.AllowGet);
                     }
 
-                } 
+                }
                 else
                 {
-                    
-                        OrderNumber orderNumber = new OrderNumber();
 
-                        customerOrderListViewModel.CustomerId = Convert.ToInt32(Session["CompanyId"]);
-                        customerOrderListViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
-                        customerOrderListViewModel.RequestThrough = "web";
-                        customerOrderListViewModel.DeliveryNoteNumber = "0";
-                        customerOrderListViewModel.LocationFullUrl = customerOrderListViewModel.LocationFullUrl == null ? "UnKnown" : customerOrderListViewModel.LocationFullUrl;
+                    OrderNumber orderNumber = new OrderNumber();
 
-                        var result = webServices.Post(customerOrderListViewModel, "CustomerOrder/CustomerGroupOrderAdd");
+                    customerOrderListViewModel.CustomerId = Convert.ToInt32(Session["CompanyId"]);
+                    customerOrderListViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    customerOrderListViewModel.RequestThrough = "web";
+                    customerOrderListViewModel.DeliveryNoteNumber = "0";
+                    customerOrderListViewModel.LocationFullUrl = customerOrderListViewModel.LocationFullUrl == null ? "UnKnown" : customerOrderListViewModel.LocationFullUrl;
 
-                        if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    var result = webServices.Post(customerOrderListViewModel, "CustomerOrder/CustomerGroupOrderAdd");
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (result.Data != "[]")
                         {
-                            if (result.Data != "[]")
-                            {
-                                customerOrderListViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderListViewModel>(result.Data.ToString()));
-                                return Json(customerOrderListViewModel, JsonRequestBehavior.AllowGet);
-                            }
+                            customerOrderListViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderListViewModel>(result.Data.ToString()));
+                            return Json(customerOrderListViewModel, JsonRequestBehavior.AllowGet);
                         }
-                    
+                    }
+
                 }
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
@@ -363,7 +366,7 @@ namespace IT.Web.Controllers
                 {
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(CustomerOrderList.Data.ToString()));
                 }
-                return RedirectToAction("Details", new { Id = searchViewModel.Id});
+                return RedirectToAction("Details", new { Id = searchViewModel.Id });
 
             }
             catch (Exception)
@@ -397,14 +400,14 @@ namespace IT.Web.Controllers
                 ViewBag.vehicleModels = driverVehicelViewModel.vehicleModels;
                 ViewBag.product = productController.Products();
 
-                return View("Create",customerOrderGroupViewModel);
+                return View("Create", customerOrderGroupViewModel);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        
+
         public DriverVehicelViewModel DriverVehicels()
         {
             SearchViewModel searchViewModel = new SearchViewModel();
@@ -426,7 +429,7 @@ namespace IT.Web.Controllers
         public ActionResult CustomerOrderDetailsDelete(CustomerOrderDeliverVewModel customerOrderDeliverVewModel)
         {
             try
-            {  
+            {
                 //return Json("success", JsonRequestBehavior.AllowGet);
                 customerOrderDeliverVewModel.Quantity = customerOrderDeliverVewModel.Quantity - customerOrderDeliverVewModel.RowQuantity;
 
@@ -441,11 +444,11 @@ namespace IT.Web.Controllers
                     return Json("success", JsonRequestBehavior.AllowGet);
                 }
                 else
-                {   
+                {
                     return Json("Failed", JsonRequestBehavior.AllowGet);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

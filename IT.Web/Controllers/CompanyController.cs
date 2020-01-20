@@ -29,7 +29,7 @@ namespace IT.Web.Controllers
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
                 var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
                 if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -54,7 +54,7 @@ namespace IT.Web.Controllers
         public ActionResult Create(CompnayModel compnayModel)
         {
             return View();
-           
+
         }
 
         [HttpGet]
@@ -66,12 +66,12 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult Creates(CompnayModel compnayModel, HttpPostedFileBase file)
         {
-          // await Creat(compnayModel,file);
+            // await Creat(compnayModel,file);
             return View();
         }
 
         // POST: Company/Create
-        
+
         [HttpPost]
         public ActionResult Create(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
@@ -97,9 +97,9 @@ namespace IT.Web.Controllers
                             content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
                             content.Add(new StringContent(compnayModel.Street == null ? "" : compnayModel.Street), "State");
                             content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
-                            
-                          //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
-                            var result = webServices.PostMultiPart(content,"Company/Add", true);
+
+                            //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
+                            var result = webServices.PostMultiPart(content, "Company/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
                                 ViewBag.Message = "Created";
@@ -111,7 +111,7 @@ namespace IT.Web.Controllers
                         }
                     }
                 }
-                return View();              
+                return View();
             }
             catch (Exception ex)
             {

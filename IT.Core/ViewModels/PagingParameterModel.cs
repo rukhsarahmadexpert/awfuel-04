@@ -8,7 +8,7 @@ namespace IT.Core.ViewModels
 {
     public class PagingParameterModel
     {
-        const int maxPageSize = 20;
+        const int maxPageSize = 50;
         public int requestedQuantity;
         public int Id { get; set; }
         public int pageNumber { get; set; } = 1;
@@ -20,7 +20,7 @@ namespace IT.Core.ViewModels
         public bool IsSend { get; set; }
         public int DriverId { get; set; }
 
-        public int pageSize
+        public int PageSize
         {
 
             get { return _pageSize; }

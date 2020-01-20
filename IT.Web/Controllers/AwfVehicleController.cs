@@ -35,7 +35,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
 
@@ -131,7 +131,8 @@ namespace IT.Web.Controllers
 
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "CreatedBy");
-                            content.Add(new StringContent("2"), "CompanyId");
+                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType"); 
                             content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
@@ -280,7 +281,8 @@ namespace IT.Web.Controllers
                             string UserId = Session["UserId"].ToString();
                             content.Add(new StringContent(UserId), "UpdatBy");
                             content.Add(new StringContent(vehicleViewModel.Id.ToString()), "Id");
-                            content.Add(new StringContent("2"), "CompanyId");
+                            CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                            content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
                             content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
@@ -327,7 +329,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = 2;
-                pagingParameterModel.pageSize = 100;
+                pagingParameterModel.PageSize = 100;
 
                 var VehicleList = webServices.Post(pagingParameterModel, "AWFVehicle/All");
 
