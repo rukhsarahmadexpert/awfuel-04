@@ -92,7 +92,7 @@ namespace IT.Web.Controllers
             }
         }
 
-        [HttpGet]
+        
         public ActionResult Edit(int Id)
         {
             try
@@ -104,6 +104,25 @@ namespace IT.Web.Controllers
                     SiteViewModel = (new JavaScriptSerializer().Deserialize<SiteViewModel>(SiteResult.Data.ToString()));
                 }
                 return View("Create", SiteViewModel);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                var SiteResult = webServices.Post(new SiteViewModel(), "Site/Edit/" + Id);
+
+                if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    SiteViewModel = (new JavaScriptSerializer().Deserialize<SiteViewModel>(SiteResult.Data.ToString()));
+                }
+                return View(SiteViewModel);
             }
             catch (Exception ex)
             {

@@ -13,7 +13,7 @@ namespace IT.Web.Controllers
     {
         WebServices webServices = new WebServices();
         List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
-        int CompanyId;
+        
         public ActionResult Index()
         {
             return View ();

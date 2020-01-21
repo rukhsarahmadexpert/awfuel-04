@@ -34,5 +34,10 @@ namespace IT.Core.ViewModels
         {
             throw new NotImplementedException();
         }
+
+        public void SetPageSize(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -44,11 +44,45 @@ namespace IT.Web.Controllers
             }
         }
 
-        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View(new SiteViewModel());
         }
+
+        [HttpPost]
+        public ActionResult Create(SiteViewModel siteViewModel)
+        {
+            try
+            {
+                var SiteResult = new ServiceResponseModel();
+                if (siteViewModel.Id < 1)
+                {
+                    siteViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    SiteResult = webServices.Post(siteViewModel, "CustomerSites/Add");
+                }
+                else
+                {
+                    siteViewModel.UpdateBy = Convert.ToInt32(Session["UserId"]);
+                    siteViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                    SiteResult = webServices.Post(siteViewModel, "CustomerSites/Update");
+                }
+
+                if (SiteResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(SiteResult.Data));
+
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(siteViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         [NonAction]
         public List<SiteViewModel> SitesAll(int CompId)
@@ -80,7 +114,7 @@ namespace IT.Web.Controllers
             }
         }
 
-        [HttpPost]
+        
         public ActionResult Edit(int Id)
         {
             try
@@ -95,6 +129,36 @@ namespace IT.Web.Controllers
                     }
                 }
                 if(Request.IsAjaxRequest())
+                {
+                    return Json(siteViewModel, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return View("Create",siteViewModel);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public ActionResult Details(int Id)
+        {
+            try
+            {
+                var result = webServices.Post(new SiteViewModel(), "/CustomerSites/CustomerSiteById/" + Id);
+
+                if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (result.Data != "[]")
+                    {
+                        siteViewModel = (new JavaScriptSerializer().Deserialize<SiteViewModel>(result.Data.ToString()));
+                    }
+                }
+                if (Request.IsAjaxRequest())
                 {
                     return Json(siteViewModel, JsonRequestBehavior.AllowGet);
                 }

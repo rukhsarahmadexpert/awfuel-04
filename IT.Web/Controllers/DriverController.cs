@@ -46,7 +46,7 @@ namespace IT.Web.Controllers
 
                 return View(driverViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -221,7 +221,7 @@ namespace IT.Web.Controllers
 
                 return View(driverViewModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -399,6 +399,6 @@ namespace IT.Web.Controllers
             }
         }
 
-        
+
     }
 }

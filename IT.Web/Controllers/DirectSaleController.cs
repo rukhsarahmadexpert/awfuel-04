@@ -46,7 +46,7 @@ namespace IT.Web.Controllers
                 return Json("failed", JsonRequestBehavior.AllowGet);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json("failed", JsonRequestBehavior.AllowGet);
             }

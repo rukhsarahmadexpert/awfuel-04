@@ -23,67 +23,82 @@
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 
-<!-- Page heading removed for composed layout -->
-<div class="px-3 px-sm-5 pt-4">
+<div class="row">
+    <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/CustomerOrder/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Order</i></span></a>
+                </h2>
 
-</div>
-<ul class="nav nav-tabs nav-tabs-clean px-3 px-sm-5" id="tabs" role="tablist">
-    <li class="nav-item all">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="All" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="All Order" />
-        </form>
-    </li>
-    <li class="nav-item created">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Created" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Created Order" />
-        </form>
-    </li>
+            </div>
+     <div class="panel-container show">
+     <div class="panel-content">
 
-    <li class="nav-item accepted">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Accepted" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Accepted Order" />
-        </form>
-    </li>
+        
+                  <div style="margin-bottom:100px">
+                    <div class="tab-pane" id="tab-All" role="tabpanel" aria-labelledby="tab-All">
+                        <ul class="nav nav-tabs nav-tabs-clean" id="tabs" role="tablist">
+                           
+                            <li class="nav-item created  bg-success col-md-2 col-6 text-white" style="width:120px" >
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Created" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400"  value="Created Order" />
+                                </form>
+                            </li>
 
-    <li class="nav-item rejected">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Rejected" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Rejected" />
-        </form>
-    </li>
+                            <li class="nav-item accepted  bg-warning col-md-2 col-6 text-white" style="width:120px">
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Accepted" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Assign Order" />
+                                </form>
+                             </li>
 
-    <li class="nav-item running">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Running" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Running" />
-        </form>
-    </li>
+                            <li class="nav-item accepted  bg-info col-md-2 col-6 text-white" style="width:120px">
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Accepted" name="OrderProgress" />
+                                    <input type="submit"  class="nav-link bg-transparent fs-lg fw-400" value="Accepted  Order" />
+                                </form>
+                             </li>
 
-    <li class="nav-item delivered">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Deliverd" name="OrderProgress" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Order Deliverd" />
-        </form>
-    </li>
+                            <li class="nav-item rejected bg-danger col-md-2 col-6 text-white" style="width:120px">
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Rejected" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Rejected Order" />
+                                </form>
+                             </li>
 
-    <li class="nav-item delivered">
-        <form action="/CustomerOrder/Index" method="post">
-            <input type="hidden" value="Order Created" name="OrderProgress" />
-            <input type="hidden" value="False" name="IsSend" />
-            <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Drafts Order" />
-        </form>
-    </li>
-</ul>
+                            <li class="nav-item running bg-secondary col-md-2 col-6 text-white" style="width:120px">
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Running" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Running Order" />
+                                </form>
+                              </li>
 
-<div class="px-3 px-sm-5 pb-4">
-    <div class="tab-content">
-        <!-- All tab stated -->
-        <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
+                            <li class="nav-item delivered bg-dark col-md-2 col-6 text-white" style="width:120px">
+                                <form action="/CustomerOrder/Index" method="post">
+                                    <input type="hidden" value="Order Deliverd" name="OrderProgress" />
+                                    <input type="submit" class="nav-link bg-transparent fs-lg fw-400" value="Delivered Order" />
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                 </div>
 
-            @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+                        <div class="px-3 px-sm-5 pb-4">
+                            <div class="tab-content">
+
+                                <!-- All tab stated -->
+                                <div class="tab-pane active" id="tab-created" role="tabpanel" aria-labelledby="tab-created">
+
+                                    @Html.Partial("~/Views/Shared/PartialView/CustomerOrder/CustomerOrderList.cshtml")
+                                </div>
+                            </div>
+                        </div>
+
+                      <!-- datatable end -->
+                </div>
+            </div>
         </div>
     </div>
 </div>
