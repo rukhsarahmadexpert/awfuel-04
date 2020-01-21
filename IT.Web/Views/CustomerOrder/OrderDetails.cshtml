@@ -255,6 +255,9 @@
 
             $('#btnReject').click(function () {
 
+
+                 @*alert('Order Rejected 1');*@
+
                 $("#btnReject").text('please wait...');
                 $("#btnReject").attr("disabled", true);
 
@@ -268,8 +271,8 @@
 
                      if (resultReject != "failed") {
 
-                        //alert('Order Rejected');
-                        //window.location.reload();
+                        @*alert('Order Rejected 2');
+                        window.location.reload();*@
                          window.location.href = "/CustomerOrder/Admin"
                     }
                     else {

@@ -23,7 +23,7 @@ namespace IT.Web.Controllers
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
         int CompanyId;
-                
+
         public ActionResult Index()
         {
             try
@@ -51,7 +51,7 @@ namespace IT.Web.Controllers
 
                 return View(VehicleViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -134,7 +134,7 @@ namespace IT.Web.Controllers
                             CompanyId = Convert.ToInt32(Session["CompanyId"]);
                             content.Add(new StringContent(CompanyId.ToString()), "CompanyId");
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
-                            content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType"); 
+                            content.Add(new StringContent(vehicleViewModel.VehicleType.ToString()), "VehicleType");
                             content.Add(new StringContent(vehicleViewModel.TraficPlateNumber == null ? "" : vehicleViewModel.TraficPlateNumber), "TraficPlateNumber");
                             content.Add(new StringContent(vehicleViewModel.TCNumber == null ? "" : vehicleViewModel.TCNumber), "TCNumber");
                             content.Add(new StringContent(vehicleViewModel.Model == null ? "" : vehicleViewModel.Model), "Model");
@@ -144,9 +144,9 @@ namespace IT.Web.Controllers
                             content.Add(new StringContent(vehicleViewModel.InsuranceExpiry == null ? "" : vehicleViewModel.InsuranceExpiry), "InsuranceExpiry");
                             content.Add(new StringContent(vehicleViewModel.RegisteredRegion == null ? "" : vehicleViewModel.RegisteredRegion), "RegisteredRegion");
                             content.Add(new StringContent(vehicleViewModel.Comments == null ? "" : vehicleViewModel.Comments), "Comments");
-                            
 
-                           
+
+
                             var result = webServices.PostMultiPart(content, "AWFVehicle/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
@@ -193,7 +193,7 @@ namespace IT.Web.Controllers
         {
             try
             {
-                
+
                 vehicleViewModel.Id = Id;
                 vehicleViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 var Result = webServices.Post(vehicleViewModel, "AWFVehicle/Edit");
@@ -337,7 +337,7 @@ namespace IT.Web.Controllers
                 {
                     VehicleViewModels = (new JavaScriptSerializer().Deserialize<List<VehicleViewModel>>(VehicleList.Data.ToString()));
                 }
-               
+
                 return VehicleViewModels;
             }
             catch (Exception ex)

@@ -36,6 +36,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel._pageSize = 1;
                 pagingParameterModel.CompanyId = CompanyId;
+                pagingParameterModel.PageSize = 100;
 
                 pagingParameterModel.OrderProgress = OrderProgress;
                 if (IsSend == "False")
@@ -46,7 +47,7 @@ namespace IT.Web.Controllers
                 {
                     pagingParameterModel.IsSend = true;
                 }
-                pagingParameterModel.PageSize = 100;
+                
 
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/CustomerOrderAllByCompanyId", false);
 
@@ -142,7 +143,7 @@ namespace IT.Web.Controllers
                 pagingParameterModel.CompanyId = CompanyId;
                 pagingParameterModel.OrderProgress = OrderProgress;
                 pagingParameterModel.IsSend = true;
-                pagingParameterModel.PageSize = 10;
+                pagingParameterModel.PageSize = 100;
 
 
                 var CustomerOrderList = webServices.Post(pagingParameterModel, "CustomerOrder/GetAllCustomerOrderGroupByAdmin", false);

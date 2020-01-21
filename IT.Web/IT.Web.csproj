@@ -732,6 +732,8 @@
     <Content Include="Views\Driver\Edit.cshtml" />
     <Content Include="Views\CustomerSites\Create.cshtml" />
     <Content Include="Views\CustomerOrder\Create.cshtml" />
+    <Content Include="Views\CustomerSites\Details.cshtml" />
+    <Content Include="Views\Site\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

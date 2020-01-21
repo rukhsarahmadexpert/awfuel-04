@@ -32,8 +32,8 @@ namespace IT.Web.Controllers
 
                 pagingParameterModel.pageNumber = 1;
                 pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 30;
-              
+                pagingParameterModel.PageSize =100;
+
                 var DriverList = webServices.Post(pagingParameterModel, "AWFDriver/All");
 
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
@@ -43,7 +43,7 @@ namespace IT.Web.Controllers
 
                 return View(driverViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -67,7 +67,7 @@ namespace IT.Web.Controllers
 
                 return View(driverViewModel);
 
-            }            
+            }
             catch (Exception ex)
             {
                 throw ex;
@@ -78,13 +78,13 @@ namespace IT.Web.Controllers
         {
             return View(new DriverViewModel());
         }
-        
+
         [HttpPost]
         public ActionResult Create(DriverViewModel driverViewModel)
         {
             try
             {
-                
+
                 if (Request.Files.Count > 0)
                 {
                     HttpPostedFileBase[] httpPostedFileBase = new HttpPostedFileBase[8];
@@ -131,7 +131,7 @@ namespace IT.Web.Controllers
                             if (httpPostedFileBase.ToList().Count > 0)
                             {
 
-                                for(int i =0; i< 8; i++)
+                                for (int i = 0; i < 8; i++)
                                 {
                                     if (httpPostedFileBase[i] != null)
                                     {
@@ -192,15 +192,15 @@ namespace IT.Web.Controllers
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "]"), "LicenseTypes");
                             }
-                            else if(driverViewModel.LicienceList.ToList().Count == 2)
+                            else if (driverViewModel.LicienceList.ToList().Count == 2)
                             {
-                                content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() +"," +driverViewModel.LicienceList[1].ToString() + "]"), "LicenseTypes");
+                                content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "]"), "LicenseTypes");
                             }
                             else
                             {
                                 content.Add(new StringContent("[" + driverViewModel.LicienceList[0].ToString() + "," + driverViewModel.LicienceList[1].ToString() + "," + driverViewModel.LicienceList[2].ToString() + "]"), "LicenseTypes");
                             }
-                            
+
                             content.Add(new StringContent(driverViewModel.LicenseExpiry == null ? "" : driverViewModel.LicenseExpiry), "DrivingLicenseExpiryDate");
                             content.Add(new StringContent(driverViewModel.Nationality == null ? "" : driverViewModel.Nationality), "Nationality");
                             content.Add(new StringContent(driverViewModel.Comments == null ? "" : driverViewModel.Comments), "Comments");
@@ -210,11 +210,11 @@ namespace IT.Web.Controllers
                             {
                                 return Redirect(nameof(Index));
                             }
-                        
+
                         }
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id});
+                return RedirectToAction(nameof(Details), new { Id = driverViewModel.Id });
             }
             catch (Exception ex)
             {
@@ -396,7 +396,7 @@ namespace IT.Web.Controllers
                 return View();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 throw ex;
@@ -426,7 +426,7 @@ namespace IT.Web.Controllers
 
                 return View(driverLoginHistoryViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -464,7 +464,7 @@ namespace IT.Web.Controllers
                 if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
 
-                   var Id = (new JavaScriptSerializer().Deserialize<int>(DriverInfo.Data.ToString()));
+                    var Id = (new JavaScriptSerializer().Deserialize<int>(DriverInfo.Data.ToString()));
                 }
 
                 return Redirect(nameof(DriverLoginHistoryAllForAdmin));
@@ -485,7 +485,7 @@ namespace IT.Web.Controllers
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/"+CompanyId);
+                var DriverInfo = webServices.Post(new DriverViewModel(), "AWFDriver/DriverAllOnline/" + CompanyId);
                 if (DriverInfo.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
@@ -493,17 +493,17 @@ namespace IT.Web.Controllers
                 }
 
                 return Json("failed", JsonRequestBehavior.AllowGet);
-                
+
 
             }
             catch (Exception)
             {
                 return Json("failed", JsonRequestBehavior.AllowGet);
 
-            }  
+            }
 
         }
-        
+
         [HttpPost]
         public ActionResult DriverAllOnlineByDriverId(int Id)
         {
@@ -518,10 +518,10 @@ namespace IT.Web.Controllers
                     var OnlineDriverList = (new JavaScriptSerializer().Deserialize<List<DriverViewModel>>(DriverInfo.Data.ToString()));
 
                     var SingleDriver = OnlineDriverList.Where(x => x.Id == Id).FirstOrDefault();
-                   
-                        return Json(SingleDriver, JsonRequestBehavior.AllowGet);
-                    
-                    
+
+                    return Json(SingleDriver, JsonRequestBehavior.AllowGet);
+
+
                 }
 
                 return Json("failed", JsonRequestBehavior.AllowGet);
@@ -537,6 +537,5 @@ namespace IT.Web.Controllers
         }
 
     }
-    
+
 }
-        
