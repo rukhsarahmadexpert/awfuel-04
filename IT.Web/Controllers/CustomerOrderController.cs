@@ -216,7 +216,7 @@ namespace IT.Web.Controllers
 
                 throw ex;
             }
-        }
+        } 
 
         [HttpPost]
         public ActionResult AcceptOrder(CustomerOrderViewModel customerOrderViewModel)
