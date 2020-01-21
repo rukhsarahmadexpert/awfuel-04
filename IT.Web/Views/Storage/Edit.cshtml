@@ -93,9 +93,9 @@
                                           }
                                           else
                                           {
-                                               foreach (var item in ViewBag.AdminVehicle)
+                                               foreach (var item in ViewBag.AdminVehicles)
                                             {
-                                                <option value="@item.Id" @(item.Id == storageViewModels[0].VehicleId ? "selected='selected'" : "")>@item.TrafficPlateNumber</option>
+                                                <option value="@item.Id" @(item.Id == storageViewModels[0].VehicleId ? "selected='selected'" : "")>@item.TraficPlateNumber</option>
                                             }
 
                                           }

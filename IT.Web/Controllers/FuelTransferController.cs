@@ -102,8 +102,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         [HttpPost]
         public ActionResult OrderTransferRequestsAllByDriverId(OrderTransferRequestsViewModel orderTransferRequestsViewModel)
         {
@@ -151,8 +150,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult CustomerOrderGroupTransferFromDriverAdd(TransferFromDriverViewModel transferFromDriverViewModel)
         {

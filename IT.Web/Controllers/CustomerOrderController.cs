@@ -454,6 +454,36 @@ namespace IT.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult CustomerOrderAssignToDriver(CustomerOrderListViewModel customerOrderListViewModel)
+        {
+            try
+            {
+               // return Json("Success", JsonRequestBehavior.AllowGet);
+
+                customerOrderListViewModel.CreatedBy = Convert.ToInt32(Session["UserId"]);
+                var customerOrderGroup = webServices.Post(customerOrderListViewModel, "CustomerOrder/CustomerOrderGroupAsignedDriverAdd", false);
+
+                if (customerOrderGroup.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if (customerOrderGroup.Data != null || customerOrderGroup.Data != "[]")
+                    {
+                        //int Result = (new JavaScriptSerializer().Deserialize<int>(customerOrderGroup.Data.ToString()));
+                    }
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public ActionResult TestMap()
         {
             return View();
