@@ -30,17 +30,18 @@ namespace IT.Web.Controllers
 
 
         }
+
         public ActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Add(UserViewModel userViewModel)
         {
             return View();
         }
-
-
+        
         [HttpGet]
         public ActionResult Login()
         {
@@ -100,8 +101,6 @@ namespace IT.Web.Controllers
         [HttpPost]
         public ActionResult Registration(UserViewModel userViewModel)
         { 
-
-
             try
             {
                 var result = webServices.Post(userViewModel, "User/Register",false);
@@ -109,11 +108,9 @@ namespace IT.Web.Controllers
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     userCompanyViewModel = (new JavaScriptSerializer()).Deserialize<UserCompanyViewModel>(result.Data.ToString());
-
-
+                    
                     if (userCompanyViewModel.CompanyId > 0)
                     {
-
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -131,8 +128,5 @@ namespace IT.Web.Controllers
             return View();
         }
 
-
-
-        
     }
 }

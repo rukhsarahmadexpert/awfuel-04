@@ -51,8 +51,11 @@
     <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\CustomerGroupOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\CustomerNoteOrderViewModel.cs" />
+    <Compile Include="ViewModels\CustomerNotification.cs" />
+    <Compile Include="ViewModels\CustomerOrderDateViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderDeliverVewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderGroupViewModel.cs" />
+    <Compile Include="ViewModels\CustomerOrderStatistics.cs" />
     <Compile Include="ViewModels\CustomerOrderViewModel.cs" />
     <Compile Include="ViewModels\DataTablesParm.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />

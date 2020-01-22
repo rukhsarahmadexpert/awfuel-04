@@ -2,6 +2,7 @@
 using IT.Repository.WebServices;
 using IT.Web.MISC;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -15,34 +16,50 @@ namespace IT.Web.Controllers
     {
 
         List<CustomerNotificationViewModel> customerNotificationViewModels = new List<CustomerNotificationViewModel>();
+        CustomerOrderStatistics customerOrderStatistics = new CustomerOrderStatistics();
+
         WebServices webServices = new WebServices();
 
         public ActionResult Index()
-
         {
-            
-            if (HttpContext.Cache["customerNotificationViewModels"] == null)
+            try
             {
-               var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
 
-                if(result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                if (HttpContext.Cache["customerNotificationViewModels"] == null)
                 {
-                    if(result.Data != null)
+                    var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                     {
-                        customerNotificationViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNotificationViewModel>>(result.Data.ToString()));
-                        HttpContext.Cache["customerNotificationViewModels"] = customerNotificationViewModels;
+                        if (result.Data != null)
+                        {
+                            customerNotificationViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNotificationViewModel>>(result.Data.ToString()));
+                            HttpContext.Cache["customerNotificationViewModels"] = customerNotificationViewModels;
+                        }
                     }
                 }
+                else
+                {
+                    customerNotificationViewModels = HttpContext.Cache["customerNotificationViewModels"] as List<CustomerNotificationViewModel>;
+                }
+                ViewBag.customerNotificationViewModels = customerNotificationViewModels;
 
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+               
+                var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/CustomerStatistics");
+                if(resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
+                }
+                ViewBag.customerOrderStatistics = customerOrderStatistics;
+
+                return View();
             }
-            else
+            catch(Exception)
             {
-                customerNotificationViewModels = HttpContext.Cache["customerNotificationViewModels"] as List<CustomerNotificationViewModel>;
-            }
-
-            ViewBag.customerNotificationViewModels = customerNotificationViewModels;
-
-            return View();
+                throw;
+            }            
         }
 
         public ActionResult About()
@@ -63,8 +80,7 @@ namespace IT.Web.Controllers
         {
             return View();
         }
-
-
+        
         public ActionResult AdminHome()
         {
             return View();
