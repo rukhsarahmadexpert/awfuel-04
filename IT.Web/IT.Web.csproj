@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -171,6 +174,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductUnitController.cs" />
+    <Compile Include="Controllers\ReportCustomerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +197,8 @@
     <Compile Include="Models\ExpenseModel.cs" />
     <Compile Include="Models\LPOInvoiceDetailsModel.cs" />
     <Compile Include="Models\LPOInvoiceModel.cs" />
+    <Compile Include="Models\ReportsByDatesVehicleDetails.cs" />
+    <Compile Include="Models\ReportsByDatesViewModel.cs" />
     <Compile Include="Models\VenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\DriverController.cs" />
@@ -211,6 +217,12 @@
     <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Controllers\CustomerNotificationController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
+    <Compile Include="Reports\CustomerReport\ReportsByDatesVehicleDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportsByDatesVehicleDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\staticImages\logo-1.png" />
@@ -735,6 +747,7 @@
     <Content Include="Views\CustomerOrder\Create.cshtml" />
     <Content Include="Views\CustomerSites\Details.cshtml" />
     <Content Include="Views\Site\Details.cshtml" />
+    <Content Include="Views\ReportCustomer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
@@ -757,6 +770,15 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\CustomerReport\ReportsByDatesVehicleDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportsByDatesVehicleDetails.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -19,6 +19,7 @@ namespace IT.Web.Controllers
         List<VehicleViewModel> vehicleViewModels = new List<VehicleViewModel>();
         VehicleViewModel vehicleViewModel = new VehicleViewModel();
         List<VehicleTypeViewModel> vehicleTypeViewModels = new List<VehicleTypeViewModel>();
+        DriverVehicelViewModel driverVehicelViewModel = new DriverVehicelViewModel();
 
         public List<DriverViewModel> VehicleViewModel { get; private set; }
         public List<VehicleViewModel> VehicleViewModels { get; private set; }
@@ -132,7 +133,6 @@ namespace IT.Web.Controllers
         }
 
         // POST: Vehicle/Create
-
 
         [HttpPost]
         public ActionResult Create(VehicleViewModel vehicleViewModel)
@@ -259,7 +259,6 @@ namespace IT.Web.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult Update(VehicleViewModel vehicleViewModel)
         {
@@ -360,8 +359,6 @@ namespace IT.Web.Controllers
             }
         }
 
-
-
         // GET: Vehicle/Delete/5
         public ActionResult Delete(int id)
         {
@@ -383,8 +380,7 @@ namespace IT.Web.Controllers
                 return View();
             }
         }
-
-
+        
         [NonAction]
         public List<VehicleViewModel> Vehicles()
         {
@@ -414,5 +410,39 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
+        
+        public DriverVehicelViewModel DriverVehicels(int CompanyId)
+        {
+            SearchViewModel searchViewModel = new SearchViewModel();
+            searchViewModel.CompanyId = CompanyId;
+            var Result = webServices.Post(searchViewModel, "CustomerOrder/DriverandVehicellist", false);
+
+            if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                if (Result.Data != "[]")
+                {
+                    driverVehicelViewModel = (new JavaScriptSerializer().Deserialize<DriverVehicelViewModel>(Result.Data.ToString()));
+                }
+            }
+
+            return driverVehicelViewModel;
+        }
+
+        [HttpPost]
+        public ActionResult VehicleByCompany()
+        {
+            try
+            {
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                var DriverVehicleLists = DriverVehicels(CompanyId);
+                DriverVehicleLists.vehicleModels.Add(new VehicleModel() { VehicelId=0, TraficPlateNumber ="All"});
+                return Json(DriverVehicleLists.vehicleModels);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

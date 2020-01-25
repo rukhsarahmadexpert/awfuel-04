@@ -20,6 +20,7 @@ namespace IT.Web.Controllers
         CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
         CustomerOrderListViewModel customerOrderListViewModel = new CustomerOrderListViewModel();
         DriverVehicelViewModel driverVehicelViewModel = new DriverVehicelViewModel();
+        VehicleController vehicleController = new VehicleController();
 
         int CompanyId = 0;
 
@@ -273,7 +274,7 @@ namespace IT.Web.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                driverVehicelViewModel = DriverVehicels();
+                driverVehicelViewModel = vehicleController.DriverVehicels(CompanyId);
 
                 ProductController productController = new ProductController();
                 CustomerSitesController customerSites = new CustomerSitesController();
@@ -300,8 +301,6 @@ namespace IT.Web.Controllers
         {
             try
             {
-
-
                 //return View("Create", new CustomerOrderGroupViewModel());
                 if (customerOrderListViewModel.Id > 0)
                 {
@@ -381,6 +380,8 @@ namespace IT.Web.Controllers
         {
             try
             {
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
                 CustomerOrderGroupViewModel customerOrderGroupViewModel = new CustomerOrderGroupViewModel();
 
                 var customerOrderGroup = webServices.Post(new CustomerOrderGroupViewModel(), "CustomerOrder/CustomerGroupOrderById/" + Id, false);
@@ -389,8 +390,7 @@ namespace IT.Web.Controllers
                 {
                     customerOrderGroupViewModel = (new JavaScriptSerializer().Deserialize<CustomerOrderGroupViewModel>(customerOrderGroup.Data.ToString()));
                 }
-
-                driverVehicelViewModel = DriverVehicels();
+                driverVehicelViewModel = vehicleController.DriverVehicels(CompanyId);
 
                 ProductController productController = new ProductController();
 
@@ -407,23 +407,6 @@ namespace IT.Web.Controllers
             {
                 throw;
             }
-        }
-
-        public DriverVehicelViewModel DriverVehicels()
-        {
-            SearchViewModel searchViewModel = new SearchViewModel();
-            searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-            var Result = webServices.Post(searchViewModel, "CustomerOrder/DriverandVehicellist", false);
-
-            if (Result.StatusCode == System.Net.HttpStatusCode.Accepted)
-            {
-                if (Result.Data != "[]")
-                {
-                    driverVehicelViewModel = (new JavaScriptSerializer().Deserialize<DriverVehicelViewModel>(Result.Data.ToString()));
-                }
-            }
-
-            return driverVehicelViewModel;
         }
 
         [HttpPost]
@@ -483,8 +466,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         public ActionResult TestMap()
         {
             return View();

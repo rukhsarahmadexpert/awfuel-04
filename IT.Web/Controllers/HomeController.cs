@@ -54,6 +54,10 @@ namespace IT.Web.Controllers
                 }
                 ViewBag.customerOrderStatistics = customerOrderStatistics;
 
+                var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
+
+                Session["RequestedData"] = RequestedData;
+
                 return View();
             }
             catch(Exception)

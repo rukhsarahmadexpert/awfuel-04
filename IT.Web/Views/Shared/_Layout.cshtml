@@ -1,5 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
+
+@{
+    List<IT.Core.ViewModels.CustomerOrderDateViewModel> customerOrderDateViewModels = new List<IT.Core.ViewModels.CustomerOrderDateViewModel>();
+
+    customerOrderDateViewModels = Session["RequestedData"] as List<IT.Core.ViewModels.CustomerOrderDateViewModel>;
+
+    
+}
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -131,54 +140,46 @@
                                 <i class="fal fa-address-card"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Customer Information</span>
                             </a>
-
                             <ul>
-
                                 <li>
-
                                     <a href="/Driver/Index" title="Build Notes" class=" " data-filter-tags="">
-
                                         <span class="nav-link-text" data-i18n="">Drivers</span><span class="">List</span>
                                     </a>
-
                                 </li>
-
                                 <li>
-
                                     <a href="/Vehicle" title="Build Notes" class=" " data-filter-tags="">
-
                                         <span class="nav-link-text" data-i18n="">Vehicle</span><span class="">List</span>
                                     </a>
-
                                 </li>
-
                                 <li>
                                     <a href="/CustomerOrder" title="Build Notes" class=" " data-filter-tags="">
-
                                         <span class="nav-link-text" data-i18n="">Customer Order</span><span class="">List</span>
                                     </a>
-
                                 </li>
                             </ul>
-
-
                         </li>
-
                         <li class="open">
-
                             <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
                                 <i class="fal fa-address-card"></i>
                                 <span class="nav-link-text" data-i18n="nav.application_intel">Customer Site</span>
                             </a>
-
                             <ul>
-
-
                                 <li>
-
                                     <a href="/CustomerSites/Index" title="Build Notes" class=" " data-filter-tags="">
-
                                         <span class="nav-link-text" data-i18n="">Sites</span><span class="">List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a href="#" title="Application Intel" class=" " data-filter-tags="application intel">
+                                <i class="fal fa-address-card"></i>
+                                <span class="nav-link-text" data-i18n="nav.application_intel">Reports</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/ReportCustomer/Index" title="Reports" class=" " data-filter-tags="">
+                                        <span class="nav-link-text" data-i18n="">Reports</span><span class="">List</span>
                                     </a>
                                 </li>
                             </ul>
@@ -1301,7 +1302,6 @@
 
     <script src="~/assets/js/vendors.bundle.js"></script>
     <script src="~/assets/js/app.bundle.js"></script>
-
     <script src="~/assets/js/datagrid/datatables/datatables.bundle.js"></script>
     <!-- datatbles buttons bundle contains:
     + "jszip.js",
@@ -1387,7 +1387,6 @@
         });
 
     </script>
-
 
     <script src="~/assets/js/formplugins/select2/select2.bundle.js"></script>
     <script>
@@ -1503,8 +1502,6 @@
 
     </script>
 
-
-
     <script type="text/javascript">
         /* Activate smart panels */
         $('#js-page-content').smartPanel();
@@ -1520,7 +1517,7 @@
     <script>
         /* defined datas */
         var dataTargetProfit = [
-            [1354586000000, 200],
+            [1354586000000, 750],
             [1364587000000, 200],
             [1374588000000, 200],
             [1384589000000, 200],
@@ -1534,8 +1531,8 @@
             [1464597000000, 200]
         ]
         var dataProfit = [
-            [1354586000000, 500],
-            [1364587000000, 300],
+            [1354586000000, 700],
+            [1364587000000, 1000],
             [1374588000000, 300],
             [1384589000000, 300],
             [1394590000000, 980],
@@ -1561,30 +1558,28 @@
             [1454596000000, 241],
             [1464597000000, 341]
         ]
+        
         var dataSet1 = [
-            [0, 10],
-            [50, 10],
-            [200, 10],
-            [300, 10],
-            [400, 10],
-            [500, 6],
-            [600, 3]
-           
-        ];
+            [0, 3],
+            [10, 10],
+            [20, 12],
+            [30, 10],
+            [40, 10],
+            [50, 6],
+            [60, 3]
+
+        ];     
         var dataSet2 = [
-            [0, 9],
-            [50, 10],
-            [200, 5],
-            [300, 3],
-            [400, 3],
-            [500, 5],
-            [600, 2]
+            [0, 5],
+            [10, 12],
+            [20, 5],
+            [30, 3],
+            [40, 3],
+            [50, 5],
+            [60, 2]
         ];
-            
-
+        
         $(document).ready(function () {
-
-
 
             /* flot toggle example */
             var flot_toggle = function () {

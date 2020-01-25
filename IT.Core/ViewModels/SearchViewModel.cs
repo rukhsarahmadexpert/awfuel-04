@@ -1,11 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace IT.Core.ViewModels
 {
     public class SearchViewModel
     {
         public int Id { get; set; }
-        public string searchkey { get; set; }
+        public string searchkey { get; set; }        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime fDate { get; set; }
         public string FromDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Tdate { get; set; }
         public string ToDate { get; set; }
         public int CompanyId { get; set; }
         public Boolean Status { get; set; }
