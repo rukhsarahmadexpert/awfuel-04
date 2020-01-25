@@ -83,7 +83,47 @@ namespace IT.Web.Controllers
         
         public ActionResult AdminHome()
         {
-            return View();
+
+            try
+            {
+
+                if (HttpContext.Cache["customerNotificationViewModels"] == null)
+                {
+                    var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        if (result.Data != null)
+                        {
+                            customerNotificationViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNotificationViewModel>>(result.Data.ToString()));
+                            HttpContext.Cache["customerNotificationViewModels"] = customerNotificationViewModels;
+                        }
+                    }
+                }
+                else
+                {
+                    customerNotificationViewModels = HttpContext.Cache["customerNotificationViewModels"] as List<CustomerNotificationViewModel>;
+                }
+                ViewBag.customerNotificationViewModels = customerNotificationViewModels;
+
+                SearchViewModel searchViewModel = new SearchViewModel();
+                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/AdminStatistics");
+                if (resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
+                }
+                ViewBag.customerOrderStatistics = customerOrderStatistics;
+
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            
         }
 
         public ActionResult Policy()
