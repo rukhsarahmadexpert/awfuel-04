@@ -57,11 +57,27 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" name="Status" id="wrappingSt">Status</span>
                                     </div>
-                                    <select class="form-control" id="ReportStatus" name="searchkey" disabled></select>
+                                    <select class="form-control" id="ReportStatusVehicle" name="SearchKey2" disabled>
+                                        <option value="All">All</option>
+                                        <option value="Created">Requested</option>
+                                        <option value="Deliverd">Deliverd</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </div>
+                                <div class="input-group flex-nowrap mt-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" name="Status" id="wrappingSt">Format</span>
+                                    </div>
+                                    <select class="form-control" id="ReportFormat" name="GroupBy" disabled>
+                                        <option value="0">Select Order Format</option>
+                                        <option value="ByDate">By Date</option>
+                                        <option value="ByVehicle">By Vehicle</option>
+                                    </select>
                                 </div>
                                 <div class="input-group flex-nowrap mt-2">
                                     <button type="submit" class="btn btn-primary form-control">Submit</button>
                                 </div>
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                             </form>
                         </div>
                         <div class="col-md-4"></div>
@@ -83,12 +99,15 @@
                 var TypeVal = $(this).val();
                 if (TypeVal == "VehicleReport")
                 {
+                    $('#ReportStatusVehicle').attr('disabled', false);
+                    $('#ReportFormat').attr('disabled', false);
+
                     ajaxRequest('POST', '/Vehicle/VehicleByCompany', '', 'json').then(function (result) {
                         if (result != "Failed") {
                             $('#ReportStatus').empty();
                             $('#wrappingSt').text('Vehicle');
                             $.each(result, function (item, val) {
-                                $('#ReportStatus').append("<option value=" + val.VehicleId + ">" + val.TraficPlateNumber + "</option>")
+                                $('#ReportStatus').append("<option value=" + val.VehicelId + ">" + val.TraficPlateNumber + "</option>")
                             });
                             $('#ReportStatus').attr('disabled', false);
                         }
@@ -96,6 +115,8 @@
                 }
                 else if (TypeVal == "OrderReport")
                 {
+                    $('#ReportStatusVehicle').attr('disabled', true);
+                    $('#ReportFormat').attr('disabled', true);
                     $('#ReportStatus').empty();
                     $('#wrappingSt').text('Status');
                     $('#ReportStatus').append("<option value='All'>All</option>");
@@ -110,6 +131,19 @@
                         $('#wrappingSt').text('Status');
                         $('#ReportStatus').attr('disabled', true);
                      }
+            });
+
+
+            $('#ReportStatus').change(function ()
+            {
+                if ($('#ReportType').val() == 'VehicleReport') {
+                    $('#ReportStatusVehicle').attr('disabled', false);
+                    $('#ReportFormat').attr('disabled', false);
+                }
+                else {
+                    $('#ReportStatusVehicle').attr('disabled', true);
+                    $('#ReportFormat').attr('disabled', true);
+                }
             });
         });
 

@@ -435,7 +435,7 @@ namespace IT.Web.Controllers
             {
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
                 var DriverVehicleLists = DriverVehicels(CompanyId);
-                DriverVehicleLists.vehicleModels.Add(new VehicleModel() { VehicelId=0, TraficPlateNumber ="All"});
+                DriverVehicleLists.vehicleModels.Insert(0,new VehicleModel() { VehicelId=0, TraficPlateNumber ="All"});
                 return Json(DriverVehicleLists.vehicleModels);
             }
             catch(Exception)

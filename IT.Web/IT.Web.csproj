@@ -170,6 +170,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CustomerQuotationController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,6 +218,12 @@
     <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Controllers\CustomerNotificationController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
+    <Compile Include="Reports\CustomerReport\ReportGroupByVehicle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportGroupByVehicle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\CustomerReport\ReportsByDatesVehicleDetails.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -754,6 +761,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CustomerQuotation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -772,6 +780,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\CustomerReport\ReportGroupByVehicle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportGroupByVehicle.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CustomerReport\ReportsByDatesVehicleDetails.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportsByDatesVehicleDetails.cs</LastGenOutput>

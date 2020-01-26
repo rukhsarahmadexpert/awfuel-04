@@ -25,5 +25,7 @@ namespace IT.Core.ViewModels
         public int Quantity { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
+        public string SearchKey2 { get; set; }
+        public string GroupBy { get; set; }
     }
 }
