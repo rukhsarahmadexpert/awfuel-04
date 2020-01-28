@@ -103,6 +103,7 @@ namespace IT.Web.Controllers
         { 
             try
             {
+                
                 var result = webServices.Post(userViewModel, "User/Register",false);
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
