@@ -4,45 +4,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="data-table-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="data-table-list">
-                    <div class="basic-tb-hd">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <h2>LPO-Info</h2>
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-primary btn-sm" id="createNewLPO"><i class="fa fa-plus"></i> New</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="LPOTable" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>LPO #</th>
-                                    <th>Vender</th>
-                                    <th>Date</th>
-                                    <th>Due Date</th>
-                                    <th>Total</th>
-                                    <th>VAT</th>
-                                    <th>Grand Total</th>
-                                    <th>Is Updated</th>
-                                    <th>Oprater</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Mena Energy</a></li>
+
+    <li class="breadcrumb-item active">Drivers</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <button class="btn btn-primary btn-sm" id="createNewLPO"><i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>LPO</i></button>
+                   
+                </h2>
+
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                <p>Drivers Base Information</p>
+
+
+            </div>-->
+                    <!-- datatable start -->
+
+                   
+                    <table id="#" class="table LPOTable table-bordered table-hover table-striped w-100">
+                        <thead class="bg-primary-600">
+                            <tr>
+                                <th>LPO #</th>
+                                <th>Vender</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>VAT</th>
+                                <th>Grand Total</th>
+                                <th>Is Updated</th>
+                                <th>Oprater</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                    </table>
+                    <!-- datatable end -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 @section Scripts{
@@ -59,7 +74,7 @@
         });
 
         var BindDataTable = function (response) {
-            $('#LPOTable').DataTable({
+            $('.LPOTable').DataTable({
                 "bRetrieve": true,
                 "bServerSide": true,
                 "processing": true,
