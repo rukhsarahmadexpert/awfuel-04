@@ -58,6 +58,7 @@
     <Compile Include="ViewModels\CustomerOrderStatistics.cs" />
     <Compile Include="ViewModels\CustomerOrderViewModel.cs" />
     <Compile Include="ViewModels\DataTablesParm.cs" />
+    <Compile Include="ViewModels\DeleteRowViewModel.cs" />
     <Compile Include="ViewModels\DesignationViewModel.cs" />
     <Compile Include="ViewModels\DriverVehicelViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
@@ -69,10 +70,12 @@
     <Compile Include="ViewModels\ReportsByDatesVehicleDetails.cs" />
     <Compile Include="ViewModels\ReportsByDatesViewModel.cs" />
     <Compile Include="ViewModels\ServiceResponseModel.cs" />
+    <Compile Include="ViewModels\SingleStringValueResult.cs" />
     <Compile Include="ViewModels\StateViewModel.cs" />
     <Compile Include="ViewModels\StorageViewModel.cs" />
     <Compile Include="ViewModels\UserCompanyViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\VatModel.cs" />
     <Compile Include="ViewModels\VehicleModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="ViewModels\DirectSaleViewModel.cs" />
     <Compile Include="ViewModels\StorageViewListModel.cs" />
     <Compile Include="ViewModels\CustomerNotificationViewModel.cs" />
+    <Compile Include="ViewModels\VenderViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

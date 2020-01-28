@@ -15,6 +15,7 @@ namespace IT.Web.Controllers
         readonly List<UserViewModel> userViewModelList = new List<UserViewModel>();
         UserCompanyViewModel userCompanyViewModel = new UserCompanyViewModel();
         WebServices webServices = new WebServices();
+
         public ActionResult Index()
         {
             //var result = webServices.Post(new UserViewModel(), "User/GetAll");
@@ -27,8 +28,6 @@ namespace IT.Web.Controllers
             Session.Abandon();
             Session.Clear();
             return Redirect(nameof(Login));
-
-
         }
 
         public ActionResult Add()
