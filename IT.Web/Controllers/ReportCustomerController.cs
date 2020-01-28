@@ -1,6 +1,7 @@
 ﻿
 using CrystalDecisions.CrystalReports.Engine;
 using IT.Core.ViewModels;
+
 using IT.Repository.WebServices;
 using IT.Web.Models;
 using System;
@@ -229,5 +230,54 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
+
+
+        [HttpGet]
+        public ActionResult Demo()
+        {
+            List<EmployeeModel> employeeModels = new List<EmployeeModel>();
+            int CompanyId = 2;
+            var results = webServices.Post(new EmployeeViewModel(), "AWFEmployee/All/" + CompanyId);
+            if (results.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                employeeModels = (new JavaScriptSerializer()).Deserialize<List<EmployeeModel>>(results.Data.ToString());
+                
+            }
+            List<IT.Web.Models.CompnayModel> compnayModels = new List<IT.Web.Models.CompnayModel>();
+            PagingParameterModel pagingParameterModel = new PagingParameterModel();
+            pagingParameterModel.pageNumber = 1;
+            pagingParameterModel._pageSize = 1;
+            pagingParameterModel.PageSize = 100;
+            var CompanyList = webServices.Post(pagingParameterModel, "Company/CompayAll");
+            if (CompanyList.StatusCode == System.Net.HttpStatusCode.Accepted)
+            {
+                compnayModels = (new JavaScriptSerializer().Deserialize<List<IT.Web.Models.CompnayModel>>(CompanyList.Data.ToString()));
+            }
+
+            string pdfname = "";
+            ReportDocument Report = new ReportDocument();
+            Report.Load(Server.MapPath("~/Reports/Demo/RizwanDemo.rpt"));
+
+            Report.Database.Tables[0].SetDataSource(employeeModels);
+            Report.Database.Tables[1].SetDataSource(compnayModels);
+
+            Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stram.Seek(0, SeekOrigin.Begin);
+
+
+            var root = Server.MapPath("/PDF/");
+            pdfname = String.Format("{0}.pdf", "Demo");
+            var path = Path.Combine(root, pdfname);
+            path = Path.GetFullPath(path);
+
+            //Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
+
+            //  stram.Close();
+
+            stram.Seek(0, SeekOrigin.Begin);
+            return new FileStreamResult(stram, "application/pdf");
+
+        }
+
     }
 }
