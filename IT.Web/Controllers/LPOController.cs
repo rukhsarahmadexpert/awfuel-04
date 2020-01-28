@@ -23,23 +23,25 @@ namespace IT.Web.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         List<LPOInvoiceModel> Models = new List<LPOInvoiceModel>();
-
-
+        
 
         // GET: LPO/LPO
         public ActionResult Index()
         {
             return View();
         }
-
-
+        
         [HttpGet]
-        public JsonResult GetAll(DataTablesParm parm)
+        public JsonResult GetAll()
         {
             try
             {
+                DataTablesParm parm = new DataTablesParm();
+
                 int pageNo = 1;
                 int totalCount = 0;
+                parm.iDisplayLength = 20;
+                parm.iDisplayStart = 0;
 
                 if (parm.iDisplayStart >= parm.iDisplayLength)
                 {
@@ -126,14 +128,12 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         public ActionResult LPOConverted()
         {
             return View();
         }
-
-
+        
         [HttpGet]
         public JsonResult GetAllConverted(DataTablesParm parm)
         {
@@ -218,8 +218,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         public ActionResult Create()
         {
             try
@@ -311,8 +310,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -352,8 +350,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult CheckISFileExist(int Id)
         {
@@ -398,8 +395,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult SaveDwnload(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -446,8 +442,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Details(int? Id)
         {
@@ -504,8 +499,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Edit(int? Id)
         {
@@ -564,8 +558,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult DeleteLPoDetailsRow(DeleteRowViewModel deleteRowViewModel)
         {
@@ -607,8 +600,7 @@ namespace IT.Web.Controllers
                 return new JsonResult { Data = new { Status = "Fail" } };
             }
         }
-
-
+        
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;
@@ -622,8 +614,7 @@ namespace IT.Web.Controllers
                 return Result;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult Update(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -671,8 +662,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         public FileResult Download(string FileName)
         {
             string PAth = Server.MapPath("~/PDF/" + FileName);
@@ -681,8 +671,7 @@ namespace IT.Web.Controllers
             string fileName = "myfile.ext";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
-
-
+        
         [HttpPost]
         public int UploadFileToFolder(int Id)
         {
@@ -770,8 +759,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         [HttpGet]
         public ActionResult PrintLPO(int Id)
         {

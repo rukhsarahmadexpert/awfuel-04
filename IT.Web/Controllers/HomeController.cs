@@ -24,41 +24,50 @@ namespace IT.Web.Controllers
         {
             try
             {
+                int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                if (HttpContext.Cache["customerNotificationViewModels"] == null)
+                if (CompanyId < 1)
                 {
-                    var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
-
-                    if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
-                    {
-                        if (result.Data != null)
-                        {
-                            customerNotificationViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNotificationViewModel>>(result.Data.ToString()));
-                            HttpContext.Cache["customerNotificationViewModels"] = customerNotificationViewModels;
-                        }
-                    }
+                    return RedirectToAction("Create", "Company");
                 }
                 else
                 {
-                    customerNotificationViewModels = HttpContext.Cache["customerNotificationViewModels"] as List<CustomerNotificationViewModel>;
+
+                    if (HttpContext.Cache["customerNotificationViewModels"] == null)
+                    {
+                        var result = webServices.Post(new CustomerNotificationViewModel(), "Advertisement/All");
+
+                        if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                        {
+                            if (result.Data != null)
+                            {
+                                customerNotificationViewModels = (new JavaScriptSerializer().Deserialize<List<CustomerNotificationViewModel>>(result.Data.ToString()));
+                                HttpContext.Cache["customerNotificationViewModels"] = customerNotificationViewModels;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        customerNotificationViewModels = HttpContext.Cache["customerNotificationViewModels"] as List<CustomerNotificationViewModel>;
+                    }
+                    ViewBag.customerNotificationViewModels = customerNotificationViewModels;
+
+                    SearchViewModel searchViewModel = new SearchViewModel();
+                    searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
+
+                    var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/CustomerStatistics");
+                    if (resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
+                    {
+                        customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
+                    }
+                    ViewBag.customerOrderStatistics = customerOrderStatistics;
+
+                    var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
+
+                    Session["RequestedData"] = RequestedData;
+
+                    return View();
                 }
-                ViewBag.customerNotificationViewModels = customerNotificationViewModels;
-
-                SearchViewModel searchViewModel = new SearchViewModel();
-                searchViewModel.CompanyId = Convert.ToInt32(Session["CompanyId"]);
-               
-                var resultCustomerStatistics = webServices.Post(searchViewModel, "CustomerOrder/CustomerStatistics");
-                if(resultCustomerStatistics.StatusCode == System.Net.HttpStatusCode.Accepted)
-                {
-                    customerOrderStatistics = (new JavaScriptSerializer().Deserialize<CustomerOrderStatistics>(resultCustomerStatistics.Data.ToString()));
-                }
-                ViewBag.customerOrderStatistics = customerOrderStatistics;
-
-                var RequestedData = customerOrderStatistics.RequestedBySevenDayed;
-
-                Session["RequestedData"] = RequestedData;
-
-                return View();
             }
             catch(Exception)
             {

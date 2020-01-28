@@ -425,6 +425,7 @@
     <None Include="bin\IT.Web.dll.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Common-Scripts\LOP-Invoice.js" />
     <Content Include="Scripts\CustomScript\common-script.js" />
     <Content Include="Scripts\CustomScript\CustomerOrder.js" />
     <Content Include="Scripts\CustomScript\FileUploadPreview.js" />
@@ -938,6 +939,11 @@
     <Content Include="Views\CustomerSites\Details.cshtml" />
     <Content Include="Views\Site\Details.cshtml" />
     <Content Include="Views\ReportCustomer\Index.cshtml" />
+    <Content Include="Views\LPO\Create.cshtml" />
+    <Content Include="Views\LPO\Details.cshtml" />
+    <Content Include="Views\LPO\Edit.cshtml" />
+    <Content Include="Views\LPO\Index.cshtml" />
+    <Content Include="Views\LPO\LPOConverted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
@@ -945,7 +951,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\CustomerQuotation\" />
-    <Folder Include="Views\LPO\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
