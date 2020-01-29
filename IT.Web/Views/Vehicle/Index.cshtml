@@ -3,10 +3,10 @@
 @model List<IT.Core.ViewModels.VehicleViewModel>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = ViewBag.LayoutName;
 
      List<IT.Core.ViewModels.VehicleViewModel> VehicleViewModels = new List<IT.Core.ViewModels.VehicleViewModel>();
-    VehicleViewModels = Model as List<IT.Core.ViewModels.VehicleViewModel>;
+     VehicleViewModels = Model as List<IT.Core.ViewModels.VehicleViewModel>;
 }
 
  <ol class="breadcrumb page-breadcrumb">
@@ -21,8 +21,10 @@
                                 <div id="panel-1" class="panel">
                                     <div class="panel-hdr">
                                         <h2>
-                                           <a href="/Vehicle/Create"> <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
-                                        </h2></a>
+                                            <a href="/Vehicle/Create">
+                                                <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Vehicle</i></span>
+                                            </a>
+                                        </h2>
                                        
                                     </div>
                                     <div class="panel-container show">
@@ -49,8 +51,10 @@
                                                 </thead>
                                                 <tbody>
                                                     
-                                                    @foreach (var item in VehicleViewModels)
+                                                    @if (VehicleViewModels != null && VehicleViewModels.Count > 0)
                                                     {
+                                                        foreach (var item in VehicleViewModels)
+                                                        {
 
                                                         <tr>
                                                             <td>@item.VehicleTypeName</td>
@@ -67,10 +71,9 @@
                                                                 <i class="fal fa-trash-alt">
                                                             </td>
                                                         </tr>
-                                                    }                                                    
-                                                    
-                                                </tbody>
-                                                
+                                                        }
+                                                    }
+                                                </tbody>                                                
                                             </table>
                                             <!-- datatable end -->
                                         </div>

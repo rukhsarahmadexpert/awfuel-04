@@ -10,7 +10,7 @@
     if (LPOInvoiceViewModel.Heading != "BILL")
     {
         DueDate = LPOInvoiceViewModel.DDate;
-        FromDate = LPOInvoiceViewModel.FDate    ;
+        FromDate = LPOInvoiceViewModel.FDate;
     }
     else
     {
@@ -21,25 +21,24 @@
 }
 
 <input type="hidden" id="LPOId" value="@LPOInvoiceViewModel.Id" />
-
+<h1 class="text-center font-weight-bold"><u>@LPOInvoiceViewModel.Heading</u></h1>
 <div class="row">
-    <h1 class="text-center"><u>@LPOInvoiceViewModel.Heading</u></h1>
     <div class="col-md-4">
+        <h5 class="font-weight-bold"><u>Vender Info:</u></h5>
         <div class="form-group">
             <p style="margin-top:10px">
             </p>
-            <p><i class="glyphicon glyphicon-flag"> : </i> <span id="Company Name">@LPOInvoiceViewModel.Representative</span></p>
-            <p><i class="glyphicon glyphicon-user"> : </i> <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
-            <p><i class="glyphicon glyphicon-road"> : </i> <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
-            <p><i class="glyphicon glyphicon-earphone"> : </i> <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
-            <p><i class="glyphicon glyphicon-envelope"> : </i> <span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
-            <p> <i class="glyphicon glyphicon-text-width"> : </i> <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
+            <p><i class="glyphicon glyphicon-flag"></i>Representative: <span id="Company Name">@LPOInvoiceViewModel.Representative</span></p>
+            <p><i class="glyphicon glyphicon-user"> </i>Name: <span id="ContactPerson">@LPOInvoiceViewModel.Name</span></p>
+            <p><i class="glyphicon glyphicon-road"></i> Address: <span id="VenderAddress">@LPOInvoiceViewModel.Address</span></p>
+            <p><i class="glyphicon glyphicon-earphone"></i>Land Line : <span id="VenderPhone">@LPOInvoiceViewModel.LandLine</span></p>
+            <p><i class="glyphicon glyphicon-envelope"></i>Email :<span id="VenderEmail">@LPOInvoiceViewModel.Email</span></p>
+            <p> <i class="glyphicon glyphicon-text-width"></i>TRN : <span id="VenderVAT">@LPOInvoiceViewModel.TRN</span></p>
         </div>
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="pull-right">
-
             <div class="form-group">
                 <div class="nk-datapk-ctm form-elet-mg" id="data_2">
                     <div class="input-group  nk-int-st">
@@ -71,7 +70,7 @@
 
             @if (LPOInvoiceViewModel.Heading == "BILL")
             {
-                <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber"/>
+                <input type="text" id="BillNumbers" class="form-control" placeholder="Invoice Number" value="@LPOInvoiceViewModel.BillNumber" />
             }
         </div>
     </div>

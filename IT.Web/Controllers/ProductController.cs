@@ -85,7 +85,6 @@ namespace IT.Web.Controllers
                 if (productResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     var reuslt = (new JavaScriptSerializer().Deserialize<int>(productResult.Data));
-
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -115,8 +114,15 @@ namespace IT.Web.Controllers
                     productUnitViewModels = (new JavaScriptSerializer().Deserialize<List<ProductUnitViewModel>>(producUnittList.Data.ToString()));
                 }
 
-                ViewBag.productUnitViewModels = productUnitViewModels;
-                return View("Create", ProductViewModel);
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(ProductViewModel, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    ViewBag.productUnitViewModels = productUnitViewModels;
+                    return View("Create", ProductViewModel);
+                }
             }
             catch (Exception ex)
             {

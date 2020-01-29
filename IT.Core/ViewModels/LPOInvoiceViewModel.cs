@@ -41,6 +41,6 @@ namespace IT.Core.ViewModels
         public Decimal ReceivedAmount { get; set; }
         public string BillNumber { get; set; }
         public int UpdatedBy { get; set; }
-        public List<LPOInvoiceDetails> lpoDetailsList { get; set; }
+        public List<LPOInvoiceDetails> lPOInvoiceDetailsList { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 
@@ -18,20 +18,16 @@
             <div class="panel-hdr">
                 <h2>
                     <button class="btn btn-primary btn-sm" id="createNewLPO"><i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>LPO</i></button>
-                   
+
                 </h2>
 
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
                     <!--      <div class="panel-tag">
-                <p>Drivers Base Information</p>
-
-
-            </div>-->
-                    <!-- datatable start -->
-
-                   
+                        <p>Drivers Base Information</p>
+                    </div>-->
+                    <!-- datatable start -->                    
                     <table id="#" class="table LPOTable table-bordered table-hover table-striped w-100">
                         <thead class="bg-primary-600">
                             <tr>
@@ -48,7 +44,6 @@
                             </tr>
                         </thead>
                         <tbody></tbody>
-
                     </table>
                     <!-- datatable end -->
                 </div>
@@ -100,7 +95,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="glyphicon glyphicon-edit"></i></a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="glyphicon glyphicon-eye-open"></i></a>' + ' | ' + '<a href="#" onclick="DeletePro(' + Id + ')"><i class="glyphicon glyphicon-remove"></i></a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
+                            return '<a href="#" onclick="EditLPO(' + Id + ')"><i class="fal fa-edit"></i>Edit</a>' + ' | ' + '<a href="#" onclick="ViewLPO(' + Id + ')"><i class="fal fa-eye"></i>Details</a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Create Bill</a>'
                         }
                     },
                 ]
@@ -109,12 +104,12 @@
 
 
         function EditLPO(Id) {
-            window.location.href = "/LPO-Edit/" + Id;
+            window.location.href = "/LPO/Edit/" + Id;
         }
 
 
         function ViewLPO(Id) {
-            window.location.href = "/LPO-Details/" + Id;
+            window.location.href = "/LPO/Details/" + Id;
         }
 
 

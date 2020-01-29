@@ -507,7 +507,6 @@ namespace IT.Web.Controllers
             {
                 var Result = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + Id);
 
-
                 var result = webServices.Post(new ProductViewModel(), "Product/All");
                 ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
                 ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
@@ -566,7 +565,7 @@ namespace IT.Web.Controllers
             {
                 decimal ResultVAT = CalculateVat(deleteRowViewModel.VAT, deleteRowViewModel.RowTotal);
 
-                lPOInvoiceViewModel.lpoDetailsList = new List<LPOInvoiceDetails>();
+                lPOInvoiceViewModel.lPOInvoiceDetailsList = new List<LPOInvoiceDetails>();
 
                 var LPOData = webServices.Post(new LPOInvoiceViewModel(), "LPO/Edit/" + deleteRowViewModel.Id);
                 lPOInvoiceViewModel = (new JavaScriptSerializer()).Deserialize<LPOInvoiceViewModel>(LPOData.Data.ToString());
@@ -642,7 +641,7 @@ namespace IT.Web.Controllers
 
                         TempData["Id"] = Res;
 
-                        int Download = UploadFileToFolder(Res);
+                        //int Download = UploadFileToFolder(Res);
 
                         return Json(Res, JsonRequestBehavior.AllowGet);
                     }

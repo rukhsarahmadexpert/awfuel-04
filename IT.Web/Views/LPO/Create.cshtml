@@ -63,11 +63,6 @@
     </div>
 </main>
 
-
-
-
-
-
 <input type="hidden" id="SendByEmail" />
 
 
@@ -81,7 +76,7 @@
                 Id = $(this).val();
 
                 if (Id > 0) {
-                    ajaxRequest("GET", "/Vender-Edit/" + Id, "json").then(function (result) {
+                    ajaxRequest("GET", "/Vender/Edit/" + Id, "json").then(function (result) {
                         if (result != "Failed") {
                             $('#VenderAddress').text(result.Address);
                             $('#VenderPhone').text(result.LandLine);
@@ -109,7 +104,7 @@
         $('#SaveDraft').click(function () {
             if (ValidLPO()) {
                 localStorage.clear();
-                CreateLPOInvoice("LPO-Create");
+                CreateLPOInvoice("/LPO/Create");
             }
         });
 
@@ -183,8 +178,8 @@
                     formData.append('lPOInvoiceDetailsList[' + i + '][UnitId]', list[i].UnitId)
                 }
 
-                if (list.length > 0) {
-
+                if (list.length > 0)
+                {
                     $.ajax({
                         url: Url,
                         type: "POST",
@@ -206,7 +201,7 @@
                                     window.location.href = "/Email";
                                 }
                                 else {
-                                    window.location.href = "/LPO-Details/" + result;
+                                    window.location.href = "/LPO/Details/" + result;
                                 }
                             }
                             else {

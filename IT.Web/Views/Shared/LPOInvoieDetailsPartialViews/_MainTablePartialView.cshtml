@@ -18,14 +18,14 @@
                 <th>
                     Quantity
                 </th>
-                <th>
+                @*<th>
                     Total
-                </th>
+                </th>*@
                 <th>
                     VAT
                 </th>
 
-                <th>
+                <th class="text-center">
                     Sub Total
                 </th>
             </tr>
@@ -50,13 +50,13 @@
                     <td>
                         @item.Qunatity
                     </td>
-                    <td>
+                    @*<td>
                         @Math.Round(item.Total, 1)
-                    </td>
+                    </td>*@
                     <td>
                         @Math.Round(item.VAT, 1)
                     </td>
-                    <td>
+                    <td class="text-center">
                         @Math.Round(item.SubTotal, 1)
                     </td>
                 </tr>

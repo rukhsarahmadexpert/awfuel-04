@@ -994,6 +994,7 @@
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_FooterButtonPartialViewView.cshtml" />
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_LPOInvoiceVenderPartialView.cshtml" />
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_MainTablePartialView.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

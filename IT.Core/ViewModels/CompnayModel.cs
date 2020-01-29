@@ -26,6 +26,7 @@ namespace IT.Core.ViewModels
         public string Remarks { get; set; }
         public string OwnerRepresentaive { get; set; }
         public bool IsCashCompany { get; set; }
+        public string CurrentStatus { get; set; }
     }
 }
 

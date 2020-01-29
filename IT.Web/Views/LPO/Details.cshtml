@@ -9,37 +9,60 @@
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
 
-<div class="data-table-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="data-table-list">
-                    <div class="basic-tb-hd">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <h5 style="color:green">@ViewBag.Success</h5>
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">LPO</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a href="/LPO/Create">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>LPO</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">                   
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="data-table-list">
+                                        <div class="basic-tb-hd">
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <h5 style="color:green">@ViewBag.Success</h5>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    @*<button class="btn btn-primary btn-sm" id="createNewEmployee"><i class="fa fa-plus"></i> New</button>*@
+                                                </div>
+                                            </div>
+                                            @*@Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_HeaderLPOInvoicePartialView.cshtml")*@
+                                            @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
+                                        </div>
+
+                                        <div>
+                                            @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_MainTablePartialView.cshtml")
+                                            @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
+
+                                        </div>
+                                        <p></p>
+                                        @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-1">
-                                @*<button class="btn btn-primary btn-sm" id="createNewEmployee"><i class="fa fa-plus"></i> New</button>*@
-
-                            </div>
-                        </div>
-                        @*@Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_HeaderLPOInvoicePartialView.cshtml")*@
-                        @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
-                    </div>
-
-                    <div class="table-responsive">
-                        @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_MainTablePartialView.cshtml")
-                        @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
-
-                    </div>
-                    <p></p>
-                    @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_FooterButtonPartialViewView.cshtml")
+                       
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 @section Scripts{
@@ -48,7 +71,7 @@
         $('#LPOEdit').click(function () {
 
             var Id = $('#LPOId').val();
-            window.location.href = "/LPO-Edit/" + Id;
+            window.location.href = "/LPO/Edit/" + Id;
 
         });
 

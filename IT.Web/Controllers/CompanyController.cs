@@ -47,7 +47,27 @@ namespace IT.Web.Controllers
         // GET: Company/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                CompnayModel compnayModel = new CompnayModel();
+
+                PagingParameterModel pagingParameterModel = new PagingParameterModel();
+                pagingParameterModel.Id = id;
+                var companyData = webServices.Post(pagingParameterModel, "Company/CompanyById");
+                if(companyData.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    if(companyData.Data != "[]" && companyData.Data != null)
+                    {
+                        compnayModel = (new JavaScriptSerializer().Deserialize<CompnayModel>(companyData.Data.ToString()));
+                    }
+                }                
+                return View(compnayModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET: Company/Create
@@ -212,6 +232,30 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CompanyFrezeOrBlackListByAdmin(SearchViewModel searchViewModel)
+        {
+            try
+            {
+                var Result = webServices.Post(searchViewModel, "Company/CompanyFrezeOrBlackListByAdmin");
+                if(Result.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    int res = (new JavaScriptSerializer().Deserialize<int>(Result.Data));
+
+                    if(res > 0)
+                    {
+                        return RedirectToAction("Details", new { searchViewModel.Id});
+                    }
+                }
+                return RedirectToAction("Details", new { searchViewModel.Id });
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

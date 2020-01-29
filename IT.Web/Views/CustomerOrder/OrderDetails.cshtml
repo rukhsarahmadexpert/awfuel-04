@@ -45,6 +45,10 @@
                                             <td>@Model.CustomerOrderId</td>
                                         </tr>
                                         <tr>
+                                            <th scope="row">@Model.latitude</th>
+                                            <td>@Model.longitude</td>
+                                        </tr>
+                                        <tr>
                                             <th scope="row">Requested Quantity</th>
                                             <td>@Model.RequestedQuantity</td>
                                         </tr>
@@ -86,7 +90,7 @@
                                 {
                                     <button type="button" onclick="AssignOrderToDriver()" class="btn btn-primary mt-1 m-1">Assign Order to Driver</button>
                                 }
-                                <a href="http://www.google.com/maps/place/24.2938194,54.5764309" target="_blank" class="btn btn-default mt-1 m-1" style="float:right" value="Accept Order"><i class="fal fa-map-marker"></i> Change Location</a>
+                                <a href="http://www.google.com/maps/place/@Model.latitude,@Model.longitude" target="_blank" class="btn btn-default mt-1 m-1" style="float:right" value="Accept Order"><i class="fal fa-map-marker"></i> Change Location</a>
 
                             </div>
                             <div class="col-md-6">
@@ -120,8 +124,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var item in Model.customerGroupOrderDetailsViewModels)
+                                                @if (Model.customerGroupOrderDetailsViewModels != null && Model.customerGroupOrderDetailsViewModels.Count > 0)
                                                 {
+                                                    foreach (var item in Model.customerGroupOrderDetailsViewModels)
+                                                    {
 
                                                     <tr>
                                                         @if (item.CurrentStatus == "Accepted")
@@ -141,6 +147,7 @@
                                                         <td>@item.TraficPlateNumber</td>
                                                         <td>@item.Name</td>
                                                     </tr>
+                                                    }
                                                 }
                                             </tbody>
                                         </table>
@@ -279,9 +286,10 @@
         // Initialize and add the map
         // function initMap() {
         // The location of Uluru
+        
 
         $(document).ready(function () {
-            var uluru = { lat: 24.2938194, lng: 54.5764309 };
+            var uluru = { lat: @Model.latitude, lng: @Model.longitude };
             // The map, centered at Uluru
             var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 17, center: uluru });

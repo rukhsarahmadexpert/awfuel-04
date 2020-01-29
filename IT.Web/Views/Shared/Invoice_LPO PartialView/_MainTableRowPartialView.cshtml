@@ -27,9 +27,9 @@
                 <th>
                     Quantity
                 </th>
-                <th>
+                @*<th>
                     Total
-                </th>
+                </th>*@
                 <th>
                     VAT
                 </th>
@@ -61,7 +61,7 @@
                             </select>
                         </td>
                         <td>
-                            <textarea type="text" id="Description" class="Description form-control" rows="1" placeholder="Description" autocomplete="off" style="width:140px;font-size:12px">@item.Description</textarea>
+                            <textarea type="text" id="Description" class="Description form-control" rows="1" placeholder="Description" autocomplete="off" style="width:270px;font-size:12px">@item.Description</textarea>
                         </td>
                         <td>
                             <select id="Unit" class="Unit product form-control Input-height select2" style="width: 100px;font-size:12px">
@@ -76,13 +76,12 @@
                             <input type="text" id="UPrice" class="rate form-control Input-height" autocomplete="off" style="width:60px;font-size:12px" value="@Math.Round(item.UnitPrice,1)" onkeypress="return IsOneDecimalPoint(event);" />
                         </td>
                         <td>
-                            <input type="text" id="quantity" class="quantity form-control Input-height" autocomplete="off" value="@item.Qunatity" style="width:60px;font-size:12px" />
-                        </td>
+                            <input type="text" id="quantity" class="quantity form-control Input-height" autocomplete="off" value="@item.Qunatity" style="width:70px;font-size:12px" />
+                            <input type="hidden" id="RowSubTotal" readonly class="RowSubTotal" autocomplete="off" value="@Math.Round(item.Total,1)" onkeypress="return IsOneDecimalPoint(event);" />
+
+                        </td>                        
                         <td>
-                            <input type="text" id="RowSubTotal" readonly class="RowSubTotal form-control Input-height" autocomplete="off" value="@Math.Round(item.Total,1)" style="width:100px;font-size:12px" onkeypress="return IsOneDecimalPoint(event);" />
-                        </td>
-                        <td>
-                            <select id="VAT" class="vat form-control Input-height" style="width:60px;font-size:12px">
+                            <select id="VAT" class="vat form-control Input-height" style="width:70px;font-size:12px">
                                 @foreach (var V in ViewBag.VatDrop)
                                 {
                                     <option value="@V.Id" @(V.VAT == item.VAT ? "selected='selected'" : "")>@V.VAT</option>
@@ -111,7 +110,7 @@
                     </select>
                 </td>
                 <td>
-                    <textarea type="text" id="Description" class="Description form-control" rows="1" placeholder="Description" autocomplete="off" style="width:140px;font-size:12px"></textarea>
+                    <textarea type="text" id="Description" class="Description form-control" rows="1" placeholder="Description" autocomplete="off" style="width:270px;font-size:12px"></textarea>
                 </td>
                 <td>
                     @*<input type="text" id="Unit" class="Unit form-control Input-height" autocomplete="off" style="width:70px;font-size:12px" />*@
@@ -127,13 +126,12 @@
                     <input type="text" id="UPrice" class="rate form-control Input-height" value="0"  autocomplete="off" style="width:80px;font-size:12px" onkeypress="return IsOneDecimalPoint(event);" />
                 </td>
                 <td>
-                    <input type="text" id="quantity" class="quantity form-control Input-height" autocomplete="off" value="0" style="width:60px;font-size:12px" />
-                </td>
+                    <input type="text" id="quantity" class="quantity form-control Input-height" autocomplete="off" value="0" style="width:70px;font-size:12px" />
+                    <input type="hidden" id="RowSubTotal" readonly class="RowSubTotal form-control Input-height" value="0" autocomplete="off" onkeypress="return IsOneDecimalPoint(event);" />
+
+                </td>               
                 <td>
-                    <input type="text" id="RowSubTotal" readonly class="RowSubTotal form-control Input-height" value="0" autocomplete="off" style="width:100px;font-size:12px" onkeypress="return IsOneDecimalPoint(event);" />
-                </td>
-                <td>
-                    <select id="VAT" class="vat form-control Input-height" style="width:60px;font-size:12px">
+                    <select id="VAT" class="vat form-control Input-height" style="width:70px;font-size:12px">
                         <option value="0">0</option>
                         <option value="5">5</option>
                     </select>

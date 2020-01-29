@@ -21,11 +21,19 @@ namespace IT.Web.Controllers
         DriverViewModel driverViewModel = new DriverViewModel();
         int CompanyId = 0;
 
-        public ActionResult Index()
+        public ActionResult Index(int CompId = 0)
         {
 
-            CompanyId = Convert.ToInt32(Session["CompanyId"]);
-
+            if (CompId == 0)
+            {
+                CompanyId = Convert.ToInt32(Session["CompanyId"]);
+                ViewBag.LayoutName = "~/Views/Shared/_Layout.cshtml";
+            }
+            else
+            {
+                CompanyId = CompId;
+                ViewBag.LayoutName = "~/Views/Shared/_layoutAdmin.cshtml";
+            }
             try
             {
                 PagingParameterModel pagingParameterModel = new PagingParameterModel();

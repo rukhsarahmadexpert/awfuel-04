@@ -94,40 +94,42 @@ function IsOneDecimalPoint(evt) {
     return true;
 }
 
-$('#drpgoods').change(function (e) {
-    //e.preventDefault();
-    var currentRow = $(this).closest("tr");
-    var productId = $(this).val();
 
-    if (productId == "AddNewProduct") {
-        ISQuotationInvoice = "Yes";
-        GetAllProductUnit();
-        $('#Updateproduct').hide();
-        $('#saveproduct').show();
-        $('#modalProductGoods').modal('show');
-    }
-    else if (parseInt(productId) > 0) {
-        ProductInfoId(productId, currentRow);
-    }
-    else if (parseInt(productId) == 0) {
-        currentRow.find('.rate').val('0');
-        currentRow.find('.Unit').val('');
-    }
+$(document).ready(function () {
+    $('#drpgoods').change(function (e) {
+        //e.preventDefault();
+        var currentRow = $(this).closest("tr");
+        var productId = $(this).val();
+        if (productId == "AddNewProduct") {
+            ISQuotationInvoice = "Yes";
+            GetAllProductUnit();
+            $('#Updateproduct').hide();
+            $('#saveproduct').show();
+            $('#modalProductGoods').modal('show');
+        }
+        else if (parseInt(productId) > 0) {
+            ProductInfoId(productId, currentRow);
+        }
+        else if (parseInt(productId) == 0) {
+            currentRow.find('.rate').val('0');
+            currentRow.find('.Unit').val('');
+        }
+    });
 });
 
 function ProductInfoId(Id, currentrow) {
     if (Id == 0) {
         return true;
     }
-    else if (Id > 0) {
-        ajaxRequest("GET", "/Product-Edit/" + Id, "", "json").then(function (result) {
-
-
+    else if (Id > 0)
+    {      
+        ajaxRequest("GET", "/Product/Edit/" + Id, "", "json").then(function (result)
+        {
             if (result != "Failed") {
-                //$('select').chosen();
+               // $('select').chosen();
                 currentrow.find('.rate').val(result.UPrice);
-                currentrow.find('.Unit').val(result.Unit);
-                // $('select').trigger("chosen:updated");
+                currentrow.find('#Unit').val(1);
+               // $('select').trigger("chosen:updated");
             }
         });
     }

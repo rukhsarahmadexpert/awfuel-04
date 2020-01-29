@@ -32,7 +32,12 @@ namespace IT.Core.ViewModels
         public int CompanyId { get; set; }
         public int pageNumber { get; set; }
         public int pageSize { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
+        public string locationFullUrl { get; set; }
+        public string pickingPoint { get; set; }
+        public string Description { get; set; }
 
-       public List<CustomerGroupOrderDetailsViewModel> customerGroupOrderDetailsViewModels { get; set; }
+        public List<CustomerGroupOrderDetailsViewModel> customerGroupOrderDetailsViewModels { get; set; }
     }
 }

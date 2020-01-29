@@ -1,7 +1,7 @@
 ﻿@model List<IT.Core.ViewModels.DriverViewModel>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = ViewBag.LayoutName;
 
      List<IT.Core.ViewModels.DriverViewModel> driverViewModels = new List<IT.Core.ViewModels.DriverViewModel>();
     driverViewModels = Model as List<IT.Core.ViewModels.DriverViewModel>;
