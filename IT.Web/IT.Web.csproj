@@ -170,6 +170,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\CustomerQuotationController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Controllers\ReportCustomerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -994,6 +996,10 @@
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_FooterButtonPartialViewView.cshtml" />
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_LPOInvoiceVenderPartialView.cshtml" />
     <Content Include="Views\Shared\LPOInvoieDetailsPartialViews\_MainTablePartialView.cshtml" />
+    <Content Include="Views\Vender\Index.cshtml" />
+    <Content Include="Views\Vender\Create.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Company\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
