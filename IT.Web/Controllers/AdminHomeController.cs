@@ -10,9 +10,10 @@ namespace IT.Web.Controllers
     [Autintication]
     public class AdminHomeController : Controller
     {
+        //get
         public ActionResult Index()
         {
             return View ();
-        }
+        } 
     }
 }
