@@ -1018,6 +1018,8 @@
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Country\StateAll.cshtml" />
+    <Content Include="Views\Country\AddUpdateState.cshtml" />
     <Content Include="Views\Invoice\Create.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
