@@ -1001,6 +1001,8 @@
     <Content Include="Views\Country\Index.cshtml" />
     <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Country\StateAll.cshtml" />
+    <Content Include="Views\Country\AddUpdateState.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />
