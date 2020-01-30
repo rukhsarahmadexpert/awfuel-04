@@ -32,6 +32,8 @@ namespace IT.Web.Models
         public string Representative { get; set; }
         public int detailId { get; set; }
 
-        public List<LPOInvoiceDetailsModel> lPOInvoiceDetailsList { get; set; }
+        public List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetailsList { get; set; } 
+        public List<CompnayModel> compnays { get; set; }
+        public List<VenderModel> venders { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace IT.Web.Controllers
         LPOInvoiceViewModel lPOInvoiceViewModel = new LPOInvoiceViewModel();
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
-        List<LPOInvoiceModel> Models = new List<LPOInvoiceModel>();
+        List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
         
 
         // GET: LPO/LPO
@@ -641,7 +641,7 @@ namespace IT.Web.Controllers
 
                         TempData["Id"] = Res;
 
-                        //int Download = UploadFileToFolder(Res);
+                        int Download = UploadFileToFolder(Res);
 
                         return Json(Res, JsonRequestBehavior.AllowGet);
                     }
@@ -675,59 +675,34 @@ namespace IT.Web.Controllers
         public int UploadFileToFolder(int Id)
         {
             string pdfname = "";
-
             try
             {
                 ReportDocument Report = new ReportDocument();
-                Report.Load(Server.MapPath("~/Reports/LPOReport.rpt"));
+                Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoice.rpt"));
 
                 List<IT.Web.Models.CompnayModel> compnayModels = new List<Models.CompnayModel>();
-                List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<IT.Web.Models.LPOInvoiceModel>();
-                List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
+                List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Models.LPOInvoiceModel>();
+                List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
 
                 var LPOInvoice = webServices.Post(new IT.Web.Models.LPOInvoiceModel(), "LPO/EditReport/" + Id);
+
+                var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
                 {
-                    lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
+                    LPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
-                // lPOInvoiceModels = Models as List<Models.lPOInvoiceModels>;
-
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var companyData = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + CompanyId);
-                if (companyData.Data != "[]")
-                {
-                    compnayModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.CompnayModel>>(companyData.Data.ToString());
-                }
-                var LPOInvoiceDetails = webServices.Post(new LPOInvoiceDetails(), "LPO/EditDetails/" + Id);
-                if (LPOInvoiceDetails.Data != "[]")
-                {
-                    lPOInvoiceDetails = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceDetails>>(LPOInvoiceDetails.Data.ToString());
-                }
-                VenderViewModel venderViewModel = new VenderViewModel();
-                var VenderData = webServices.Post(new VenderViewModel(), "Vender/Edit/" + 1);
-                if (VenderData.Data != "[]")
-                {
-                    venderViewModel = (new JavaScriptSerializer()).Deserialize<VenderViewModel>(VenderData.Data.ToString());
-                }
-                venderModels.Add(new VenderModel()
-                {
-
-                    Name = venderViewModel.Name,
-                    Address = venderViewModel.Address,
-                    Representative = venderViewModel.Representative,
-                    LandLine = venderViewModel.LandLine,
-                    Mobile = venderViewModel.Mobile,
-                    Title = venderViewModel.Title,
-                    TRN = venderViewModel.TRN,
-                    UserName = "Vender Info:"
-                });
+                lPOInvoiceModels.Insert(0, LPOInvoiceModel);
+                compnayModels = LPOInvoiceModel.compnays;
+                lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
+                venderModels = LPOInvoiceModel.venders;
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
-                Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
-                Report.Database.Tables[2].SetDataSource(lPOInvoiceDetails);
-                Report.Database.Tables[3].SetDataSource(venderModels);
+                Report.Database.Tables[1].SetDataSource(venderModels);
+                Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
+                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
@@ -752,7 +727,7 @@ namespace IT.Web.Controllers
 
                 return 1;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -766,62 +741,31 @@ namespace IT.Web.Controllers
             try
             {
                 ReportDocument Report = new ReportDocument();
-                Report.Load(Server.MapPath("~/Reports/LPOReport.rpt"));
-
+                Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoice.rpt"));
 
                 List<IT.Web.Models.CompnayModel> compnayModels = new List<Models.CompnayModel>();
                 List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Models.LPOInvoiceModel>();
-                List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
+                List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
 
                 var LPOInvoice = webServices.Post(new IT.Web.Models.LPOInvoiceModel(), "LPO/EditReport/" + Id);
 
+                var LPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
                 if (LPOInvoice.Data != "[]")
                 {
-                    lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
+                    LPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var companyData = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + CompanyId);
-                if (companyData.Data != "[]")
-                {
-                    compnayModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.CompnayModel>>(companyData.Data.ToString());
-                }
-                var LPOInvoiceDetails = webServices.Post(new LPOInvoiceDetails(), "LPO/EditDetails/" + Id);
-                if (LPOInvoiceDetails.Data != "[]")
-                {
-                    lPOInvoiceDetails = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceDetails>>(LPOInvoiceDetails.Data.ToString());
-                }
-                VenderViewModel venderViewModel = new VenderViewModel();
-                if (lPOInvoiceModels.Count > 0)
-                {
-                    var VenderData = webServices.Post(new VenderViewModel(), "Vender/Edit/" + lPOInvoiceModels[0].VenderId);
-
-                    if (VenderData.Data != "[]")
-                    {
-                        venderViewModel = (new JavaScriptSerializer()).Deserialize<VenderViewModel>(VenderData.Data.ToString());
-                    }
-                }
-
-                venderModels.Add(new VenderModel()
-                {
-
-                    Name = venderViewModel.Name,
-                    Address = venderViewModel.Address,
-                    Representative = venderViewModel.Representative,
-                    LandLine = venderViewModel.LandLine,
-                    Mobile = venderViewModel.Mobile,
-                    Title = venderViewModel.Title,
-                    TRN = venderViewModel.TRN,
-                    UserName = "Vender Info:"
-                });
-
-
-
+                lPOInvoiceModels.Insert(0, LPOInvoiceModel);
+                compnayModels = LPOInvoiceModel.compnays;
+                lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
+                venderModels = LPOInvoiceModel.venders;
+                
                 Report.Database.Tables[0].SetDataSource(compnayModels);
-                Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
-                Report.Database.Tables[2].SetDataSource(lPOInvoiceDetails);
-                Report.Database.Tables[3].SetDataSource(venderModels);
+                Report.Database.Tables[1].SetDataSource(venderModels);
+                Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
+                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);               
 
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
@@ -843,22 +787,21 @@ namespace IT.Web.Controllers
 
                 Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
 
-                stram.Close();
+                //stram.Close();
 
-                byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-                string fileName = companyName + ".PDF";
-                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                //byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+               // string fileName = companyName + ".PDF";
+                //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
                 // Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                // stram.Seek(0, SeekOrigin.Begin);
+                 stram.Seek(0, SeekOrigin.Begin);
 
-                // return new FileStreamResult(stram, "application/pdf");
+                 return new FileStreamResult(stram, "application/pdf");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
     }
 }
