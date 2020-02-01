@@ -1,15 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 <link href="~/Content/css/Common/LPOInvoiceTable.css" rel="stylesheet" />
 <link href="~/Content/css/Common/Common-LPO.css" rel="stylesheet" />
 
+
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-    <li class="breadcrumb-item active">LPO</li>
+    <li class="breadcrumb-item active">Quotation</li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
 <div class="row">
@@ -17,8 +18,8 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <a href="/Invoice/Create">
-                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Invoice</i></span>
+                    <a href="/Product/Create">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Quotation</i></span>
                     </a>
                 </h2>
             </div>
@@ -35,8 +36,6 @@
                                     @*<button class="btn btn-primary btn-sm" id="createNewEmployee"><i class="fa fa-plus"></i> New</button>*@
                                 </div>
                             </div>
-                            @*@Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_HeaderLPOInvoicePartialView.cshtml")*@
-
                             @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
                         </div>
                         <div>
@@ -47,11 +46,11 @@
                         @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_LPO_InvoiceButtonPartialView.cshtml")
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
 
 
 <div class="modal fade" id="ModelEditLPO" data-backdrop="static" role="dialog">
@@ -64,7 +63,6 @@
                 <h5>You want to change this FIle <span id="spanId" class="badge badge-light">Reason  ?</span></h5>
                 <br />
                 <textarea class="form-control" cols="5" role="3" id="ReasonUpdated"></textarea>
-
             </div>
             <hr />
             <div class="modal-footer">
@@ -75,19 +73,46 @@
     </div>
 </div>
 
+
+
 <input hidden id="IsDownload" />
+
+
 
 @section Scripts{
     <script src="~/Scripts/Common-Scripts/LOP-Invoice.js"></script>
     <script>
+        $('#Venders').change(function () {
+            var Id = 0;
+            Id = $(this).val();
 
+            if (Id > 0) {
+                ajaxRequest("GET", "/Vender-Edit/" + Id, "json").then(function (result) {
+                    if (result != "Failed") {
+                        $('#VenderAddress').text(result.Address);
+                        $('#VenderPhone').text(result.LandLine);
+                        $('#VenderEmail').text(result.Email);
+                        $('#VenderVAT').text(result.TRN);
+                        $('#ContactPerson').text(result.Representative);
+                    }
+                    else {
+                        alert('data not found');
+                    }
+                });
+            }
+        });
 
         $('#SaveEmail').click(function () {
 
-            localStorage.setItem("SendByEmail", "True");
+            var Id = $('#LPOId').val();
+
             if (ValidLPO()) {
-                CreateLPOInvoice("/Invoice-Update");
+                localStorage.setItem("SendByEmail", "True");
+                $('#IsDownload').val('');
+                CreateLPOInvoice("/Quotation/Update");
             }
+
+            window.location.href = "/Email";
 
         });
 
@@ -100,8 +125,9 @@
                 if (ValidLPO()) {
 
                     localStorage.removeItem("SendByEmail");
+
                     $('#IsDownload').val('');
-                    CreateLPOInvoice("/Invoice/Update");
+                    CreateLPOInvoice("/Quotation/Update");
                 }
             }
         });
@@ -114,10 +140,12 @@
                 if (ValidLPO()) {
                     localStorage.removeItem("SendByEmail");
                     $('#IsDownload').val("True");
-                    CreateLPOInvoice("/Invoice/Update");
+                    CreateLPOInvoice("/Quotation/Update");
                 }
             }
         });
+
+        //function CreateLPOInvoice(url, btnName, Message, returnulr) {
 
         function CreateLPOInvoice(Url) {
             if (1 == 1) {
@@ -156,7 +184,7 @@
 
                 var empObj = {
                     Id: $('#LPOId').val(),
-                    PONumber: $('#PONumber').text(),
+                    PONumber: $('#PONo').val(),
                     RefrenceNumber: $('#RefrenceNo').val(),
                     FromDate: $('#FromDate').val(),
                     DueDate: $('#DueDate').val(),
@@ -197,9 +225,9 @@
                         contentType: false,
                         processData: false,
                         success: function (result) {
-                            if (result) {
+                            if (result != "Failed") {
                                 list = [];
-                               // sucessAdd();
+                                //sucessAdd();
                                 //response(result, btnName, Message, returnulr, F)
 
                                 var SendEmail = localStorage.getItem("SendByEmail");
@@ -210,7 +238,7 @@
                                     window.location.href = "/Email";
                                 }
                                 else {
-                                    window.location.href = "/Invoice/Details/" + result;
+                                    window.location.href = "/Quotation/Details/" + result;
                                 }
                             }
                             else {
@@ -223,27 +251,19 @@
                     });
                 }
                 else {
-
-                    swal({
-                        title: 'Graag uw invoer controleren!',
-                        text: 'Graag minstens een invoer selecteren',
-                        type: 'warning'
-                    });
+                    alert('at least one itme in list', parseInt(list.length));
                 }
             }
             else {
 
-                swal({
-                    title: 'Graag uw invoer controleren!',
-                    text: 'Graag contact slecteren',
-                    type: 'warning'
-                });
+                al('Opration Failed, try againg later');
             }
         }
 
         $(document).on('click', '.BtnRemove', function () {
             var row = $(this).closest('tr');
-            deleteQuatation(row, "/Invoice/DeleteInvoiceDetailsRow");
+            deleteQuatation(row, "/Quotation/DeleteQuotationDetailsRow");
+
         });
 
         function deleteQuatation(currentRow, routeurl) {
@@ -259,11 +279,12 @@
                     //sucessUpdate();
                     window.location.reload();
                 }
+                else {
+                    alert("Opration Failed")
+                }
             });
 
         }
 
-
     </script>
 }
-

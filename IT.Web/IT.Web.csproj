@@ -1024,6 +1024,12 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\Quotation\Create.cshtml" />
+    <Content Include="Views\Quotation\Details.cshtml" />
+    <Content Include="Views\Quotation\Edit.cshtml" />
+    <Content Include="Views\Quotation\MakeInvoice.cshtml" />
+    <Content Include="Views\ProductUnit\Create.cshtml" />
+    <Content Include="Views\ProductUnit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Driver\Create.cshtml" />

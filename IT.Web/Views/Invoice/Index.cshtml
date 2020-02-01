@@ -91,7 +91,7 @@
                     {
                         "mData": "Id",
                         "render": function (Id, type, full, meta) {
-                            return '<a href="#" onclick="EditInvoice(' + Id + ')"><i class="glyphicon glyphicon-edit"></i></a>' + ' | ' + '<a href="#" onclick="ViewInvoice(' + Id + ')"><i class="glyphicon glyphicon-eye-open"></i></a>' + ' | ' + '<a href="#" onclick="DeleteInvoice(' + Id + ')"><i class="glyphicon glyphicon-remove"></i></a>' + ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Invoice</a>'
+                            return '<a href="#" onclick="EditInvoice(' + Id + ')"><i class="fal fa-edit"></i>Edit</a>' + ' | ' + '<a href="#" onclick="ViewInvoice(' + Id + ')"><i class="fal fa-eye"></i>Details</a> '+ ' | ' + '<a href="#" onclick="CreateBill(' + Id + ')">Invoice</a>'
                         }
                     },
                 ]
@@ -101,12 +101,12 @@
 
 
         function EditInvoice(Id) {
-            window.location.href = "/Invoice-Details/" + Id;
+            window.location.href = "/Invoice/Edit   /" + Id;
         }
 
 
         function ViewInvoice(Id) {
-            window.location.href = "/Invoice-Edit/" + Id;
+            window.location.href = "/Invoice/Details/" + Id;
         }
 
 

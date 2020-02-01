@@ -60,7 +60,12 @@ namespace IT.Web.Controllers
                     {
                         compnayModel = (new JavaScriptSerializer().Deserialize<CompnayModel>(companyData.Data.ToString()));
                     }
-                }                
+                }
+
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(compnayModel, JsonRequestBehavior.AllowGet);
+                }
                 return View(compnayModel);
             }
             catch (Exception)
@@ -182,6 +187,17 @@ namespace IT.Web.Controllers
                 return View();
             }
         }
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult CashCompany()
         {

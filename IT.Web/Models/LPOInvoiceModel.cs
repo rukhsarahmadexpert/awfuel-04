@@ -33,7 +33,7 @@ namespace IT.Web.Models
         public int detailId { get; set; }
 
         public List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetailsList { get; set; } 
-        public List<CompnayModel> compnays { get; set; }
-        public List<VenderModel> venders { get; set; }
+        public List<IT.Web.Models.CompnayModel> compnays { get; set; }
+        public List<IT.Web.Models.VenderModel> venders { get; set; }
     }
 }

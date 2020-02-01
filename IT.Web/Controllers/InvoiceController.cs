@@ -376,49 +376,32 @@ namespace IT.Web.Controllers
             try
             {
                 ReportDocument Report = new ReportDocument();
-                Report.Load(Server.MapPath("~/Reports/LPOReport.rpt"));
+                Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoice.rpt"));
 
                 List<IT.Web.Models.CompnayModel> compnayModels = new List<IT.Web.Models.CompnayModel>();
                 List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<IT.Web.Models.LPOInvoiceModel>();
-                List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
+                List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<IT.Web.Models.LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
-
-                var LPOInvoice = webServices.Post(new IT.Core.ViewModels.LPOInvoiceModel(), "Invoice/EditReport/" + Id);
-                lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var companyData = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + CompanyId);
-                compnayModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.CompnayModel>>(companyData.Data.ToString());
+                var lPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();   
 
-                var LPOInvoiceDetails = webServices.Post(new LPOInvoiceDetails(), "Invoice/EditDetails/" + Id);
-                lPOInvoiceDetails = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceDetails>>(LPOInvoiceDetails.Data.ToString());
+                lPOInvoiceModel.Id = Id;
+                lPOInvoiceModel.detailId = CompanyId;
 
-                IT.Web.Models.CompnayModel companyViewModel = new IT.Web.Models.CompnayModel();
-
-                VenderViewModel venderViewModel = new VenderViewModel();
-
-                var companyDatsa = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + lPOInvoiceModels[0].VenderId);
-                companyViewModel = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.CompnayModel>>(companyDatsa.Data.ToString()).FirstOrDefault();
-
-                venderModels.Add(new VenderModel()
-                {
-
-                    Name = companyViewModel.Name,
-                    Address = companyViewModel.Address,
-                    Representative = companyViewModel.OwnerRepresentaive,
-                    LandLine = companyViewModel.Phone,
-                    Mobile = companyViewModel.Cell,
-                    Title = "Mr",
-                    TRN = companyViewModel.TRN,
-                    UserName = "Customer Info:"
-                });
-
+                var LPOInvoice = webServices.Post(lPOInvoiceModel, "Invoice/EditReport/" + Id);
+                lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
+              
+                lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
+                compnayModels = lPOInvoiceModel.compnays;
+                lPOInvoiceModels.Insert(0, lPOInvoiceModel);
+                venderModels = lPOInvoiceModel.venders;
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
-                Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
-                Report.Database.Tables[2].SetDataSource(lPOInvoiceDetails);
-                Report.Database.Tables[3].SetDataSource(venderModels);
+                Report.Database.Tables[1].SetDataSource(venderModels);
+                Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
+                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
