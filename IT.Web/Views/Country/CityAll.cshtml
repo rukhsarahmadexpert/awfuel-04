@@ -1,10 +1,10 @@
-﻿@model List<IT.Core.ViewModels.StateViewModel>
+﻿@model  List<IT.Core.ViewModels.CityViewModel>
 @{
-    ViewBag.Title = "StateAll";
+    ViewBag.Title = "CityAll";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
-    List<IT.Core.ViewModels.StateViewModel> stateViewModels = new List<IT.Core.ViewModels.StateViewModel>();
-    stateViewModels = Model as List<IT.Core.ViewModels.StateViewModel>;
+    List<IT.Core.ViewModels.CityViewModel> cityViewModels = new List<IT.Core.ViewModels.CityViewModel>();
+    cityViewModels = Model as List<IT.Core.ViewModels.CityViewModel>;
 }
 
 <ol class="breadcrumb page-breadcrumb">
@@ -17,8 +17,8 @@
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    <a href="/Country/AddUpdateState">
-                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>state</i></span>
+                    <a href="/Country/AddUpdateCity">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>City</i></span>
                     </a>
                 </h2>
             </div>
@@ -37,21 +37,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in stateViewModels)
+                            @foreach (var item in cityViewModels)
                             {
                                 <tr>
 
-                                    <td>@item.States</td>
+                                    <td>@item.CityName</td>
 
                                     <td>
                                         <form action="/Country/EditState" method="post">
                                             <input type="hidden" name="Id" value="@item.Id" />
-                                            <input type="hidden" name="Name" value="@item.States" />
-                                            <input type="hidden" name="CountryId" value="@item.CountryId" />
+                                            <input type="hidden" name="Name" value="@item.CityName" />
+                                            <input type="hidden" name="StateId" value="@item.StateId" />
 
                                             <button type="submit" class="btn btn-sm"><i class="fal fa-edit"></i></button>
                                         </form>
-                                       
+
                                     </td>
                                 </tr>
                             }
@@ -63,6 +63,7 @@
         </div>
     </div>
 </div>
+
 
 
 
