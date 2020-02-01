@@ -6,44 +6,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="data-table-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="data-table-list">
-                    <div class="basic-tb-hd">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <h2>Invoice-Info</h2>
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-primary btn-sm" id="createNewInvice"><i class="fa fa-plus"></i> New</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="InvoiceTable" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Invoice #</th>
-                                    <th>Customer</th>
-                                    <th>Date Date</th>
-                                    <th>Due Date</th>
-                                    <th>Total</th>
-                                    <th>Vat </th>
-                                    <th>Grand Total</th>
-                                    <th>Oprater</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+
+
+<ol class="breadcrumb page-breadcrumb">
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
+    <li class="breadcrumb-item active">Product</li>
+    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+</ol>
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-1" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    <a id="createNewInvice" class="text-primary" style="cursor:pointer">
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Products</i></span>
+                    </a>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    <!--      <div class="panel-tag">
+                        <p>Drivers Base Information</p>
+                    </div>-->
+                    <!-- datatable start -->
+
+                    <table id=" dt-basic-example" class="InvoiceTable table table-bordered table-hover table-striped w-100">
+                        <thead  class="bg-primary-600">
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Customer</th>
+                                <th>Date Date</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>Vat </th>
+                                <th>Grand Total</th>
+                                <th>Oprater</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!-- datatable end -->
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 @section Scripts{
@@ -66,7 +75,7 @@
 
 
         var BindDataTable = function (response) {
-            $('#InvoiceTable').DataTable({
+            $('.InvoiceTable').DataTable({
                 "bRetrieve": true,
                 "bServerSide": true,
                 "processing": true,

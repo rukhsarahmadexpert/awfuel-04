@@ -1,6 +1,6 @@
 ﻿@model List<IT.Core.ViewModels.DriverLoginHistoryViewModel>
 @{
-    ViewBag.Title = "DriverLoginHistoryAllForAdmin";
+    ViewBag.Title = "Driver Login History For Admin";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
     List<IT.Core.ViewModels.DriverLoginHistoryViewModel> driverLoginHistoryViewModels = new List<IT.Core.ViewModels.DriverLoginHistoryViewModel>();
@@ -48,8 +48,6 @@
                                                             <td>@item.TraficPlateNumber</td>
                                                             <td>@item.OrderStatus</td>
                                                             <td>@item.IsActive</td>
-                                                           
-                                                            
                                                             <td>
                                                                 <div>
                                                                     <div class="row">
@@ -71,20 +69,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </td>
-
-                                                         <!--  <td>
-                                                               <a href="/AwfDriver/Details/@item.DriverId"><i class="fal fa-eye"></i> </a> &nbsp; &nbsp;
-                                                                <a href="/AwfDriver/Edit/@item.DriverId"><i class="fal fa-edit"></i></a>&nbsp; &nbsp;
-                                                                <i class="fal fa-trash-alt"> 
-                                                            </td>-->
-
-                                                          
+                                                            </td> 
                                                         </tr>
-                                                    }
-
-                                                    
-                                                    
+                                                    }   
                                                 </tbody>
                                                 
                                             </table>

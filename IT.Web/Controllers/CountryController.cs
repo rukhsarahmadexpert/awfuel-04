@@ -17,6 +17,8 @@ namespace IT.Web.Controllers
         List<CountryViewModel> countryViewModels = new List<CountryViewModel>();
         StateViewModel StateViewModel = new StateViewModel();
         List<StateViewModel> stateViewModels = new List<StateViewModel>();
+        CityViewModel CityViewModel = new CityViewModel();
+        List<CityViewModel> cityViewModels = new List<CityViewModel>();
         // GET: Country
         public ActionResult Index()
         {
@@ -98,17 +100,38 @@ namespace IT.Web.Controllers
             }
         }
 
-
-        public ActionResult EditState(int Id, String Name)
+        [HttpPost]
+        public ActionResult EditState(int Id, String Name, int CountryId = 0)
         {
             StateViewModel stateViewModel = new StateViewModel();
             stateViewModel.Id = Id;
             stateViewModel.States = Name;
+            stateViewModel.CountryId = CountryId;
 
             CountryController countryController = new CountryController();
             ViewBag.Countries = countryController.Countries();
 
             return View("AddUpdateState", stateViewModel);
+        }
+
+        [NonAction]
+        public List<StateViewModel> States()
+        {
+            try
+            {
+                var stateList = webServices.Post(new ProductViewModel(), "Country/StateAll");
+
+                if (stateList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    stateViewModels = (new JavaScriptSerializer().Deserialize<List<StateViewModel>>(stateList.Data.ToString()));
+
+                }
+                return stateViewModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // End state
@@ -177,5 +200,81 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
+
+
+
+        // City start
+        public ActionResult CityAll()
+        {
+            try
+            {
+                var cityList = webServices.Post(new CityViewModel(), "Country/CityAll");
+
+                if (cityList.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    cityViewModels = (new JavaScriptSerializer().Deserialize<List<CityViewModel>>(cityList.Data.ToString()));
+                }
+                if (Request.IsAjaxRequest())
+                {
+                    return Json(cityViewModels, JsonRequestBehavior.AllowGet);
+                }
+                return View(cityViewModels);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult AddUpdateCity()
+        {
+            CountryController countryController = new CountryController();
+            ViewBag.States = countryController.States();
+            return View(new CityViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult AddUpdateCity(CityViewModel cityViewModel)
+        {
+            try
+            {
+                //stateViewModels.Insert(0, stateViewModel);
+                var cityResult = new ServiceResponseModel();
+                if (cityViewModel.Id < 1)
+                {
+                    cityResult = webServices.Post(cityViewModel, "Country/AddUpdateCity");
+                }
+                else
+                {
+                    cityResult = webServices.Post(cityViewModel, "Country/AddUpdateCity");
+                }
+                if (cityResult.StatusCode == System.Net.HttpStatusCode.Accepted)
+                {
+                    var reuslt = (new JavaScriptSerializer().Deserialize<int>(cityResult.Data));
+                    return RedirectToAction(nameof(CityAll));
+                }
+                return View(cityResult);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCity(int Id, String Name, int StateId = 0)
+        {
+            CityViewModel cityViewModel = new CityViewModel();
+            cityViewModel.Id = Id;
+            cityViewModel.CityName = Name;
+            cityViewModel.StateId = StateId;
+
+            CountryController countryController = new CountryController();
+            ViewBag.Countries = countryController.Countries();
+
+            return View("AddUpdateCity", CityViewModel);
+        }
+
+        // End City
     }
 }

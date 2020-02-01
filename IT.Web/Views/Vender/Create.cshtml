@@ -1,7 +1,7 @@
 ﻿
     @model IT.Core.ViewModels.VenderViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Vender Create";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 
 
@@ -34,7 +34,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Title</label>
                                         <select id="Title" name="Title" class="Title form-control" required>
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Name</label>
                                         <input type="hidden" name="Id" id="Id" value="@Model.Id" />
@@ -54,24 +54,34 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Representative</label>
+                                        <input type="text" id="Representative" name="Representative" value="@Model.Representative" class="form-control" placeholder="Representative">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">Countries</label>
                                         <select id="Country" name="Country" class="select3 Country" required>
                                             @foreach (var item in countryViewModels)
                                             {
                                                 <option value="@item.Id">@item.CountryName</option>
-                                               
+
                                             }
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">State</label>
                                         <select id="State" name="State" class="select3 State" required>
-                                            @foreach (var item in countryViewModels.Where(x=>x.Id == 3))
+                                            @foreach (var item in countryViewModels.Where(x => x.Id == 3))
                                             {
                                                 foreach (var item1 in item.stateViewModels)
                                                 {
@@ -81,10 +91,7 @@
                                         </select>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="simpleinput">City</label>
                                         <select id="City" name="City" class="select3 City" required>
@@ -106,43 +113,51 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Address</label>
                                         <input type="text" id="Address" value="@Model.Address" name="Address" class="form-control" placeholder="Address">
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">LandLine</label>
                                         <input type="text" id="LandLine" value="@Model.LandLine" name="LandLine" class="form-control" placeholder="LandLine">
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Mobile</label>
                                         <input type="text" id="Mobile" name="Mobile" value="@Model.Mobile" class="form-control" placeholder="Mobile">
                                     </div>
                                 </div>
+                             
+
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Email</label>
                                         <input type="text" id="Email" name="Email" value="@Model.Email" class="form-control" placeholder="Email">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">Website</label>
                                         <input type="text" id="Website" name="Website" value="@Model.Website" class="form-control" placeholder="Website">
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label" for="simpleinput">TRN</label>
                                         <input type="text" id="TRN" name="TRN" value="@Model.TRN" class="form-control" placeholder="TRN">
@@ -150,30 +165,25 @@
                                 </div>
 
 
-                                <div class="col-md-3">
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Representative</label>
-                                        <input type="text" id="Representative" name="Representative" value="@Model.Representative" class="form-control" placeholder="Representative">
+                                        <label class="form-label" for="simpleinput">Remarks</label>
+                                        <textarea name="Remarks" id="Remarks" class="form-control">@Model.Remarks</textarea>
                                     </div>
                                 </div>
                             </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="form-label" for="simpleinput">Remarks</label>
-                                            <textarea name="Remarks" id="Remarks" class="form-control">@Model.Remarks</textarea>
-                                        </div>
-                                    </div>
+                            <div class="row py-5">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
+                                        Submit
+                                        <span>Vender</span>
+                                    </button>
                                 </div>
-                                <div class="row py-5">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
-                                            Submit
-                                            <span>Product</span>
-                                        </button>
-                                    </div>
-                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
