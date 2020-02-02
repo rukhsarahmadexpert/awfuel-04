@@ -293,7 +293,6 @@ namespace IT.Web.Controllers
                 ViewBag.Vender = venderViewModels;
 
                 ViewBag.titles = "LPO";
-
                 ViewBag.PO = SerailNO;
 
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel();

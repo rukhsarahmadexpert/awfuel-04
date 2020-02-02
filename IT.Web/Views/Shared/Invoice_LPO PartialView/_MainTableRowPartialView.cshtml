@@ -64,7 +64,7 @@
                             <textarea type="text" id="Description" class="Description form-control" rows="1" placeholder="Description" autocomplete="off" style="width:270px;font-size:12px">@item.Description</textarea>
                         </td>
                         <td>
-                            <select id="Unit" class="Unit product form-control Input-height select2" style="width: 100px;font-size:12px">
+                            <select id="Unit" class="Unit product form-control Input-height" style="width: 100px;font-size:12px">
                                 @foreach (var Units in ViewBag.ProductUnit)
                                 {
                                     <option value="@Units.Id" @(Units.Id == item.UnitId ? "selected='selected'" : "")>@Units.Name</option>
@@ -115,7 +115,7 @@
                 <td>
                     @*<input type="text" id="Unit" class="Unit form-control Input-height" autocomplete="off" style="width:70px;font-size:12px" />*@
 
-                    <select id="Unit" class="Unit product form-control Input-height select2" style="width: 100px;font-size:12px">
+                    <select id="Unit" class="Unit product form-control Input-height" style="width: 100px;font-size:12px">
                         @foreach (var Units in ViewBag.ProductUnit)
                         {
                             <option value="@Units.Id">@Units.Name</option>

@@ -390,7 +390,7 @@ namespace IT.Web.Controllers
                 lPOInvoiceModel.Id = Id;
                 lPOInvoiceModel.detailId = CompanyId;
 
-                var LPOInvoice = webServices.Post(lPOInvoiceModel, "Invoice/EditReport/" + Id);
+                var LPOInvoice = webServices.Post(lPOInvoiceModel, "Invoice/EditReport");
                 lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
               
                 lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;

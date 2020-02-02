@@ -84,6 +84,23 @@ namespace IT.Web.Controllers
                     lPOInvoiceVModel.FromDate = System.DateTime.Now;
                     lPOInvoiceVModel.DueDate = System.DateTime.Now;
 
+                    var result = webServices.Post(new ProductViewModel(), "Product/All");
+                    ProductViewModel = (new JavaScriptSerializer()).Deserialize<List<ProductViewModel>>(result.Data.ToString());
+                    ProductViewModel.Insert(0, new ProductViewModel() { Id = 0, Name = "Select Item" });
+                    ViewBag.Product = ProductViewModel;
+
+                    var results = webServices.Post(new ProductUnitViewModel(), "ProductUnit/All");
+                    productUnitViewModels = (new JavaScriptSerializer()).Deserialize<List<ProductUnitViewModel>>(results.Data.ToString());
+                    productUnitViewModels.Insert(0, new ProductUnitViewModel() { Id = 0, Name = "Select Unit" });
+                    ViewBag.ProductUnit = productUnitViewModels;
+
+                    var Res = webServices.Post(new DriverViewModel(), "Vender/All");
+                    venderViewModels = (new JavaScriptSerializer()).Deserialize<List<VenderViewModel>>(Res.Data.ToString());
+                    venderViewModels.Insert(0, new VenderViewModel() { Id = 0, Name = "Select Vender" });
+
+                    ViewBag.Vender = venderViewModels;
+
+
                     return View(lPOInvoiceVModel);                    
                 }
                 else
@@ -233,7 +250,6 @@ namespace IT.Web.Controllers
         [HttpGet]
         public ActionResult Details(int Id)
         {
-
             try
             {
                 var Result = webServices.Post(new LPOInvoiceViewModel(), "Bill/Details/" + Id);

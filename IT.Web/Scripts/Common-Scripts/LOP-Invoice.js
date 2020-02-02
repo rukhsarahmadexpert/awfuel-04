@@ -112,7 +112,7 @@ $(document).ready(function () {
         }
         else if (parseInt(productId) == 0) {
             currentRow.find('.rate').val('0');
-            currentRow.find('.Unit').val('');
+            currentRow.find('.Unit').val(1);
         }
     });
 });
