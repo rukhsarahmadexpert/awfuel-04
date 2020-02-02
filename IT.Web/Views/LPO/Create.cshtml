@@ -73,6 +73,7 @@
                 if (Id > 0) {
                     ajaxRequest("GET", "/Vender/Edit/" + Id, "json").then(function (result) {
                         if (result != "Failed") {
+                           
                             $('#VenderAddress').text(result.Address);
                             $('#VenderPhone').text(result.LandLine);
                             $('#VenderEmail').text(result.Email);

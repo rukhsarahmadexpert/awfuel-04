@@ -20,18 +20,19 @@ namespace IT.Web.Controllers
             try
             {
                 CompanyId = Convert.ToInt32(Session["CompanyId"]);
-                PagingParameterModel pagingParameterModel = new PagingParameterModel();
-                pagingParameterModel.pageNumber = 1;
-                pagingParameterModel.CompanyId = CompanyId;
-                pagingParameterModel.PageSize = 100;
+                PagingParameterModel pagingParameterModel = new PagingParameterModel
+                { 
+                    pageNumber = 1,
+                    CompanyId = CompanyId,
+                    PageSize = 100,
+                 };
 
                 var DriverList = webServices.Post(pagingParameterModel, "Vender/All");
                 if (DriverList.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     venderViewModels = (new JavaScriptSerializer().Deserialize<List<VenderViewModel>>(DriverList.Data.ToString()));
                 }
-
-
+                
                 return View(venderViewModels);
             }
             catch (Exception ex)
@@ -65,11 +66,9 @@ namespace IT.Web.Controllers
                     venderViewModel.UpdatedBy = Convert.ToInt32(Session["UserId"]);
                     venderResult = webServices.Post(venderViewModel, "Vender/Update");
                 }
-
                 if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     var reuslt = (new JavaScriptSerializer().Deserialize<int>(venderResult.Data));
-
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -91,6 +90,12 @@ namespace IT.Web.Controllers
                 if (venderResult.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     venderViewModel = (new JavaScriptSerializer().Deserialize<VenderViewModel>(venderResult.Data.ToString()));
+                }
+
+
+                if(Request.IsAjaxRequest())
+                {
+                    return Json(venderViewModel, JsonRequestBehavior.AllowGet);
                 }
 
                 CountryController countryController = new CountryController();
