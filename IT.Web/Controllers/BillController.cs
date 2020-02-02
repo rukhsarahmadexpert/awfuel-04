@@ -122,7 +122,7 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
 
@@ -225,7 +225,7 @@ namespace IT.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
         }
@@ -282,7 +282,7 @@ namespace IT.Web.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }
