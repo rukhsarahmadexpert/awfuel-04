@@ -1,12 +1,11 @@
 ﻿@model IT.Core.ViewModels.SiteViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Site Create";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
 <ol class="breadcrumb page-breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sites</a></li>
-                            
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sites</a></li>                            
                             <li class="breadcrumb-item active">Create</li>
                             <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
  </ol>
@@ -27,7 +26,7 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add your Site from here...
+                            Please add Site from here...
                         </div>
                         <form action="/Site/Create" method="post" enctype="application/x-www-form-urlencoded">
                             <div class="row">
@@ -104,7 +103,7 @@
                                 </div>
 
                                  <div class="col-md-12">
-                                           <button type="submit" id="Save"  class="btn btn-primary btn-md btn-block waves-effect waves-themed">Driver
+                                           <button type="submit" id="Save"  class="btn btn-primary btn-sm btn-block waves-effect waves-themed">Site
 
                                             <span>submit</span>
                                              </button>
