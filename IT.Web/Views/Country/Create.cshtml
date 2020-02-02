@@ -1,6 +1,6 @@
 ﻿@model IT.Core.ViewModels.CountryViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Country Create";
     Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
 
@@ -23,7 +23,7 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            Please add your Product from here...
+                            Please add |Country from here...
                         </div>
                         <form action="/Country/Create" method="post">
                             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
@@ -39,7 +39,7 @@
 
                             <div class="row py-5">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block waves-effect waves-themed">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block waves-effect waves-themed">
                                         Submit
                                         <span>Country</span>
                                     </button>
