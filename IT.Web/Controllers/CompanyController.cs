@@ -118,25 +118,50 @@ namespace IT.Web.Controllers
                             content.Add(new StringContent("ClientDocs"), "ClientDocs");
                             content.Add(new StringContent("Name"), "Name");
                             content.Add(new StringContent("street Data"), "Street");
+                            string UserId = Session["UserId"].ToString();
+                            content.Add(new StringContent(UserId), "CreatedBy");
                             content.Add(new StringContent(compnayModel.Postcode == null ? "" : compnayModel.Postcode), "Postcode");
                             content.Add(new StringContent(compnayModel.City == null ? "" : compnayModel.City), "City");
-                            content.Add(new StringContent(compnayModel.Street == null ? "" : compnayModel.Street), "State");
+                            content.Add(new StringContent(compnayModel.Address == null ? "" : compnayModel.Address), "Address");
+                            content.Add(new StringContent(compnayModel.State == null ? "" : compnayModel.State), "State");
                             content.Add(new StringContent(compnayModel.Country == null ? "" : compnayModel.Country), "Country");
+                            content.Add(new StringContent(compnayModel.Cell == null ? "" : compnayModel.Cell), "Cell");
+                            content.Add(new StringContent(compnayModel.Phone == null ? "" : compnayModel.Phone), "Phone");
+                            content.Add(new StringContent(compnayModel.Email == null ? "" : compnayModel.Email), "Email");
+                            content.Add(new StringContent(compnayModel.Web == null ? "" : compnayModel.Web), "Web");
+                            content.Add(new StringContent(compnayModel.TRN == null ? "" : compnayModel.TRN), "TRN");
+                            content.Add(new StringContent(compnayModel.Remarks == null ? "" : compnayModel.Remarks), "Remarks");
+                            content.Add(new StringContent(compnayModel.OwnerRepresentaive == null ? "" : compnayModel.OwnerRepresentaive), "OwnerRepresentaive");
+                            content.Add(new StringContent("true"), "IsActive");
+
+
 
                             //  var result1 = client.PostAsync("http://localhost:64299/api/Company/Add", content).Result;
                             var result = webServices.PostMultiPart(content, "Company/Add", true);
                             if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                             {
+                                var companyViewModel = new CompanyViewModel();
+                                companyViewModel = (new JavaScriptSerializer().Deserialize<CompanyViewModel>(result.Data.ToString()));
+
+
+                                Session["userCompanyViewModel"] = companyViewModel;
+                                Session["CompanyId"] = companyViewModel.Id;
+                                Session["UserId"] = companyViewModel.CreatedBy;
+
+                                return RedirectToAction("Index", "Home");
                                 ViewBag.Message = "Created";
                             }
                             else
                             {
                                 ViewBag.Message = "Failed";
                             }
+
                         }
+                       
                     }
                 }
-                return View();
+                return RedirectToAction("Index", "Home");
+
             }
             catch (Exception ex)
             {
@@ -147,7 +172,7 @@ namespace IT.Web.Controllers
         // GET: Company/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+             return View();
         }
 
         // POST: Company/Edit/5
