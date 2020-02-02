@@ -3,33 +3,27 @@
     /**/
 
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_layoutAdmin.cshtml";
 }
-
-
-
+   
 <ol class="breadcrumb page-breadcrumb">
     <li class="breadcrumb-item"><a href="javascript:void(0);">Aw Fuel</a></li>
-    <li class="breadcrumb-item active">Product</li>
+    <li class="breadcrumb-item active">Invoice</li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
 </ol>
+
 <div class="row">
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
                 <h2>
                     <a id="createNewInvice" class="text-primary" style="cursor:pointer">
-                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Products</i></span>
+                        <i class="fal fa-plus-circle"></i>  Add New <span class="fw-300"><i>Invoice</i></span>
                     </a>
                 </h2>
             </div>
             <div class="panel-container show">
-                <div class="panel-content">
-                    <!--      <div class="panel-tag">
-                        <p>Drivers Base Information</p>
-                    </div>-->
-                    <!-- datatable start -->
-
+                <div class="panel-content">                   
                     <table id=" dt-basic-example" class="InvoiceTable table table-bordered table-hover table-striped w-100">
                         <thead  class="bg-primary-600">
                             <tr>
@@ -53,15 +47,8 @@
     </div>
 </div>
 
-
-
 @section Scripts{
-
-    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Hubs/ScriptHub/AdminScript.js"></script>
-
-
+      
     <script>
 
         $('#createNewInvice').click(function () {

@@ -527,84 +527,46 @@ namespace IT.Web.Controllers
             {
 
                 ReportDocument Report = new ReportDocument();
-                Report.Load(Server.MapPath("~/Reports/LPOReport.rpt"));
+                Report.Load(Server.MapPath("~/Reports/LPO-Invoice/LPOInvoice.rpt"));
 
-                List<IT.Core.ViewModels.CompnayModel> compnayModels = new List<IT.Core.ViewModels.CompnayModel>();
-                List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<IT.Web.Models.LPOInvoiceModel>();
-                List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
+                List<IT.Web.Models.CompnayModel> compnayModels = new List<Models.CompnayModel>();
+                List<IT.Web.Models.LPOInvoiceModel> lPOInvoiceModels = new List<Models.LPOInvoiceModel>();
+                List<IT.Web.Models.LPOInvoiceDetailsModel> lPOInvoiceDetails = new List<LPOInvoiceDetailsModel>();
                 List<VenderModel> venderModels = new List<VenderModel>();
-
-                var LPOInvoice = webServices.Post(new IT.Core.ViewModels.LPOInvoiceModel(), "Invoice/EditReport/" + Id);
-                if (LPOInvoice.Data != "[]")
-                {
-                    lPOInvoiceModels = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.LPOInvoiceModel>>(LPOInvoice.Data.ToString());
-                }
-                string companyName;
-                if (lPOInvoiceModels.Count > 0)
-                {
-                    companyName = Id + "-" + lPOInvoiceModels[0].PONumber + ".pdf";
-                }
-                else
-                {
-                    companyName = Id + " No Date Found";
-                }
-                //if (System.IO.File.Exists(Server.MapPath("~/PDF/" + companyName)))
-                //{
-                //    System.IO.File.Delete(Server.MapPath("~/PDF/" + companyName));
-                //}
+                var lPOInvoiceModel = new IT.Web.Models.LPOInvoiceModel();
 
                 int CompanyId = Convert.ToInt32(Session["CompanyId"]);
 
-                var companyData = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + CompanyId);
+                lPOInvoiceModel.Id = Id;
+                lPOInvoiceModel.detailId = CompanyId;
 
-                if (companyData.Data != "[]")
+                var LPOInvoice = webServices.Post(lPOInvoiceModel, "Invoice/EditReport");
+
+              
+                if (LPOInvoice.Data != "[]")
                 {
-                    compnayModels = (new JavaScriptSerializer()).Deserialize<List<IT.Core.ViewModels.CompnayModel>>(companyData.Data.ToString());
-
-                }
-                var LPOInvoiceDetails = webServices.Post(new LPOInvoiceDetails(), "Invoice/EditDetails/" + Id);
-                if (LPOInvoiceDetails.Data != "[]")
-                {
-                    lPOInvoiceDetails = (new JavaScriptSerializer()).Deserialize<List<LPOInvoiceDetails>>(LPOInvoiceDetails.Data.ToString());
-                }
-                IT.Web.Models.CompnayModel companyViewModel = new IT.Web.Models.CompnayModel();
-
-                VenderViewModel venderViewModel = new VenderViewModel();
-
-                if (lPOInvoiceModels.Count > 0)
-                {
-                    var companyDatsa = webServices.Post(new IT.Core.ViewModels.CompnayModel(), "Company/Edit/" + lPOInvoiceModels[0].VenderId);
-
-                    if (companyDatsa.Data != "[]")
-                    {
-                        companyViewModel = (new JavaScriptSerializer()).Deserialize<List<IT.Web.Models.CompnayModel>>(companyDatsa.Data.ToString()).FirstOrDefault();
-                    }
+                    lPOInvoiceModel = (new JavaScriptSerializer()).Deserialize<IT.Web.Models.LPOInvoiceModel>(LPOInvoice.Data.ToString());
                 }
 
-                venderModels.Add(new VenderModel()
-                {
-                    Name = companyViewModel.Name,
-                    Address = companyViewModel.Address,
-                    Representative = companyViewModel.OwnerRepresentaive,
-                    LandLine = companyViewModel.Phone,
-                    Mobile = companyViewModel.Cell,
-                    Title = "Mr",
-                    TRN = companyViewModel.TRN,
-                    UserName = "Customer Info:"
-                });
-
+                lPOInvoiceModels.Insert(0, lPOInvoiceModel);
+                compnayModels = lPOInvoiceModel.compnays;
+                lPOInvoiceDetails = lPOInvoiceModel.lPOInvoiceDetailsList;
+                venderModels = lPOInvoiceModel.venders;
 
                 Report.Database.Tables[0].SetDataSource(compnayModels);
-                Report.Database.Tables[1].SetDataSource(lPOInvoiceModels);
-                Report.Database.Tables[2].SetDataSource(lPOInvoiceDetails);
-                Report.Database.Tables[3].SetDataSource(venderModels);
-
-
-                Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                stram.Seek(0, SeekOrigin.Begin);
-
-                companyName = Id + "-" + lPOInvoiceModels[0].PONumber;
-
+                Report.Database.Tables[1].SetDataSource(venderModels);
+                Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
+                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
+                
+                string companyName;
+                if (lPOInvoiceModels.Count > 0)
+                {
+                    companyName = Id + "-" + lPOInvoiceModels[0].PONumber;
+                }
+                else
+                {
+                    companyName = "Data Not Found";
+                }
                 var root = Server.MapPath("/PDF/");
                 pdfname = String.Format("{0}.pdf", companyName);
                 var path = Path.Combine(root, pdfname);
@@ -612,17 +574,16 @@ namespace IT.Web.Controllers
 
                 Report.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, path);
 
-                stram.Close();
-
-
+                //stram.Close();
+                
                 byte[] fileBytes = System.IO.File.ReadAllBytes(path);
                 string fileName = companyName + ".PDF";
-                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
-                // Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                // stram.Seek(0, SeekOrigin.Begin);
+                Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);             
+                stram.Seek(0, SeekOrigin.Begin);
 
-                // return new FileStreamResult(stram, "application/pdf");
+                 return new FileStreamResult(stram, "application/pdf");
             }
             catch (Exception ex)
             {
