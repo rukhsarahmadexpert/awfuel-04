@@ -41,7 +41,7 @@
                                         @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_LPOInvoiceVenderPartialView.cshtml")
                                     </div>
                                     <div>
-                                        @Html.Partial("~/Views/Shared/LPOInvoieDetailsPartialViews/_MainTablePartialView.cshtml")
+                                        @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_MainTableRowPartialView.cshtml")
                                         @Html.Partial("~/Views/Shared/Invoice_LPO PartialView/_FooterTotalPartialView.cshtml")
                                     </div>
                                     <p></p>
@@ -78,9 +78,9 @@
 
                 ajaxRequest("POST", "/Bill/Create", Data, "json").then(function (result) {
 
-                    if (result != "Failed") {
-                        sucessAdd();
-
+                    if (result != "Failed")
+                    {
+                      //  sucessAdd();
                         window.location.href = "/Bill";
                     }
                     else {

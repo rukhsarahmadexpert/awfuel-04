@@ -23,14 +23,14 @@ namespace IT.Web.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
-        
+
 
         // GET: LPO/LPO
         public ActionResult Index()
         {
             return View();
         }
-        
+
         [HttpGet]
         public JsonResult GetAll()
         {
@@ -128,12 +128,12 @@ namespace IT.Web.Controllers
             }
 
         }
-        
+
         public ActionResult LPOConverted()
         {
             return View();
         }
-        
+
         [HttpGet]
         public JsonResult GetAllConverted(DataTablesParm parm)
         {
@@ -218,7 +218,7 @@ namespace IT.Web.Controllers
             }
 
         }
-        
+
         public ActionResult Create()
         {
             try
@@ -233,11 +233,8 @@ namespace IT.Web.Controllers
                     {
                         string LPNo = (new JavaScriptSerializer()).Deserialize<string>(LPONoResult.Data);
 
-
                         SerailNO = LPNo.Substring(4, 8);
-
                         SerailNO = SerailNO.ToString().Substring(0, 6);
-
 
                         string TotdayNumber = POClass.PONumber().Substring(0, 6);
                         int Counts = 0;
@@ -267,12 +264,10 @@ namespace IT.Web.Controllers
 
                         SerailNO = "LPO-" + AlreadyNumber;
                     }
-
                 }
                 else
                 {
                     AlreadyNumber = POClass.PONumber();
-
                     SerailNO = "LPO-" + AlreadyNumber;
                 }
 
@@ -293,7 +288,6 @@ namespace IT.Web.Controllers
                 ViewBag.Vender = venderViewModels;
 
                 ViewBag.titles = "LPO";
-
                 ViewBag.PO = SerailNO;
 
                 LPOInvoiceViewModel lPOInvoiceVModel = new LPOInvoiceViewModel();
@@ -303,14 +297,12 @@ namespace IT.Web.Controllers
 
                 return View(lPOInvoiceVModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
-
         }
-        
+
         [HttpPost]
         public ActionResult Create(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -350,7 +342,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         [HttpPost]
         public ActionResult CheckISFileExist(int Id)
         {
@@ -395,7 +387,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         [HttpPost]
         public ActionResult SaveDwnload(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -442,7 +434,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         [HttpGet]
         public ActionResult Details(int? Id)
         {
@@ -458,34 +450,25 @@ namespace IT.Web.Controllers
                     lPOInvoiceViewModel.DueDate = lPOInvoiceViewModel.DueDate.AddDays(1);
                     ViewBag.lPOInvoiceViewModel = lPOInvoiceViewModel;
 
-
                     lPOInvoiceViewModel.Heading = "LPO";
-                    var Results = webServices.Post(new LPOInvoiceDetails(), "LPO/EditDetails/" + Id);
+                    lPOInvoiceDetails = lPOInvoiceViewModel.lPOInvoiceDetailsList;
 
-                    if (Results.Data != "[]")
+                    ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
+
+                    if (TempData["Success"] == null)
                     {
-                        lPOInvoiceDetails = (new JavaScriptSerializer().Deserialize<List<LPOInvoiceDetails>>(Results.Data.ToString()));
-                        ViewBag.lPOInvoiceDetails = lPOInvoiceDetails;
-
-                        if (TempData["Success"] == null)
+                        if (TempData["Download"] != null)
                         {
-                            if (TempData["Download"] != null)
-                            {
-                                ViewBag.IsDownload = TempData["Download"].ToString();
-                                ViewBag.Id = Id;
-                            }
+                            ViewBag.IsDownload = TempData["Download"].ToString();
+                            ViewBag.Id = Id;
                         }
-                        else
-                        {
-                            ViewBag.Success = TempData["Success"];
-                        }
-
-                        return View();
                     }
                     else
                     {
-                        return View();
+                        ViewBag.Success = TempData["Success"];
                     }
+
+                    return View();
                 }
                 else
                 {
@@ -499,7 +482,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         [HttpGet]
         public ActionResult Edit(int? Id)
         {
@@ -557,7 +540,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         [HttpPost]
         public ActionResult DeleteLPoDetailsRow(DeleteRowViewModel deleteRowViewModel)
         {
@@ -599,7 +582,7 @@ namespace IT.Web.Controllers
                 return new JsonResult { Data = new { Status = "Fail" } };
             }
         }
-        
+
         public static decimal CalculateVat(decimal vat, decimal Total)
         {
             decimal Result = 0;
@@ -613,7 +596,7 @@ namespace IT.Web.Controllers
                 return Result;
             }
         }
-        
+
         [HttpPost]
         public ActionResult Update(LPOInvoiceViewModel lPOInvoiceViewModel)
         {
@@ -661,7 +644,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-        
+
         public FileResult Download(string FileName)
         {
             string PAth = Server.MapPath("~/PDF/" + FileName);
@@ -670,7 +653,7 @@ namespace IT.Web.Controllers
             string fileName = "myfile.ext";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
-        
+
         [HttpPost]
         public int UploadFileToFolder(int Id)
         {
@@ -733,7 +716,7 @@ namespace IT.Web.Controllers
             }
 
         }
-        
+
         [HttpGet]
         public ActionResult PrintLPO(int Id)
         {
@@ -761,11 +744,11 @@ namespace IT.Web.Controllers
                 compnayModels = LPOInvoiceModel.compnays;
                 lPOInvoiceDetails = LPOInvoiceModel.lPOInvoiceDetailsList;
                 venderModels = LPOInvoiceModel.venders;
-                
+
                 Report.Database.Tables[0].SetDataSource(compnayModels);
                 Report.Database.Tables[1].SetDataSource(venderModels);
                 Report.Database.Tables[2].SetDataSource(lPOInvoiceModels);
-                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);               
+                Report.Database.Tables[3].SetDataSource(lPOInvoiceDetails);
 
                 Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stram.Seek(0, SeekOrigin.Begin);
@@ -790,13 +773,13 @@ namespace IT.Web.Controllers
                 //stram.Close();
 
                 //byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-               // string fileName = companyName + ".PDF";
+                // string fileName = companyName + ".PDF";
                 //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
                 // Stream stram = Report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                 stram.Seek(0, SeekOrigin.Begin);
+                stram.Seek(0, SeekOrigin.Begin);
 
-                 return new FileStreamResult(stram, "application/pdf");
+                return new FileStreamResult(stram, "application/pdf");
             }
             catch (Exception ex)
             {
