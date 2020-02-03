@@ -63,9 +63,7 @@
 
             var Id = $('#LPOId').val();
             window.location.href = "/LPO/Edit/" + Id;
-
         });
-
 
         $(document).ready(function () {
 
@@ -75,7 +73,6 @@
 
             Id = @Html.Raw(Json.Encode(ViewBag.Id));
             window.location.href = '/LPO/printLPO/' + Id;
-
         }
         });
 
@@ -100,7 +97,6 @@
                     alert('Failed to Send email');
                 }
             });
-
         });
     </script>
 
