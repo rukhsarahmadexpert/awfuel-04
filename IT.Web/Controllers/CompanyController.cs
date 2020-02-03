@@ -96,7 +96,6 @@ namespace IT.Web.Controllers
         }
 
         // POST: Company/Create
-
         [HttpPost]
         public ActionResult Create(CompnayModel compnayModel, HttpPostedFileBase LogoUrl)
         {
@@ -212,17 +211,6 @@ namespace IT.Web.Controllers
                 return View();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
 
         public ActionResult CashCompany()
         {
