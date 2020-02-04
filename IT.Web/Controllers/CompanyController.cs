@@ -146,9 +146,9 @@ namespace IT.Web.Controllers
                                 Session["userCompanyViewModel"] = companyViewModel;
                                 Session["CompanyId"] = companyViewModel.Id;
                                 Session["UserId"] = companyViewModel.CreatedBy;
-
-                                return RedirectToAction("Index", "Home");
                                 ViewBag.Message = "Created";
+                                return RedirectToAction("Index", "Home");
+                               
                             }
                             else
                             {

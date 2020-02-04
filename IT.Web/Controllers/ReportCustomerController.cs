@@ -23,7 +23,6 @@ namespace IT.Web.Controllers
 
         public ActionResult Index()
         {
-
             SearchViewModel searchViewModel = new SearchViewModel();
             searchViewModel.fDate = System.DateTime.Now;
             searchViewModel.Tdate = System.DateTime.Now;
@@ -230,8 +229,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Demo()
         {

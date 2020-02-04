@@ -135,8 +135,6 @@ namespace IT.Web.Controllers
         }
 
         // End state
-
-
         public ActionResult Create()
         {
             return View(new CountryViewModel());
@@ -169,9 +167,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
-
+               
         public ActionResult Edit(int Id, String Name)
         {
             CountryViewModel countryViewModel = new CountryViewModel();
@@ -179,8 +175,7 @@ namespace IT.Web.Controllers
             countryViewModel.CountryName = Name;
             return View("Create",countryViewModel);
         }
-
-
+        
         [NonAction]
         public List<CountryViewModel> Countries()
         {
@@ -200,9 +195,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
-
+               
         // City start
         public ActionResult CityAll()
         {

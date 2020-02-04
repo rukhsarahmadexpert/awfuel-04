@@ -82,8 +82,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [NonAction]
         public List<SiteViewModel> SitesAll(int CompId)
         {
@@ -113,8 +112,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-        
+                
         public ActionResult Edit(int Id)
         {
             try
@@ -143,8 +141,7 @@ namespace IT.Web.Controllers
                 throw;
             }
         }
-
-
+        
         public ActionResult Details(int Id)
         {
             try

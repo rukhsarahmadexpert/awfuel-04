@@ -130,8 +130,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [NonAction]
         public List<ProductViewModel> Products()
         {

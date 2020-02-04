@@ -71,8 +71,7 @@ namespace IT.Web.Controllers
             }
 
         }
-
-
+        
         public JsonResult GetAllVehicle()
         {
             try
@@ -91,8 +90,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         public ActionResult Details(int id)
         {
             try
@@ -116,8 +114,7 @@ namespace IT.Web.Controllers
 
             return View(vehicleViewModel);
         }
-
-
+        
         // GET: Vehicle/Create
         public ActionResult Create()
         {
@@ -145,7 +142,6 @@ namespace IT.Web.Controllers
         }
 
         // POST: Vehicle/Create
-
         [HttpPost]
         public ActionResult Create(VehicleViewModel vehicleViewModel)
         {

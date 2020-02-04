@@ -84,8 +84,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         public ActionResult DirectsaleOrderAdd()
         {
             DriverModel driverModel = new DriverModel();
@@ -223,8 +222,7 @@ namespace IT.Web.Controllers
         {
             return View();
         }
-
-
+        
         public ActionResult OrderDetails()
         {
             try

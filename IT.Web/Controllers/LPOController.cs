@@ -23,8 +23,7 @@ namespace IT.Web.Controllers
         List<LPOInvoiceDetails> lPOInvoiceDetails = new List<LPOInvoiceDetails>();
         List<LPOInvoiceViewModel> lPOInvoiceViewModels = new List<LPOInvoiceViewModel>();
         List<IT.Web.Models.LPOInvoiceModel> Models = new List<IT.Web.Models.LPOInvoiceModel>();
-
-
+        
         // GET: LPO/LPO
         public ActionResult Index()
         {

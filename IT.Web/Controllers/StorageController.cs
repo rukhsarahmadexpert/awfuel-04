@@ -14,8 +14,7 @@ namespace IT.Web.Controllers
         WebServices webServices = new WebServices();
         List<StorageViewModel> storageViewModels = new List<StorageViewModel>();
         StorageViewModel StorageViewModel = new StorageViewModel();
-
-
+        
         public ActionResult Index()
         {
             try

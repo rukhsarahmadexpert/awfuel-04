@@ -64,8 +64,7 @@ namespace IT.Web.Controllers
         {
             return View(new DriverViewModel());
         }
-
-
+        
         [HttpPost]
         public ActionResult Create(DriverViewModel driverViewModel)
         {
@@ -207,8 +206,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         public ActionResult Details(int Id)
         {
             CompanyId = Convert.ToInt32(Session["CompanyId"]);
@@ -234,8 +232,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         public ActionResult Edit(int Id)
         {
 
@@ -262,8 +259,7 @@ namespace IT.Web.Controllers
                 throw ex;
             }
         }
-
-
+        
         [HttpPost]
         public ActionResult Update(DriverViewModel driverViewModel)
         {
